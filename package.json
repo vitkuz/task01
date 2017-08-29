@@ -1,0 +1,41 @@
+{
+  "name": "task1_webpack2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-react": "^6.24.1",
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.4",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "gulp-load-plugins": "^1.5.0",
+    "less-loader": "^4.0.5",
+    "lodash": "^4.17.4",
+    "node-sass": "^4.5.3",
+    "nodemon": "^1.11.0",
+    "opn": "^5.1.0",
+    "pug": "^2.0.0-rc.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.6",
+    "webpack": "^3.5.5"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.5",
+    "file-loader": "^0.11.2",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-nodemon": "^2.2.1",
+    "style-loader": "^0.18.2",
+    "webpack-stream": "^4.0.0"
+  }
+}
