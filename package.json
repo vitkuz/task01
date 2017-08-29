@@ -13,7 +13,6 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-react": "^6.24.1",
-    "bootstrap": "^3.3.7",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
     "gulp-load-plugins": "^1.5.0",
