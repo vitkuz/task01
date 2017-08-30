@@ -5,9 +5,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 const config = require('dotenv').config();
-console.log("env config:",JSON.stringify(config));
+console.log("env config:",config);
 
-process.env.NODE_ENV = config.NODE_ENV;
+process.env.NODE_ENV = config.parsed.NODE_ENV;
+console.log("NODE_ENV",process.env.NODE_ENV);
 
 const VENDOR_LIBS = ['lodash','react','react-dom','redux-form', 'react-redux', 'redux'];
 

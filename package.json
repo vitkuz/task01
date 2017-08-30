@@ -4,11 +4,12 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
+    "start": "babel-node ./src/server/index.js",
     "build": "npm run clean && webpack",
     "clean": "rimraf ./build",
-    "server": "node ./src/server/index.js",
+    "server": "babel-node ./src/server/index.js",
     "dev": "webpack-dev-server",
-    "prod": "NODE_ENV=production npm run clean && webpack -p"
+    "prod": "npm run clean && webpack -p"
   },
   "author": "",
   "license": "ISC",
@@ -46,7 +47,8 @@
     "gulp-livereload": "^3.8.1",
     "gulp-nodemon": "^2.2.1",
     "style-loader": "^0.18.2",
-    "webpack-stream": "^4.0.0",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-dev-server": "^2.7.1",
+    "webpack-stream": "^4.0.0"
   }
 }
