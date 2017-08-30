@@ -4,11 +4,11 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "gulp client:dev",
-    "build": "webpack",
-    "clean": "rimraf ./public/build",
+    "build": "npm run clean && webpack",
+    "clean": "rimraf ./build",
     "server": "node ./src/server/index.js",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "prod": "NODE_ENV=production npm run clean && webpack -p"
   },
   "author": "",
   "license": "ISC",
@@ -36,8 +36,7 @@
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.6",
     "webpack": "^3.5.5",
-    "webpack-cleanup-plugin": "^0.5.1",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-cleanup-plugin": "^0.5.1"
   },
   "devDependencies": {
     "babel-preset-env": "^1.6.0",
@@ -47,6 +46,7 @@
     "gulp-livereload": "^3.8.1",
     "gulp-nodemon": "^2.2.1",
     "style-loader": "^0.18.2",
-    "webpack-stream": "^4.0.0"
+    "webpack-stream": "^4.0.0",
+    "webpack-dev-server": "^2.7.1"
   }
 }

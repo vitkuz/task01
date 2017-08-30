@@ -5,9 +5,11 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 const config = require('dotenv').config();
-console.log("conf:",JSON.stringify(config));
+console.log("env config:",JSON.stringify(config));
 
-const VENDOR_LIBS = ['lodash','react','react-dom'];
+process.env.NODE_ENV = config.NODE_ENV;
+
+const VENDOR_LIBS = ['lodash','react','react-dom','redux-form', 'react-redux', 'redux'];
 
 module.exports = {
     // context: __dirname + "./src",
@@ -57,7 +59,8 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({names:['vendor','manifest']}),
         new HtmlWebpackPlugin({
-            template:'public/index.html'
+            template:'public/index.html',
+            favicon: 'src/images/favicon.ico'
         }),
         new WebpackCleanupPlugin({
             preview: true,
