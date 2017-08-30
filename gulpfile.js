@@ -59,11 +59,15 @@ function compileClient() {
                 new ExtractTextPlugin("../css/styles.css"),
             ]
         }))
-        .pipe(gulp.dest('public/js'));
+        .pipe(gulp.dest('public/js'))
+        .pipe($.livereload());
 }
 
 
 function watchClient() {
+
+    $.livereload.listen();
+
     return gulp
         .watch("./src/client/**/*.js", compileClient)
         .on("error", ()=> {});
