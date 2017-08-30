@@ -1,10 +1,13 @@
 const gulp = require('gulp');
 const path = require('path');
 const rimraf = require('rimraf');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+
 const $ = require('gulp-load-plugins')();
 
 const webpack = require('webpack-stream');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 const nodemon = require('nodemon');
 
