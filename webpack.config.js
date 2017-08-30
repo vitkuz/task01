@@ -17,12 +17,12 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: '[name].js',
-        publicPath: '/build/'
+        filename: '[name].[hash].js',
+        publicPath: '/'
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: path.join(__dirname, "public"),
+        contentBase: path.join(__dirname, "build"),
         // inline: true,
         hot:true,
         port:3000
@@ -55,7 +55,7 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin("css/styles.css"),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.CommonsChunkPlugin({name:'vendor'}),
+        new webpack.optimize.CommonsChunkPlugin({names:['vendor','manifest']}),
         new HtmlWebpackPlugin({
             template:'public/index.html'
         }),
