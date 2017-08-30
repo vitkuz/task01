@@ -48,8 +48,6 @@ function handleRender(req, res) {
         res.send(document);
     });
 
-    // Send the rendered page back to the client
-    // res.send(renderFullPage(html, preloadedState))
 }
 
 
@@ -63,9 +61,6 @@ if (process.env.NODE_ENV !== 'production') {
 
     app.get('*', handleRender);
 
-    // app.get('*', function (req, res) {
-    //     res.sendfile(path.join(__dirname, 'build/index.html'));
-    // });
 }
 
 

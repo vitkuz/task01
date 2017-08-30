@@ -21,7 +21,6 @@ const store = createStore(netflixApp, preloadedState)
 console.log("TEST 1");
 console.log("TEST 2");
 console.log("TEST 3");
-console.log("TEST 4");
 
 ReactDOM.render(
     <Provider store={store}>

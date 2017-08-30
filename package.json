@@ -4,7 +4,7 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "babel-node ./src/server/index.js",
+    "start": "npm run clean && webpack && babel-node ./src/server/index.js",
     "build": "npm run clean && webpack",
     "clean": "rimraf ./build",
     "server": "babel-node ./src/server/index.js",
