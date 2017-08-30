@@ -1,6 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 const config = require('dotenv').config();
@@ -52,9 +53,12 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin("../build/css/styles.css"),
+        new ExtractTextPlugin("css/styles.css"),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({name:'vendor'}),
+        new HtmlWebpackPlugin({
+            template:'public/index.html'
+        }),
         new WebpackCleanupPlugin({
             preview: true,
         })
