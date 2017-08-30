@@ -4,15 +4,19 @@ const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const webpack = require('webpack');
 
 const config = require('dotenv').config();
+console.log("conf:",JSON.stringify(config));
 
-console.log("consf!!!",JSON.stringify(config));
+const VENDOR_LIBS = ['lodash','react','react-dom'];
 
 module.exports = {
     // context: __dirname + "./src",
-    entry: './src/client/index.js',
+    entry: {
+        bundle:'./src/client/index.js',
+        vendor: VENDOR_LIBS
+    },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js',
+        filename: '[name].js',
         publicPath: '/build/'
     },
     devtool: 'inline-source-map',
@@ -50,6 +54,7 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin("../build/css/styles.css"),
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({name:'vendor'}),
         new WebpackCleanupPlugin({
             preview: true,
         })

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './scss/index.scss';
-
+import _ from "lodash";
 console.log("TEST");
 
 ReactDOM.render(
