@@ -5,8 +5,6 @@ import App from './App'
 import './scss/index.scss';
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+    <App />,
     document.getElementById('root')
 );
