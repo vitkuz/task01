@@ -1,10 +1,9 @@
-export default function () {
-    return [
-        {title:1},
-        {title:2},
-        {title:3},
-        {title:4},
-        {title:5}
-    ]
+import {combineReducers} from 'redux';
+import {MoviesReducer} from './reducer_movies'
 
-}
+const rootReducer = combineReducers({
+    movies:MoviesReducer
+})
+
+
+export default rootReducer;

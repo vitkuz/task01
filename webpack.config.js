@@ -60,7 +60,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({names:['vendor','manifest']}),
         new HtmlWebpackPlugin({
-            template:'public/index.html',
+            template:'src/templates/index.html',
             favicon: 'src/images/favicon.ico'
         }),
         new WebpackCleanupPlugin({

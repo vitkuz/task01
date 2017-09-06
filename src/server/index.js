@@ -4,11 +4,12 @@ var express = require('express');
 import fs from 'fs';
 
 import React from 'react';
-import {createStore} from 'redux'
+import { createStore, applyMiddleware } from 'redux';
+import promiseMiddleware from 'redux-promise';
 import {Provider} from 'react-redux'
 import {renderToString} from 'react-dom/server'
 import App from '../client/App'
-import netflixApp from '../client/reducers'
+import rootReducer from '../client/reducers'
 
 
 var app = express();
@@ -22,9 +23,11 @@ process.env.NODE_ENV = config.parsed.NODE_ENV;
 
 function handleRender(req, res) {
     // Create a new Redux store instance
-    const store = createStore(netflixApp)
+    const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
+    const store = createStoreWithMiddleware(rootReducer);
     // Grab the initial state from our Redux store
-
+    console.log("!!!!");
+    console.log(store);
 
     fs.readFile('./build/index.html', 'utf8', function (err, file) {
         if (err) {

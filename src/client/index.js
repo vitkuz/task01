@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM,{ render } from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import App from './App'
-import netflixApp from './reducers'
-
+import rootReducer from './reducers'
+import promiseMiddleware from 'redux-promise';
 import './scss/index.scss';
 import _ from "lodash";
 
@@ -14,13 +14,9 @@ const preloadedState = window.__PRELOADED_STATE__
 // Allow the passed state to be garbage-collected
 delete window.__PRELOADED_STATE__
 
-// Create Redux store with initial state
-const store = createStore(netflixApp, preloadedState)
 
-
-console.log("TEST 1");
-console.log("TEST 2");
-console.log("TEST 3");
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
+const store = createStoreWithMiddleware(rootReducer,preloadedState);
 
 ReactDOM.render(
     <Provider store={store}>
