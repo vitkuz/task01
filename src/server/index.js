@@ -4,14 +4,11 @@ var express = require('express');
 import fs from 'fs';
 
 import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
-import {Provider} from 'react-redux'
-import {renderToString} from 'react-dom/server'
 
 var app = express();
 
 const config = require('dotenv').config();
-const port = process.env.PORT || config.parsed.PORT;
+const port = process.env.PORT || config.parsed.PORT || 4000;
 process.env.NODE_ENV = config.parsed.NODE_ENV;
 
 if (process.env.NODE_ENV !== 'production') {
@@ -40,7 +37,7 @@ if (process.env.NODE_ENV !== 'production') {
 // app.set('view engine', 'pug');
 
 
-app.listen(port || 4000, function () {
+app.listen(port, function () {
     console.log(`Example app listening on port ${port}!`);
 
     if (process.env.NODE_ENV !== 'production') {
