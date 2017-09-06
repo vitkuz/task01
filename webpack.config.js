@@ -15,7 +15,20 @@ const VENDOR_LIBS = ['lodash','react','react-dom','redux-form', 'react-redux', '
 module.exports = {
     // context: __dirname + "./src",
     entry: {
-        bundle:'./src/client/index.js',
+        bundle:[
+            'react-hot-loader/patch',
+            // activate HMR for React
+
+            'webpack-dev-server/client?http://localhost:4000',
+            // bundle the client for webpack-dev-server
+            // and connect to the provided endpoint
+
+            'webpack/hot/only-dev-server',
+            // bundle the client for hot reloading
+            // only- means to only hot reload for successful updates
+
+            './src/client/index.js'
+        ],
         vendor: VENDOR_LIBS
     },
     output: {
@@ -25,10 +38,12 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     devServer: {
+        host: 'localhost',
         contentBase: path.join(__dirname, "build"),
-        // inline: true,
+        historyApiFallback: true,
         hot:true,
-        port:3000
+        port:4000,
+        headers: {'Access-Control-Allow-Origin': '*'}
     },
     module: {
         rules: [

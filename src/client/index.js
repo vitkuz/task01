@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM,{ render } from 'react-dom'
-import { Provider } from 'react-redux'
 import App from './App'
 import './scss/index.scss';
 
@@ -8,3 +7,14 @@ ReactDOM.render(
     <App />,
     document.getElementById('root')
 );
+
+// Hot Module Replacement API
+if (module.hot) {
+    module.hot.accept('./App', () => {
+        const NextApp = require('./App').default;
+        ReactDOM.render(
+            <NextApp/>,
+            document.getElementById('root')
+        );
+    });
+}
