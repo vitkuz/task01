@@ -5,11 +5,10 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "npm run clean && webpack && babel-node ./src/server/index.js",
-    "build": "npm run clean && webpack",
+    "build": "npm run clean && webpack --config ./webpack.config.prod.js",
     "clean": "rimraf ./build",
     "server": "babel-node ./src/server/index.js",
     "dev": "webpack-dev-server --hot --inline",
-    "prod": "npm run clean && webpack -p",
     "lint": "eslint ./src"
   },
   "author": "",
@@ -48,7 +47,6 @@
     "style-loader": "^0.18.2",
     "webpack": "^3.5.5",
     "webpack-cleanup-plugin": "^0.5.1",
-    "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.7.1",
     "webpack-stream": "^4.0.0"
   },

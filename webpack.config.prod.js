@@ -3,12 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const config = require('dotenv').config();
 
-console.log('env config:', config);
-
-process.env.NODE_ENV = config.parsed.NODE_ENV || 4000;
-console.log('NODE_ENV', process.env.NODE_ENV);
 
 const VENDOR_LIBS = ['lodash', 'react', 'react-dom', 'redux-form', 'react-redux', 'redux'];
 
@@ -16,17 +11,6 @@ module.exports = {
     // context: __dirname + './src',
     entry: {
         bundle: [
-            'react-hot-loader/patch',
-            // activate HMR for React
-
-            'webpack-dev-server/client?http://localhost:4000',
-            // bundle the client for webpack-dev-server
-            // and connect to the provided endpoint
-
-            'webpack/hot/only-dev-server',
-            // bundle the client for hot reloading
-            // only- means to only hot reload for successful updates
-
             './src/client/index.jsx',
         ],
         vendor: VENDOR_LIBS,
@@ -37,14 +21,6 @@ module.exports = {
         publicPath: '/',
     },
     devtool: 'inline-source-map',
-    devServer: {
-        host: 'localhost',
-        contentBase: path.join(__dirname, 'build'),
-        historyApiFallback: true,
-        hot: true,
-        port: 4000,
-        headers: { 'Access-Control-Allow-Origin': '*' },
-    },
     resolve: {
         extensions: ['.js', '.jsx'],
     },
@@ -76,6 +52,11 @@ module.exports = {
         new ExtractTextPlugin('css/styles.css'),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest'] }),
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {
+                warnings: false,
+            },
+        }),
         new HtmlWebpackPlugin({
             template: 'src/templates/index.html',
             favicon: 'src/images/favicon.ico',
@@ -85,7 +66,7 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('development'),
+                NODE_ENV: JSON.stringify('production'),
                 WEBPACK: true,
             },
         }),
