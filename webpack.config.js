@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const config = require('dotenv').config();
 console.log("env config:",config);
 
-process.env.NODE_ENV = config.parsed.NODE_ENV;
+process.env.NODE_ENV = config.parsed.NODE_ENV || 4000;
 console.log("NODE_ENV",process.env.NODE_ENV);
 
 const VENDOR_LIBS = ['lodash','react','react-dom','redux-form', 'react-redux', 'redux'];
@@ -50,9 +50,9 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
-                use: {
-                    loader: 'babel-loader'
-                }
+                use: [
+                    "babel-loader",
+                ],
             },
             {
                 test: /\.scss$/,

@@ -1,11 +1,11 @@
-import React from 'react'
-import ReactDOM,{ render } from 'react-dom'
-import App from './App'
+import React from 'react';
+import ReactDOM, { render } from 'react-dom';
+import App from './App';
 import './scss/index.scss';
 
-ReactDOM.render(
+render(
     <App />,
-    document.getElementById('root')
+    document.getElementById('root'),
 );
 
 // Hot Module Replacement API
@@ -13,7 +13,7 @@ if (module.hot) {
     module.hot.accept('./App', () => {
         const NextApp = require('./App').default;
         ReactDOM.render(
-            <NextApp/>,
+            <NextApp />,
             document.getElementById('root')
         );
     });
