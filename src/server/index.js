@@ -6,7 +6,7 @@ const config = require('dotenv').config();
 const app = express();
 
 const port = process.env.PORT || config.parsed.PORT || 4000;
-process.env.NODE_ENV = config.parsed.NODE_ENV;
+process.env.NODE_ENV = config.parsed.NODE_ENV || 'development';
 
 app.use(express.static('build'));
 

@@ -4,8 +4,7 @@ const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
-
-const VENDOR_LIBS = ['lodash', 'react', 'react-dom', 'redux-form', 'react-redux', 'redux'];
+const VENDOR_LIBS = ['react', 'react-dom', 'redux-form', 'react-redux', 'redux'];
 
 module.exports = {
     // context: __dirname + './src',

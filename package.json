@@ -4,11 +4,11 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "npm run clean && webpack && babel-node ./src/server/index.js",
+    "start": "npm run clean && webpack  --config ./webpack.config.dev.js && babel-node ./src/server/index.js",
     "build": "npm run clean && webpack --config ./webpack.config.prod.js",
     "clean": "rimraf ./build",
     "server": "babel-node ./src/server/index.js",
-    "dev": "webpack-dev-server --hot --inline",
+    "dev": "webpack-dev-server --hot --inline --config ./webpack.config.dev.js",
     "lint": "eslint ./src"
   },
   "author": "",

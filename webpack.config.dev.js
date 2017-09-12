@@ -3,14 +3,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const config = require('dotenv').config();
 
-console.log('env config:', config);
-
-process.env.NODE_ENV = config.parsed.NODE_ENV || 4000;
-console.log('NODE_ENV', process.env.NODE_ENV);
-
-const VENDOR_LIBS = ['lodash', 'react', 'react-dom', 'redux-form', 'react-redux', 'redux'];
+const VENDOR_LIBS = ['react', 'react-dom', 'redux-form', 'react-redux', 'redux'];
 
 module.exports = {
     // context: __dirname + './src',
