@@ -1,0 +1,100 @@
+//@import "~meyer-reset-sass";
+@import "bootstrap-variables";
+$icon-font-path: "../../../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+$margin-constant:20px;
+
+.mt1 {
+  margin-top: $margin-constant;
+}
+
+.mb1 {
+  margin-bottom: $margin-constant;
+}
+
+.mr1 {
+  margin-right: $margin-constant;
+}
+
+.ml1 {
+  margin-left: $margin-constant;
+}
+
+.p1 {
+  padding: $margin-constant;
+}
+
+.dflex {
+  display: flex;
+}
+
+.dflex-justify {
+  justify-content: space-between;
+}
+
+h1,h2,h3,h4 {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  cursor:pointer;
+}
+
+.App {
+  border: 1px solid red;
+}
+
+footer,
+header {
+  border: 1px solid red;
+  padding:22px;
+}
+
+.help  {
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-content {
+  border: 1px solid green;
+}
+
+.input-group {
+  //display: flex;
+}
+
+.search {
+  width: 100%;
+  background: #000;
+  border:1px solid #fff;
+  &:focus {
+    border:1px solid pink;
+  }
+}
+.movies-gid-content {
+ overflow: hidden;
+}
+.movie {
+  float: left;
+  width: calc(25% - 22px);
+  margin-right: 29.3px;
+  margin-bottom:29.3px;
+  background: #2f2f2f;
+
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .movie-description {
+    color: #ffffff;
+    padding: 10px;
+  }
+
+}
