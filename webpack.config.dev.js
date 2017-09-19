@@ -76,7 +76,7 @@ module.exports = {
             favicon: 'src/images/favicon.ico',
         }),
         new CopyWebpackPlugin([
-            { from: 'static' }
+            { from: 'public' },
         ]),
         new WebpackCleanupPlugin({
             preview: true,

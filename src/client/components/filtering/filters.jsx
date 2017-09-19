@@ -8,8 +8,8 @@ class Filters extends React.Component {
         this.handleRatingClick = this.handleRatingClick.bind(this);
     }
 
-    handleDateClick (e) {
-       this.props.byDate();
+    handleDateClick(e) {
+        this.props.byDate();
     }
 
     handleRatingClick(e) {
@@ -18,14 +18,16 @@ class Filters extends React.Component {
 
     render() {
         return (
-            <section className="help mt1 p1">
-                <div>{this.props.movies.length -1} movies found</div>
-                <div>
-                    <span>Sort by </span>
-                    <span><a role='filter' onClick={this.handleDateClick}>release date</a></span> |&nbsp;
-                    <span><a role='filter' onClick={this.handleRatingClick}>rating</a></span>
-                </div>
 
+            <section className="section sorting mt1">
+                <div className="section-content">
+                    <div>{this.props.movies.length - 1} movies found</div>
+                    <div>
+                        <span>Sort by </span>
+                        <span><a role='filter' onClick={this.handleDateClick}>release date</a></span> |&nbsp;
+                        <span><a role='filter' onClick={this.handleRatingClick}>rating</a></span>
+                    </div>
+                </div>
             </section>
         );
     }

@@ -7,8 +7,8 @@ class MovieGrid extends React.Component {
     }
 
     renderMovies() {
-        return this.props.movies.map((movie,i) => {
-            return <Movie key={i} movie={movie} />
+        return this.props.movies.map((movie, i) => {
+            return <Movie key={i} movie={movie}/>
         });
     }
 
@@ -23,9 +23,13 @@ class MovieGrid extends React.Component {
         }
 
         return (
-            <div className="movies-gid-content mt1">
-                { this.renderMovies() }
-            </div>
+            <section className="section movies mt1">
+                <div className="section-content">
+                    <div className="movies-gid-content mt1">
+                        { this.renderMovies() }
+                    </div>
+                </div>
+            </section>
         );
     }
 }

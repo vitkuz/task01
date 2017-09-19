@@ -1,5 +1,25 @@
 import React from 'react';
-import ToggleGroup from '../utils/ToggleGroup.jsx';
+import ToggleGroup from '../utils/ToggleGroup';
+
+function fetchPosts() {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+        .then((response) => {
+            return response.json();
+        })
+        .then((json) => {
+            console.log('json', json);
+        });
+}
+
+function fetchComments() {
+    fetch('https://jsonplaceholder.typicode.com/comments')
+        .then((response) => {
+            return response.json();
+        })
+        .then((json) => {
+            console.log('json', json);
+        });
+}
 
 function fetchPosts() {
     fetch('https://jsonplaceholder.typicode.com/posts')

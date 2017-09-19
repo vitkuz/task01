@@ -1,7 +1,12 @@
 import React from 'react';
+
+// Import components
 import MovieGrid from './components/results/MovieGrid';
 import Filters from './components/filtering/filters';
-import Search from './components/search/search';
+import HeaderSearch from './components/sections/header-search';
+import HeaderMovie from './components/sections/header-movie-single';
+import Footer from './components/sections/footer';
+
 
 // utils function to generate random colors
 function getRandomColor() {
@@ -75,66 +80,13 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <header className="section header header-search header-cover-1">
-                    <div className="gradient-1">
-                        <div className="section-content">
-                            <h1><span className="glyphicon glyphicon-asterisk" />netflixroulette </h1>
-                            <p>Find Your Movie</p>
-                            <Search />
-                        </div>
-                    </div>
-                </header>
-
-
-                <header className="section header header-movie header-cover-1">
-                    <div className="section-content">
-
-                        <div className="row">
-                            <div className="col-md-4">
-                                <div className="field-movie-poster">
-                                    <img src={`http://via.placeholder.com/350x500/${getRandomColor()}`} alt=""/>
-                                </div>
-                            </div>
-                            <div className="col-md-8">
-                                <h1 className="field-movie-title">Pulb fiction</h1>
-                                <p className="field-movie-category">Oscar-wining Movies</p>
-                                <div className="field-movie-year">1994</div><div className="field-length">145 min</div>
-                                <div className="filed-movie-description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid aut consequuntur dolores ea eos et hic impedit, in ipsam ipsum laudantium nesciunt quisquam quod quos ratione saepe velit veniam?
-                                </div>
-
-                                <div className="field-movie-director">
-
-                                </div>
-
-                                <div className="field-movie-cast">
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </header>
-
-                <section className="section sorting mt1">
-                    <div className="section-content">
-                        <Filters movies={this.state.database} byDate={this.sortByDate} byRating={this.sortByRate} />
-                    </div>
-                </section>
-
-                <section className="section movies mt1">
-                    <div className="section-content">
-                        <MovieGrid movies={this.state.database} />
-                    </div>
-                </section>
-
-
-
-                <footer className="section footer mt1">
-                    <div className="section-content">
-                        footer / (c) 2018
-                    </div>
-                </footer>
+                <HeaderSearch />
+                <HeaderMovie />
+                <Filters movies={this.state.database}
+                         byDate={this.sortByDate}
+                         byRating={this.sortByRate} />
+                <MovieGrid movies={this.state.database} />
+                <Footer footerText="(c) 2018" />
 
             </div>
         );
