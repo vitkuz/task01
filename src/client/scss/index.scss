@@ -1,15 +1,110 @@
-body {
-  background:green;
-  color: #fff;
-  font-size:12px;
+//@import "~meyer-reset-sass";
 
-  h1 {
-    //font-size: 32px;
-  }
+@import "utils/utils";
+@import "components/header/header";
+
+
+
+html,body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
 }
 
-.App {
-  margin: 40px;
-  padding: 40px;
+* {
+
+}
+
+.sorting {
+  background: #ccc;
+
+}
+
+img {
+  max-width: 100%;
+}
+
+.section-content {
+  @extend .container;
+}
+
+h1 {
+  color:red;
+}
+
+.btn.active {
+  background-color:red;
+  color: #fff;
+}
+
+.btn {
+  background-color:#f3f3f3;
+  color: #fff;
+}
+
+
+
+
+.dflex {
+  display: flex;
+}
+
+.dflex-justify {
+  justify-content: space-between;
+}
+
+h1,h2,h3,h4 {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  cursor:pointer;
+}
+
+.help  {
   border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-content {
+  border: 1px solid green;
+}
+
+.input-group {
+  //display: flex;
+}
+
+.search {
+  width: 100%;
+  background: #000;
+  border:1px solid #fff;
+  &:focus {
+    border:1px solid pink;
+  }
+}
+.movies-gid-content {
+ overflow: hidden;
+}
+.movie {
+  float: left;
+  width: calc(25% - 22px);
+  margin-right: 29.3px;
+  margin-bottom:29.3px;
+  background: #2f2f2f;
+
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .movie-description {
+    color: #ffffff;
+    padding: 10px;
+  }
+
 }

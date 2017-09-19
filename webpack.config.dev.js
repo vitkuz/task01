@@ -1,6 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
@@ -74,6 +75,9 @@ module.exports = {
             template: 'src/templates/index.html',
             favicon: 'src/images/favicon.ico',
         }),
+        new CopyWebpackPlugin([
+            { from: 'static' }
+        ]),
         new WebpackCleanupPlugin({
             preview: true,
         }),

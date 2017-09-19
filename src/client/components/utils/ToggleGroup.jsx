@@ -10,7 +10,6 @@ class ToggleGroup extends React.Component {
     }
 
     isActive(i) {
-        console.log(i, this.state.selected);
         if ( this.state.selected === i) {
             return 'active';
         } else {

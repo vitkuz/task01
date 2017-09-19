@@ -1,6 +1,26 @@
 import React from 'react';
 import ToggleGroup from '../utils/ToggleGroup.jsx';
 
+function fetchPosts() {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+        .then((response) => {
+            return response.json();
+        })
+        .then((json) => {
+            console.log('json', json);
+        });
+}
+
+function fetchComments() {
+    fetch('https://jsonplaceholder.typicode.com/comments')
+        .then((response) => {
+            return response.json();
+        })
+        .then((json) => {
+            console.log('json', json);
+        });
+}
+
 class Search extends React.Component {
     constructor(props) {
         super(props);
@@ -23,14 +43,15 @@ class Search extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        fetch('https://jsonplaceholder.typicode.com/posts')
-            .then((response) => {
-                return response.json();
-            })
-            .then((json) => {
-                console.log('json', json);
-            });
-
+        switch (this.state.term) {
+            case 'posts':
+                fetchPosts();
+                break;
+            case 'comments':
+                fetchComments();
+                break;
+            default :
+        }
     }
 
     render() {
