@@ -38,7 +38,6 @@ class ToggleGroup extends React.Component {
             <div>
                 { this.renderButtons() }
             </div>
-
         );
     }
 }
@@ -48,7 +47,7 @@ ToggleGroup.defaultProps = {
 };
 
 ToggleGroup.propTypes = {
-    searchByFlag: PropTypes.func.isRequired,
+    searchByFlag: PropTypes.string.isRequired,
     updateSearchBy: PropTypes.func.isRequired,
 };
 

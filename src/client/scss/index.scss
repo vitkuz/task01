@@ -5,21 +5,13 @@
 
 @import "components/sections/sections";
 @import "components/header/header";
+@import "components/movie/movie";
 @import "components/footer/footer";
 
 html, body {
   margin: 0;
   padding: 0;
   font-size: 16px;
-}
-
-input {
-  border: 1px solid;
-  padding: 10px;
-}
-
-.movie {
-  float:left;
 }
 
 img {

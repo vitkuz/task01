@@ -68,7 +68,7 @@ class MovieGrid extends React.Component {
 
                     <Filters updateSortBy={this.props.updateSortBy} />
 
-                    <div className="movies-gid-content mt1">
+                    <div className="row movies-gid-content mt1">
                         { this.renderMovies() }
                     </div>
                 </div>

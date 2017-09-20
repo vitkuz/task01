@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 const Movie = (props) => {
     return (
-        <div className="movie">
+        <div className="col-md-3 mb1 movie">
             <div className="movie-picture">
-                <img src={props.movie.img} alt="Movie Poster"/>
+                <img src={props.movie.img} alt="Movie Poster" />
             </div>
             <div className="movie-description">
                 <div className="movie-description-year">

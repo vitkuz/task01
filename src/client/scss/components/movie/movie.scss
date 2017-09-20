@@ -1,21 +1,16 @@
 .movie {
-  float: left;
-  width: calc(25% - 22px);
-  margin-right: 29.3px;
-  margin-bottom: 29.3px;
-  background: #2f2f2f;
-
-  &:nth-child(4n) {
-    margin-right: 0;
+  .movie-picture {
+    background: #000;
   }
 
   img {
-    max-width: 100%;
+    width: 100%;
   }
 
   .movie-description {
     color: #ffffff;
     padding: 10px;
+    background: #000;
   }
 
 }
