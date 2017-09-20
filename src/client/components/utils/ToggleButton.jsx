@@ -4,26 +4,21 @@ import PropTypes from 'prop-types';
 class Toggle extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isToggleOn: true };
+        this.state = {
+            text:this.props.button.title,
+            value:this.props.button.value,
+        };
         this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick() {
-        this.setState({
-            isToggleOn: !this.state.isToggleOn,
-        });
-        this.updateGroup();
-        this.props.updateSearchState(this.props.text);
-    }
-
-    updateGroup() {
-        this.props.updateGroup(this.props.index);
+        this.props.updateSearchBy(this.state.value);
     }
 
     render() {
         return (
-            <a onClick={this.handleClick} className={`btn btn-danger ${this.props.addClass}`}>
-                { this.props.text }
+            <a onClick={this.handleClick} className={this.props.classes}>
+                {this.state.text}
             </a>
         );
     }

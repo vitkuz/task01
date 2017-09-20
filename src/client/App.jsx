@@ -2,7 +2,7 @@ import React from 'react';
 
 // Import components
 import MovieGrid from './components/results/MovieGrid';
-import Filters from './components/filtering/Filters';
+
 import HeaderSearch from './components/sections/HeaderSearch';
 import HeaderMovie from './components/sections/HeaderMovieSingle';
 import Footer from './components/sections/Footer';
@@ -18,23 +18,33 @@ function getRandomColor() {
     return color;
 }
 
-function sortFunc(a, b) {
-    if (a.year < b.year) {
-        return -1;
-    }
-    if (a.year > b.year) {
-        return 1;
-    }
-    return 0;
+function fetchPosts() {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+        .then((response) => {
+            return response.json();
+        })
+        .then((json) => {
+            console.log('json', json);
+        });
+}
+
+function fetchComments() {
+    fetch('https://jsonplaceholder.typicode.com/comments')
+        .then((response) => {
+            return response.json();
+        })
+        .then((json) => {
+            console.log('json', json);
+        });
 }
 
 const database = [
-    { title: 'title 1', year: '2011', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 1 },
+    { title: 'title 1', year: '2011', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 9 },
     { title: 'title 2', year: '2012', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '222', rating: 2 },
-    { title: 'title 3', year: '2013', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 3 },
+    { title: 'title 3', year: '2013', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 1 },
     { title: 'title 4', year: '2014', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '333', rating: 4 },
-    { title: 'title 5', year: '2015', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '222', rating: 5 },
-    { title: 'title 6', year: '2016', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 6 },
+    { title: 'title 5', year: '2015', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '222', rating: 1 },
+    { title: 'title 6', year: '2016', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 2 },
     { title: 'title 7', year: '2017', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 7 },
     { title: 'title 8', year: '2011', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 8 },
     { title: 'title 9', year: '2011', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 9 },
@@ -44,38 +54,46 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
+            sortBy:'rating',
+            searchBy:'comments',
             database,
         };
-        this.update = this.update.bind(this);
-        this.sortByDate = this.sortByDate.bind(this);
-        this.sortByRate = this.sortByRate.bind(this);
+        this.updateSortBy = this.updateSortBy.bind(this);
+        this.updateSearchBy = this.updateSearchBy.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
+
     }
 
-    update(e) {
-        this.setState({ search: e.target.value });
+    updateSortBy(flag) {
+        console.log('flag', flag);
+        this.setState({sortBy: flag});
+        console.log(this.state.sortBy);
     }
 
-    sortByDate() {
-        const currentData = [...this.state.database];
-        currentData.sort(sortFunc);
-        this.setState({database: currentData});
+    updateSearchBy(flag) {
+        console.log('flag',flag);
+        this.setState({searchBy:flag});
     }
 
-    sortByRate() {
-        const currentData = [...this.state.database];
-        currentData.sort(sortFunc);
-        this.setState({ database: currentData });
+    handleSearch(value) {
+        switch (this.state.searchBy) {
+            case 'posts':
+                fetchPosts(value);
+                break;
+            case 'comments':
+                fetchComments(value);
+                break;
+            default :
+                console.log("!!!!");
+        }
     }
 
     render() {
         return (
             <div className="App">
-                <HeaderSearch />
+                <HeaderSearch updateSearchBy={this.updateSearchBy} searchByFlag={this.state.searchBy} handleSearch={this.handleSearch}/>
                 <HeaderMovie />
-                <Filters movies={this.state.database}
-                         byDate={this.sortByDate}
-                         byRating={this.sortByRate} />
-                <MovieGrid movies={this.state.database} />
+                <MovieGrid database={this.state.database} updateSortBy={this.updateSortBy} sortByFlag={this.state.sortBy} />
                 <Footer />
 
             </div>

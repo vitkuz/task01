@@ -6,26 +6,29 @@ import Toggle from './ToggleButton';
 class ToggleGroup extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { selected: props.selected };
-        this.changeActive = this.changeActive.bind(this);
+        this.state = {
+            buttons:[
+                {title: 'posts', value:'posts'},
+                {title: 'comments', value:'comments'}
+            ],
+            selected: this.props.searchByFlag,
+        };
     }
-    getToggleClassName(i) {
-        if (this.state.selected === i) {
-            return 'active';
+    getToggleClassName(button) {
+
+        if (button.value === this.props.searchByFlag) {
+            return 'btn active';
+        } else  {
+            return 'btn';
         }
-        return '';
+
     }
-    changeActive(i) {
-        this.setState({ selected: i });
-    }
+
     renderButtons() {
-        return this.props.buttons.map((button, index ) => {
-            <Toggle updateSearchState={this.props.updateParent}
-                    key={index}
-                    index={index}
-                    text={button.title}
-                    addClass={this.getToggleClassName(index)}
-                    updateGroup={this.changeActive} />
+        return this.state.buttons.map((button,index) => {
+            return <Toggle key={button.value} button={button}
+                           classes={this.getToggleClassName(button)}
+                           updateSearchBy={this.props.updateSearchBy} />
 
         });
     }
@@ -41,11 +44,11 @@ class ToggleGroup extends React.Component {
 }
 
 ToggleGroup.defaultProps = {
-    selected: 0,
+    selected: 'comments',
 };
 
 ToggleGroup.propTypes = {
-    selected: PropTypes.number,
+    selected: PropTypes.string,
 };
 
 export default ToggleGroup;

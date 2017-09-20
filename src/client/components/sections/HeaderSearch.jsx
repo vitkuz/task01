@@ -10,7 +10,7 @@ class HeaderSearch extends React.Component {
                     <div className="section-content">
                         <h1>netflixroulette </h1>
                         <p>Find Your Movie</p>
-                        <Search />
+                        <Search updateSearchBy={this.props.updateSearchBy} searchByFlag={this.props.searchByFlag} handleSearch={this.props.handleSearch}/>
                     </div>
                 </div>
             </header>
