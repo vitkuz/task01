@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Filters extends React.Component {
     constructor(props) {
@@ -7,11 +8,11 @@ class Filters extends React.Component {
         this.handleRatingClick = this.handleRatingClick.bind(this);
     }
 
-    handleDateClick(e) {
+    handleDateClick() {
         this.props.updateSortBy('year');
     }
 
-    handleRatingClick(e) {
+    handleRatingClick() {
         this.props.updateSortBy('rating');
     }
 
@@ -23,13 +24,21 @@ class Filters extends React.Component {
                     <div>{} movies found</div>
                     <div>
                         <span>Sort by:</span>
-                        <span><a role='filter' onClick={this.handleDateClick}>release date</a></span> |&nbsp;
-                        <span><a role='filter' onClick={this.handleRatingClick}>rating</a></span>
+                        <span>
+                            <a onClick={this.handleDateClick}>release date</a>
+                        </span> |&nbsp;
+                        <span>
+                            <a onClick={this.handleRatingClick}>rating</a>
+                        </span>
                     </div>
                 </div>
             </section>
         );
     }
 }
+
+Filters.propTypes = {
+    updateSortBy: PropTypes.func.isRequired,
+};
 
 export default Filters;

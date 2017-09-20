@@ -7,9 +7,9 @@ class ToggleGroup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            buttons:[
-                {title: 'posts', value:'posts'},
-                {title: 'comments', value:'comments'}
+            buttons: [
+                { title: 'posts', value: 'posts'},
+                { title: 'comments', value: 'comments'}
             ],
             selected: this.props.searchByFlag,
         };
@@ -25,7 +25,7 @@ class ToggleGroup extends React.Component {
     }
 
     renderButtons() {
-        return this.state.buttons.map((button,index) => {
+        return this.state.buttons.map((button) => {
             return <Toggle key={button.value} button={button}
                            classes={this.getToggleClassName(button)}
                            updateSearchBy={this.props.updateSearchBy} />
@@ -48,7 +48,7 @@ ToggleGroup.defaultProps = {
 };
 
 ToggleGroup.propTypes = {
-    selected: PropTypes.string,
+    selected: PropTypes.func,
 };
 
 export default ToggleGroup;

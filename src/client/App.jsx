@@ -12,7 +12,7 @@ import Footer from './components/sections/Footer';
 function getRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '';
-    for (var i = 0; i < 6; i++) {
+    for (let i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
@@ -54,8 +54,8 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            sortBy:'rating',
-            searchBy:'comments',
+            sortBy: 'rating',
+            searchBy: 'comments',
             database,
         };
         this.updateSortBy = this.updateSortBy.bind(this);
@@ -66,13 +66,13 @@ class App extends React.Component {
 
     updateSortBy(flag) {
         console.log('flag', flag);
-        this.setState({sortBy: flag});
+        this.setState({ sortBy: flag });
         console.log(this.state.sortBy);
     }
 
     updateSearchBy(flag) {
-        console.log('flag',flag);
-        this.setState({searchBy:flag});
+        console.log('flag', flag);
+        this.setState({ searchBy: flag });
     }
 
     handleSearch(value) {
@@ -84,18 +84,17 @@ class App extends React.Component {
                 fetchComments(value);
                 break;
             default :
-                console.log("!!!!");
+                console.log('!!!!');
         }
     }
 
     render() {
         return (
             <div className="App">
-                <HeaderSearch updateSearchBy={this.updateSearchBy} searchByFlag={this.state.searchBy} handleSearch={this.handleSearch}/>
+                <HeaderSearch updateSearchBy={this.updateSearchBy} searchByFlag={this.state.searchBy} handleSearch={this.handleSearch} />
                 <HeaderMovie />
                 <MovieGrid database={this.state.database} updateSortBy={this.updateSortBy} sortByFlag={this.state.sortBy} />
                 <Footer />
-
             </div>
         );
     }

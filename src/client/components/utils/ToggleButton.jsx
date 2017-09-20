@@ -5,8 +5,8 @@ class Toggle extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text:this.props.button.title,
-            value:this.props.button.value,
+            text: props.button.title,
+            value: props.button.value,
         };
         this.handleClick = this.handleClick.bind(this);
     }
@@ -25,7 +25,7 @@ class Toggle extends React.Component {
 }
 
 Toggle.propTypes = {
-    updateSearchState: PropTypes.func,
+    text: PropTypes.string,
 };
 
 export default Toggle;
