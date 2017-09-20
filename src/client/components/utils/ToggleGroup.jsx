@@ -40,8 +40,12 @@ class ToggleGroup extends React.Component {
     }
 }
 
+ToggleGroup.defaultProps = {
+    selected: 0,
+};
+
 ToggleGroup.propTypes = {
-    selected: PropTypes.number
+    selected: PropTypes.number,
 };
 
 export default ToggleGroup;
