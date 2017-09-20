@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from '../search/search';
+import Search from '../search/Search';
 
 class HeaderSearch extends React.Component {
 

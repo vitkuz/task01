@@ -4,7 +4,7 @@ import Movie from './Movie';
 class MovieGrid extends React.Component {
     renderMovies() {
         return this.props.movies.map((movie, i) => {
-            return <Movie key={i} movie={movie}/>
+            return <Movie key={movie.title} movie={movie}/>
         });
     }
     render() {

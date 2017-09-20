@@ -8,8 +8,8 @@ class Toggle extends React.Component {
     }
 
     handleClick() {
-        this.setState(function(prevState) {
-            return {isToggleOn: !prevState.isToggleOn};
+        this.setState({
+            isToggleOn: !this.state.isToggleOn
         });
         this.updateGroup();
         this.props.updateSearchState(this.props.text);

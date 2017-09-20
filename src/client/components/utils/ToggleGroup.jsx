@@ -9,7 +9,7 @@ class ToggleGroup extends React.Component {
         this.changeActive = this.changeActive.bind(this);
     }
 
-    isActive(i) {
+    getToggleClassName(i) {
         if ( this.state.selected === i) {
             return 'active';
         } else {
@@ -24,9 +24,9 @@ class ToggleGroup extends React.Component {
     renderButtons() {
         return this.props.buttons.map((button, index ) => {
             if ((this.props.buttons.length-1) === index) {
-                return <Toggle updateSearchState={this.props.updateParent} key={index} index={index} text={button.title} addClass={this.isActive(index)} updateGroup={this.changeActive} />
+                return <Toggle updateSearchState={this.props.updateParent} key={index} index={index} text={button.title} addClass={this.getToggleClassName(index)} updateGroup={this.changeActive} />
             } else {
-                return <Toggle updateSearchState={this.props.updateParent} key={index} index={index} text={button.title} addClass={this.isActive(index)+' mr1'} updateGroup={this.changeActive} />
+                return <Toggle updateSearchState={this.props.updateParent} key={index} index={index} text={button.title} addClass={this.getToggleClassName(index)+' mr1'} updateGroup={this.changeActive} />
             }
 
         });
