@@ -18,21 +18,11 @@ function getRandomColor() {
     return color;
 }
 
-function sortByDate(a,b) {
+function sortFunc(a,b) {
     if (a.year < b.year) {
         return -1;
     }
     if (a.year > b.year) {
-        return 1;
-    }
-    return 0;
-}
-
-function sortByRating(a,b) {
-    if (a.rating < b.rating) {
-        return -1;
-    }
-    if (a.rating > b.rating) {
         return 1;
     }
     return 0;
@@ -67,14 +57,14 @@ class App extends React.Component {
 
     sortByDate() {
         let currentData = [...this.state.database];
-        currentData.sort(sortByDate);
+        currentData.sort(sortFunc);
         this.setState({database: currentData});
     }
 
     sortByRate() {
         let currentData = [...this.state.database];
-        currentData.sort(sortByRating);
-        this.setState({database: currentData});
+        currentData.sort(sortFunc);
+        this.setState({database: sortFunc});
     }
 
     render() {
@@ -86,7 +76,7 @@ class App extends React.Component {
                          byDate={this.sortByDate}
                          byRating={this.sortByRate} />
                 <MovieGrid movies={this.state.database} />
-                <Footer footerText="(c) 2018" />
+                <Footer />
 
             </div>
         );

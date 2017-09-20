@@ -1,8 +1,14 @@
 @import "normalize";
 
-@import "vars";
-@import "grid-framework";
-@import "grid";
+@import "grid/_vars";
+@import "grid/_grid-framework";
+@import "grid/_grid";
+
+@import "typography/typography";
+
+@import "buttons/buttons";
+@import "inputs/input";
+
 
 
 $margin-constant:20px;
@@ -154,4 +160,12 @@ $margin-constant:20px;
 
 .p1 {
   padding: $margin-constant;
+}
+
+.dflex {
+  display: flex;
+}
+
+.dflex-justify {
+  justify-content: space-between;
 }

@@ -62,7 +62,7 @@ module.exports = {
             {
                 test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
                 use: [{
-                    loader: 'file-loader',
+                    loader: 'file-loader?name=/fonts/[name].[ext]',
                 }],
             },
         ],
@@ -73,10 +73,10 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest'] }),
         new HtmlWebpackPlugin({
             template: 'src/templates/index.html',
-            favicon: 'src/images/favicon.ico',
         }),
         new CopyWebpackPlugin([
-            { from: 'public' },
+            { from: 'src/images' },
+            { from: 'src/fonts' },
         ]),
         new WebpackCleanupPlugin({
             preview: true,

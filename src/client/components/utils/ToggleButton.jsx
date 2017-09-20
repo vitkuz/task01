@@ -22,7 +22,7 @@ class Toggle extends React.Component {
     render() {
 
         return (
-            <a onClick={this.handleClick} className={'btn btn-danger '+this.props.addClass}>
+            <a onClick={this.handleClick} className={`btn btn-danger ${this.props.addClass}`}>
                 { this.props.text }
             </a>
         );

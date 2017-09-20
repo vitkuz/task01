@@ -2,16 +2,11 @@ import React from 'react';
 import Movie from './Movie';
 
 class MovieGrid extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     renderMovies() {
         return this.props.movies.map((movie, i) => {
             return <Movie key={i} movie={movie}/>
         });
     }
-
     render() {
         if (!this.props.movies) {
             return (

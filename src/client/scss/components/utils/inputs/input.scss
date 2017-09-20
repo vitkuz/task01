@@ -1,0 +1,17 @@
+.input-group {
+  position: relative;
+}
+
+.input-group-addon {
+  position: absolute;
+  right: 11px;
+  top:11px;
+  z-index: 1;
+  color: red;
+}
+
+input {
+  width: 100%;
+  border:green;
+  padding: 10px;
+}

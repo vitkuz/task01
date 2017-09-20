@@ -21,30 +21,10 @@ function fetchComments() {
         });
 }
 
-function fetchPosts() {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-        .then((response) => {
-            return response.json();
-        })
-        .then((json) => {
-            console.log('json', json);
-        });
-}
-
-function fetchComments() {
-    fetch('https://jsonplaceholder.typicode.com/comments')
-        .then((response) => {
-            return response.json();
-        })
-        .then((json) => {
-            console.log('json', json);
-        });
-}
-
 class Search extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { term:'posts', query: '' };
+        this.state = { term: 'posts', query: '' };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,7 +36,7 @@ class Search extends React.Component {
     }
 
     handleTypeChange(term) {
-        this.setState({term});
+        this.setState({ term });
         console.log(this.state.term);
     }
 
@@ -84,7 +64,7 @@ class Search extends React.Component {
                 </div>
                 <div className="dflex dflex-justify mt1">
                     <div>
-                        <ToggleGroup updateParent={this.handleTypeChange} selected={0} buttons={[{title:'posts', value: 'posts'}, {title: 'comments', value: 'commnets'}]} />
+                        <ToggleGroup updateParent={this.handleTypeChange} selected={0} buttons={[{title: 'posts', value: 'posts'}, {title: 'comments', value: 'commnets'}]} />
                     </div>
                     <div>
                         <button className="btn btn-default">Submit</button>
