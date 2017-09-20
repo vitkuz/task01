@@ -24,8 +24,13 @@ class Toggle extends React.Component {
     }
 }
 
+Toggle.defaultProps = {
+    classes: 'btn',
+};
+
 Toggle.propTypes = {
-    text: PropTypes.string,
+    button: PropTypes.object.isRequired,
+    classes: PropTypes.string,
 };
 
 export default Toggle;

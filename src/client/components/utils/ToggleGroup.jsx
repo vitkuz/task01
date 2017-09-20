@@ -8,8 +8,8 @@ class ToggleGroup extends React.Component {
         super(props);
         this.state = {
             buttons: [
-                { title: 'posts', value: 'posts'},
-                { title: 'comments', value: 'comments'}
+                { title: 'posts', value: 'posts' },
+                { title: 'comments', value: 'comments' },
             ],
             selected: this.props.searchByFlag,
         };
@@ -48,7 +48,8 @@ ToggleGroup.defaultProps = {
 };
 
 ToggleGroup.propTypes = {
-    selected: PropTypes.func,
+    searchByFlag: PropTypes.func.isRequired,
+    updateSearchBy: PropTypes.func.isRequired,
 };
 
 export default ToggleGroup;

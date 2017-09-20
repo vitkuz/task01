@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Movie from './Movie';
 import Filters from '../filtering/Filters';
 
-function sortBy(key, reverse) {
 
-    var moveSmaller = reverse ? 1 : -1;
-    var moveLarger = reverse ? -1 : 1;
+function sortBy(key, reverse) {
+    const moveSmaller = reverse ? 1 : -1;
+    const moveLarger = reverse ? -1 : 1;
 
     return function (a, b) {
         if (a[key] < b[key]) {
@@ -18,29 +20,19 @@ function sortBy(key, reverse) {
     };
 }
 
-function sortByYear(a, b) {
-    if (a.year < b.year) {
-        return -1;
-    }
-    if (a.year > b.year) {
-        return 1;
-    }
-    return 0;
-}
-
 class MovieGrid extends React.Component {
     constructor(props) {
         super(props);
-        this.state ={
-            database:this.props.database,
-            sortBy:this.props.sortByFlag,
+        this.state = {
+            database: props.database,
+            sortBy: props.sortByFlag,
         };
     }
 
     renderMovies() {
 
         const sorted = [...this.state.database];
-        console.log('before sorting',sorted);
+        console.log('before sorting', sorted);
 
         switch (this.props.sortByFlag) {
             case 'year':
@@ -55,7 +47,7 @@ class MovieGrid extends React.Component {
         console.log('after sorting',sorted);
 
         return sorted.map((movie, i) => {
-            return <Movie key={movie.title} movie={movie}/>
+            return <Movie key={movie.title} movie={movie} />
         });
     }
 
@@ -84,5 +76,11 @@ class MovieGrid extends React.Component {
         );
     }
 }
+
+MovieGrid.propTypes = {
+    database: PropTypes.array.isRequired,
+    sortByFlag: PropTypes.string.isRequired,
+    updateSortBy: PropTypes.func.isRequired,
+};
 
 export default MovieGrid;

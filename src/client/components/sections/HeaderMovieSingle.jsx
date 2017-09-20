@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const HeaderMovieSinglePage = () => {
     return (
-        <header className="section header header-movie header-cover-1">
+        <div className="section header header-movie header-cover-1">
             <div className="section-content">
 
                 <div className="row">
@@ -32,7 +33,7 @@ test
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
     );
 };
 

@@ -1,6 +1,8 @@
 import React from 'react';
-import Search from '../search/Search';
 import PropTypes from 'prop-types';
+
+import Search from '../search/Search';
+
 
 const HeaderSearch = (props) => {
     return (
@@ -9,11 +11,17 @@ const HeaderSearch = (props) => {
                 <div className="section-content">
                     <h1>netflixroulette </h1>
                     <p>Find Your Movie</p>
-                    <Search updateSearchBy={props.updateSearchBy} searchByFlag={props.searchByFlag} handleSearch={props.handleSearch}/>
+                    <Search updateSearchBy={props.updateSearchBy} searchByFlag={props.searchByFlag} handleSearch={props.handleSearch} />
                 </div>
             </div>
         </header>
     );
+};
+
+HeaderSearch.propTypes = {
+    updateSearchBy: PropTypes.func.isRequired,
+    handleSearch: PropTypes.func.isRequired,
+    searchByFlag: PropTypes.string.isRequired,
 };
 
 export default HeaderSearch;
