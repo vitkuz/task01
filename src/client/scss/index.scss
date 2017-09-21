@@ -1,15 +1,19 @@
-body {
-  background:green;
-  color: #fff;
-  font-size:12px;
+@import "components/utils/utils";
 
-  h1 {
-    //font-size: 32px;
-  }
+@import "components/utils/buttons/buttons";
+@import "components/utils/inputs/input";
+
+@import "components/sections/sections";
+@import "components/header/header";
+@import "components/movie/movie";
+@import "components/footer/footer";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
 }
 
-.App {
-  margin: 40px;
-  padding: 40px;
-  border: 1px solid red;
+img {
+  max-width: 100%;
 }
