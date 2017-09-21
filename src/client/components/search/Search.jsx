@@ -31,10 +31,7 @@ class Search extends React.Component {
                 </div>
                 <div className="dflex dflex-justify mt1">
                     <div>
-                        <ToggleGroup updateSearchBy={this.props.updateSearchBy} searchByFlag={this.props.searchByFlag} buttons={[
-                            { title: 'posts', value: 'posts' },
-                            { title: 'comments', value: 'comments' },
-                        ]} />
+                        <ToggleGroup updateSearchBy={this.props.updateSearchBy} searchByFlag={this.props.searchByFlag} />
                     </div>
                     <div>
                         <button className="btn btn-default">Submit</button>
