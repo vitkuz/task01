@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Movie = (props) => {
@@ -9,12 +10,14 @@ const Movie = (props) => {
             </div>
             <div className="movie-description">
                 <div className="movie-description-year">
-                    {props.movie.year}
+                    Year: {props.movie.year}
                 </div>
                 <div className="movie-description-title">
-                    <h3>{props.movie.title}</h3>
+                    <h3><Link to="/movie">{props.movie.title}</Link></h3>
                 </div>
-                <div className="movie-description-category">{props.movie.category}</div>
+                <div className="movie-description-category">Cat: {props.movie.category}</div>
+                <div className="movie-description-rating">Rating: {props.movie.rating}</div>
+                <div><Link to="/movie" className="btn">More</Link></div>
             </div>
 
         </div>

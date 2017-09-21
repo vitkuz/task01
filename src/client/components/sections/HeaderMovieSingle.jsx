@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const HeaderMovieSinglePage = () => {
     return (
@@ -7,6 +8,9 @@ const HeaderMovieSinglePage = () => {
             <div className="gradient-2">
                 <div className="section-content">
 
+                    <div className="row text-right">
+                        <Link to="/" className="btn">Make search</Link>
+                    </div>
                     <div className="row">
                         <div className="col-md-4">
                             <div className="field-movie-poster">

@@ -1,11 +1,14 @@
 import React from 'react';
+import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 // Import components
-import MovieGrid from './components/results/MovieGrid';
 
-import HeaderSearch from './components/sections/HeaderSearch';
-import HeaderMovie from './components/sections/HeaderMovieSingle';
+
 import Footer from './components/sections/Footer';
+
+import HomePage from './pages/HomePage';
+import MovieSinglePage from './pages/MovieSinglePage';
+import PageNotFound from './pages/PageNotFound';
 
 
 // utils function to generate random colors
@@ -30,6 +33,12 @@ function fetchComments() {
         .then((response) => {
             return response.json();
         })
+}
+
+function withProps(Component, props) {
+    return function(matchProps) {
+        return <Component {...props} {...matchProps} />
+    }
 }
 
 const database = [
@@ -79,12 +88,35 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="App">
-                <HeaderSearch updateSearchBy={this.updateSearchBy} searchByFlag={this.state.searchBy} handleSearch={this.handleSearch} />
-                <HeaderMovie />
-                <MovieGrid database={this.state.database} updateSortBy={this.updateSortBy} sortByFlag={this.state.sortBy} />
-                <Footer />
-            </div>
+            <Router>
+                <div className="App">
+
+                    <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to={{ pathname: '/movie' }}>Movie</Link></li>
+                        <li><Link to="/okdslkjfdskj">PageNotFound</Link></li>
+                    </ul>
+
+                    <Switch>
+                        <Route exact path="/" component={withProps(HomePage, {
+                            updateSearchBy: this.updateSearchBy,
+                            searchByFlag: this.state.searchBy,
+                            handleSearch: this.handleSearch,
+                            sortByFlag: this.state.sortBy,
+                            updateSortBy: this.updateSortBy,
+                            database: this.state.database,
+                        })} />
+                        <Route exact path="/movie" component={withProps(MovieSinglePage, {
+                            sortByFlag: this.state.sortBy,
+                            updateSortBy: this.updateSortBy,
+                            database: this.state.database,
+                        })} />
+                        <Route component={PageNotFound} />
+                    </Switch>
+                    <Footer />
+                </div>
+            </Router>
+
         );
     }
 }
