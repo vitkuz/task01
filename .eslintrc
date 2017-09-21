@@ -6,11 +6,11 @@
     "node": true
   },
   "rules": {
-    "jsx-a11y/href-no-hash": 0,
-    "react/jsx-indent":0,
-    "treatUndefinedAsUnspecified":0,
-    "linebreak-style": 0,
-    "indent": 0,
-    "no-console": 0
+    "jsx-a11y/href-no-hash": 0, /*do not understand wtf is that*/
+    "react/jsx-indent":0, /*prefer tab indent*/
+    "treatUndefinedAsUnspecified":0, /*dont care about that*/
+    "linebreak-style": 0, /*working on windows*/
+    "indent": 0, /*prefer tab indent*/
+    "no-console": 0 /*use console for deguging*/
   }
 }

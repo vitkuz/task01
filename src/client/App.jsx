@@ -23,9 +23,6 @@ function fetchPosts() {
         .then((response) => {
             return response.json();
         })
-        .then((json) => {
-            console.log('json', json);
-        });
 }
 
 function fetchComments() {
@@ -33,9 +30,6 @@ function fetchComments() {
         .then((response) => {
             return response.json();
         })
-        .then((json) => {
-            console.log('json', json);
-        });
 }
 
 const database = [
@@ -65,13 +59,10 @@ class App extends React.Component {
     }
 
     updateSortBy(flag) {
-        console.log('flag', flag);
         this.setState({ sortBy: flag });
-        console.log(this.state.sortBy);
     }
 
     updateSearchBy(flag) {
-        console.log('flag', flag);
         this.setState({ searchBy: flag });
     }
 
@@ -83,8 +74,6 @@ class App extends React.Component {
             case 'comments':
                 fetchComments(value);
                 break;
-            default :
-                console.log('!!!!');
         }
     }
 

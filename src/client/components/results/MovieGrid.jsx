@@ -32,7 +32,6 @@ class MovieGrid extends React.Component {
     renderMovies() {
 
         const sorted = [...this.state.database];
-        console.log('before sorting', sorted);
 
         switch (this.props.sortByFlag) {
             case 'year':
@@ -44,9 +43,8 @@ class MovieGrid extends React.Component {
             default:
                 break;
         }
-        console.log('after sorting',sorted);
 
-        return sorted.map((movie, i) => {
+        return sorted.map((movie) => {
             return <Movie key={movie.title} movie={movie} />
         });
     }
@@ -61,7 +59,7 @@ class MovieGrid extends React.Component {
 
             );
         }
-        console.log('render');
+
         return (
             <section className="section movies mt1">
                 <div className="section-content">
