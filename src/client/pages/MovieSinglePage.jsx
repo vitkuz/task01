@@ -1,9 +1,9 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import HeaderMovie from '../components/sections/HeaderMovieSingle';
 import MovieGrid from '../components/results/MovieGrid';
 
-export default class MovieSinglePage extends React.Component {
-
+class MovieSinglePage extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0);
     }
@@ -21,3 +21,12 @@ export default class MovieSinglePage extends React.Component {
         );
     }
 }
+
+MovieSinglePage.propTypes = {
+    match: PropTypes.object.isRequired,
+    database: PropTypes.array.isRequired,
+    updateSortBy: PropTypes.func.isRequired,
+    sortByFlag: PropTypes.func.isRequired,
+};
+
+export default MovieSinglePage;

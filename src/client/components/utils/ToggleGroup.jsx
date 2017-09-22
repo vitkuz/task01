@@ -8,8 +8,8 @@ class ToggleGroup extends React.Component {
         super(props);
         this.state = {
             buttons: [
-                { title: 'posts', value: 'posts' },
-                { title: 'comments', value: 'comments' },
+                { title: 'title', value: 'title' },
+                { title: 'director', value: 'director' },
             ],
             selected: this.props.searchByFlag,
         };

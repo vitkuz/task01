@@ -30,7 +30,7 @@ class Search extends React.Component {
                     <span className="input-group-addon" id="basic-addon2">fake api</span>
                 </div>
                 <div className="dflex dflex-justify mt1">
-                    <div>
+                    <div className="toggle-search-type">
                         <ToggleGroup updateSearchBy={this.props.updateSearchBy} searchByFlag={this.props.searchByFlag} />
                     </div>
                     <div>

@@ -1,8 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Import components
-
 
 import Footer from './components/sections/Footer';
 
@@ -11,34 +10,41 @@ import MovieSinglePage from './pages/MovieSinglePage';
 import PageNotFound from './pages/PageNotFound';
 import database from '../dummydata/data';
 
-function fetchPosts() {
-    fetch('https://jsonplaceholder.typicode.com/posts')
+function fetchByTitle(value) {
+    value = value || 'Attack on titan';
+    fetch(`https://netflixroulette.net/api/api.php?title=${value}`)
         .then((response) => {
+            // console.log(response.json());
             return response.json();
         })
+        .then((result) => {
+            console.log(result);
+        });
 }
 
-function fetchComments() {
-    fetch('https://jsonplaceholder.typicode.com/comments')
+function fetchByDirector(value) {
+    value = value || 'Quentin Tarantino';
+    fetch(`http://netflixroulette.net/api/api.php?director=${value}`)
         .then((response) => {
             return response.json();
         })
+        .then((result) => {
+            console.log(result);
+        });
 }
 
 function withProps(Component, props) {
     return function(matchProps) {
-        return <Component {...props} {...matchProps} />
-    }
+        return <Component {...props} {...matchProps} />;
+    };
 }
-
-
 
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
             sortBy: 'rating',
-            searchBy: 'comments',
+            searchBy: 'title',
             database,
         };
         this.updateSortBy = this.updateSortBy.bind(this);
@@ -57,11 +63,13 @@ class App extends React.Component {
 
     handleSearch(value) {
         switch (this.state.searchBy) {
-            case 'posts':
-                fetchPosts(value);
+            case 'title':
+                fetchByTitle(value);
                 break;
-            case 'comments':
-                fetchComments(value);
+            case 'director':
+                fetchByDirector(value);
+                break;
+            default:
                 break;
         }
     }

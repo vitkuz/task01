@@ -2,14 +2,11 @@ import * as React from 'react';
 import HeaderSearch from '../components/sections/HeaderSearch';
 import MovieGrid from '../components/results/MovieGrid';
 
-export default class HomePage extends React.Component {
+const HomePage = (props) => (
+    <div>
+        <HeaderSearch updateSearchBy={props.updateSearchBy} searchByFlag={props.searchByFlag} handleSearch={props.handleSearch} />
+        <MovieGrid database={props.database} updateSortBy={props.updateSortBy} sortByFlag={props.sortByFlag} />
+    </div>
+);
 
-    render() {
-        return (
-            <div>
-                <HeaderSearch  updateSearchBy={this.props.updateSearchBy} searchByFlag={this.props.searchByFlag} handleSearch={this.props.handleSearch} />
-                <MovieGrid database={this.props.database} updateSortBy={this.props.updateSortBy} sortByFlag={this.props.sortByFlag} />
-            </div>
-        );
-    }
-}
+export default HomePage;
