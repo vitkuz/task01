@@ -15,21 +15,19 @@ class ToggleGroup extends React.Component {
         };
     }
     getToggleClassName(button) {
-
         if (button.value === this.props.searchByFlag) {
             return 'btn active';
-        } else  {
-            return 'btn';
         }
-
+        return 'btn';
     }
 
     renderButtons() {
         return this.state.buttons.map((button) => {
-            return <Toggle key={button.value} button={button}
-                           classes={this.getToggleClassName(button)}
-                           updateSearchBy={this.props.updateSearchBy} />
-
+            return (<Toggle key={button.value}
+                             button={button}
+                             classes={this.getToggleClassName(button)}
+                             updateSearchBy={this.props.updateSearchBy} />
+            );
         });
     }
 
