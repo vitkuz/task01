@@ -2,37 +2,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const HeaderMovieSinglePage = () => {
+const printListOfNames = (list) => {
+    return list.map(name => <span key={name} className="actor">{name}</span>);
+}
+
+const HeaderMovieSinglePage = (props) => {
     return (
         <div className="section header header-movie header-cover-1">
             <div className="gradient-2">
                 <div className="section-content">
 
-                    <div className="row text-right">
-                        <Link to="/" className="btn">Make search</Link>
+                    <div className="row">
+                        <Link to="/" className="btn pull-rigth">Make search</Link>
                     </div>
                     <div className="row">
                         <div className="col-md-4">
                             <div className="field-movie-poster">
-                                <img src={'http://via.placeholder.com/350x500/CC0000'} />
+                                <img src={props.movie.img} alt="Movie Poster" />
                             </div>
                         </div>
                         <div className="col-md-8">
-                            <h1 className="field-movie-title">Pulb fiction</h1>
-                            <p className="field-movie-category">Oscar-wining Movies</p>
-                            <div className="field-movie-year">1994</div><div className="field-length">145 min</div>
-                            <div className="filed-movie-description">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid aut
-                                consequuntur dolores ea eos et hic impedit, in ipsam ipsum laudantium
-                                nesciunt quisquam quod quos ratione saepe velit veniam?
+                            <h1 className="field-movie-title">{props.movie.title}</h1>
+                            <p className="field-movie-subtitle bold">{props.movie.subtitle}</p>
+                            <div className="field-movie-year">{props.movie.year}</div>
+                            <div className="field-length">Duration: 145 min</div>
+                            <div className="field-movie-description">
+                                { props.movie.description }
                             </div>
 
                             <div className="field-movie-director">
-                                test
+                                <span className="field-label">Director:</span>
+                                { props.movie.director }
                             </div>
 
                             <div className="field-movie-cast">
-                                test
+                                <span className="field-label">Cast:</span>
+                                { printListOfNames(props.movie.cast) }
                             </div>
                         </div>
                     </div>

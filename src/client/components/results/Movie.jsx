@@ -13,11 +13,11 @@ const Movie = (props) => {
                     Year: {props.movie.year}
                 </div>
                 <div className="movie-description-title">
-                    <h3><Link to="/movie">{props.movie.title}</Link></h3>
+                    <h3><Link to={'/movie/'+props.movie.id}>{props.movie.title}</Link></h3>
                 </div>
                 <div className="movie-description-category">Cat: {props.movie.category}</div>
                 <div className="movie-description-rating">Rating: {props.movie.rating}</div>
-                <div><Link to="/movie" className="btn">More</Link></div>
+                <div><Link to={'/movie/'+props.movie.id} className="btn">More</Link></div>
             </div>
 
         </div>

@@ -1,6 +1,31 @@
+.header-movie {
+  [class^="field"] {
+    margin-bottom:22px;
+  }
+
+  a {
+    color:red;
+  }
+
+  .actor {
+    margin-right:11px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+  }
+
+  line-height:1.5;
+}
+
 .movie {
   .movie-picture {
     background: #000;
+  }
+
+  a {
+    color:red;
   }
 
   img {
@@ -12,5 +37,4 @@
     padding: 10px;
     background: #000;
   }
-
 }

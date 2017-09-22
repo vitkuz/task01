@@ -45,7 +45,7 @@ class MovieGrid extends React.Component {
         }
 
         return sorted.map((movie) => {
-            return <Movie key={movie.title} movie={movie} />
+            return <Movie key={movie.id} movie={movie} />;
         });
     }
 

@@ -5,9 +5,6 @@ import MovieGrid from '../components/results/MovieGrid';
 export default class HomePage extends React.Component {
 
     render() {
-
-        console.log('HomePage', this.props);
-
         return (
             <div>
                 <HeaderSearch  updateSearchBy={this.props.updateSearchBy} searchByFlag={this.props.searchByFlag} handleSearch={this.props.handleSearch} />

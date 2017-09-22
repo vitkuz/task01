@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 // Import components
 
@@ -9,17 +9,7 @@ import Footer from './components/sections/Footer';
 import HomePage from './pages/HomePage';
 import MovieSinglePage from './pages/MovieSinglePage';
 import PageNotFound from './pages/PageNotFound';
-
-
-// utils function to generate random colors
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
+import database from '../dummydata/data';
 
 function fetchPosts() {
     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -41,17 +31,7 @@ function withProps(Component, props) {
     }
 }
 
-const database = [
-    { title: 'title 1', year: '2011', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 9 },
-    { title: 'title 2', year: '2012', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '222', rating: 2 },
-    { title: 'title 3', year: '2013', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 1 },
-    { title: 'title 4', year: '2014', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '333', rating: 4 },
-    { title: 'title 5', year: '2015', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '222', rating: 1 },
-    { title: 'title 6', year: '2016', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 2 },
-    { title: 'title 7', year: '2017', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 7 },
-    { title: 'title 8', year: '2011', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 8 },
-    { title: 'title 9', year: '2011', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 9 },
-];
+
 
 class App extends React.Component {
     constructor() {
@@ -90,13 +70,6 @@ class App extends React.Component {
         return (
             <Router>
                 <div className="App">
-
-                    <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to={{ pathname: '/movie' }}>Movie</Link></li>
-                        <li><Link to="/okdslkjfdskj">PageNotFound</Link></li>
-                    </ul>
-
                     <Switch>
                         <Route exact path="/" component={withProps(HomePage, {
                             updateSearchBy: this.updateSearchBy,
@@ -106,7 +79,7 @@ class App extends React.Component {
                             updateSortBy: this.updateSortBy,
                             database: this.state.database,
                         })} />
-                        <Route exact path="/movie" component={withProps(MovieSinglePage, {
+                        <Route exact path="/movie/:id" component={withProps(MovieSinglePage, {
                             sortByFlag: this.state.sortBy,
                             updateSortBy: this.updateSortBy,
                             database: this.state.database,
