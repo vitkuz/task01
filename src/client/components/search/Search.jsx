@@ -14,7 +14,7 @@ class Search extends React.Component {
     }
 
     handleInputChange(e) {
-        this.setState({query: e.target.value});
+        this.setState({ query: e.target.value });
     }
 
     handleFormSubmit(e) {
@@ -42,5 +42,11 @@ class Search extends React.Component {
         );
     }
 }
+
+Search.propTypes = {
+    handleSearch: PropTypes.func.isRequired,
+    searchByFlag: PropTypes.string.isRequired,
+    updateSearchBy: PropTypes.func.isRequired,
+};
 
 export default Search;

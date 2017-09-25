@@ -1,20 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-// Import components
+// Page components
+import HeaderSearch from './components/sections/HeaderSearch';
+import HeaderMovie from './components/sections/HeaderMovieSingle';
+import MovieGrid from './components/results/MovieGrid';
 
 import Footer from './components/sections/Footer';
 
-import HomePage from './pages/HomePage';
-import MovieSinglePage from './pages/MovieSinglePage';
 import PageNotFound from './pages/PageNotFound';
 import database from '../dummydata/data';
 
-function fetchByTitle(value) {
-    value = value || 'Attack on titan';
+function fetchByTitle(value = 'Attack on titan') {
+    // value = value || 'Attack on titan';
     fetch(`https://netflixroulette.net/api/api.php?title=${value}`)
         .then((response) => {
-            // console.log(response.json());
             return response.json();
         })
         .then((result) => {
@@ -22,8 +22,8 @@ function fetchByTitle(value) {
         });
 }
 
-function fetchByDirector(value) {
-    value = value || 'Quentin Tarantino';
+function fetchByDirector(value = 'Quentin Tarantino') {
+    // value = value || 'Quentin Tarantino';
     fetch(`http://netflixroulette.net/api/api.php?director=${value}`)
         .then((response) => {
             return response.json();
@@ -34,7 +34,7 @@ function fetchByDirector(value) {
 }
 
 function withProps(Component, props) {
-    return function(matchProps) {
+    return function (matchProps) {
         return <Component {...props} {...matchProps} />;
     };
 }
@@ -50,7 +50,6 @@ class App extends React.Component {
         this.updateSortBy = this.updateSortBy.bind(this);
         this.updateSearchBy = this.updateSearchBy.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
-
     }
 
     updateSortBy(flag) {
@@ -78,22 +77,46 @@ class App extends React.Component {
         return (
             <Router>
                 <div className="App">
+
                     <Switch>
-                        <Route exact path="/" component={withProps(HomePage, {
-                            updateSearchBy: this.updateSearchBy,
-                            searchByFlag: this.state.searchBy,
-                            handleSearch: this.handleSearch,
-                            sortByFlag: this.state.sortBy,
-                            updateSortBy: this.updateSortBy,
-                            database: this.state.database,
-                        })} />
-                        <Route exact path="/movie/:id" component={withProps(MovieSinglePage, {
-                            sortByFlag: this.state.sortBy,
-                            updateSortBy: this.updateSortBy,
-                            database: this.state.database,
-                        })} />
-                        <Route component={PageNotFound} />
+                        <Route
+                          exact
+                          path="/"
+                          component={withProps(HeaderSearch, {
+                                updateSearchBy: this.updateSearchBy,
+                                searchByFlag: this.state.searchBy,
+                                handleSearch: this.handleSearch,
+                            })} />
+
+                        <Route
+                          path="/movie/:id"
+                          component={withProps(HeaderMovie, {
+                                database: this.state.database,
+                            })} />
                     </Switch>
+
+                    <Switch>
+                        <Route
+                          exact
+                          path="/"
+                          component={withProps(MovieGrid, {
+                                sortByFlag: this.state.sortBy,
+                                updateSortBy: this.updateSortBy,
+                                database: this.state.database,
+                            })} />
+
+                        <Route
+                          path="/movie/:id"
+                          component={withProps(MovieGrid, {
+                                sortByFlag: this.state.sortBy,
+                                updateSortBy: this.updateSortBy,
+                                database: this.state.database,
+                            })} />
+
+                        <Route
+                          component={PageNotFound} />
+                    </Switch>
+
                     <Footer />
                 </div>
             </Router>

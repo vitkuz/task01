@@ -9,7 +9,7 @@ function sortBy(key, reverse) {
     const moveSmaller = reverse ? 1 : -1;
     const moveLarger = reverse ? -1 : 1;
 
-    return function (a, b) {
+    return function sort(a, b) {
         if (a[key] < b[key]) {
             return moveSmaller;
         }
@@ -30,7 +30,6 @@ class MovieGrid extends React.Component {
     }
 
     renderMovies() {
-
         const sorted = [...this.state.database];
 
         switch (this.props.sortByFlag) {
@@ -50,7 +49,6 @@ class MovieGrid extends React.Component {
     }
 
     render() {
-
         if (!this.state.database) {
             return (
                 <div className="movies-gid-content mt1">
@@ -76,7 +74,7 @@ class MovieGrid extends React.Component {
 }
 
 MovieGrid.propTypes = {
-    database: PropTypes.array.isRequired,
+    database: PropTypes.arrayOf(PropTypes.object).isRequired,
     sortByFlag: PropTypes.string.isRequired,
     updateSortBy: PropTypes.func.isRequired,
 };

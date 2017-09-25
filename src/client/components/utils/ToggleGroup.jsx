@@ -22,13 +22,13 @@ class ToggleGroup extends React.Component {
     }
 
     renderButtons() {
-        return this.state.buttons.map((button) => {
-            return (<Toggle key={button.value}
-                             button={button}
-                             classes={this.getToggleClassName(button)}
-                             updateSearchBy={this.props.updateSearchBy} />
-            );
-        });
+        return this.state.buttons.map(button => (
+            <Toggle
+              key={button.value}
+              button={button}
+              classes={this.getToggleClassName(button)}
+              updateSearchBy={this.props.updateSearchBy} />
+        ));
     }
 
     render() {

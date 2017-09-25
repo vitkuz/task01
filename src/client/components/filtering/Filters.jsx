@@ -26,10 +26,10 @@ class Filters extends React.Component {
                         <span>Sort by:</span>
 
                         <span>
-                            <a role="button" onClick={this.handleDateClick}>release date</a>
+                            <a role="button" tabIndex="0" onClick={this.handleDateClick}>release date</a>
                         </span> |&nbsp;
                         <span>
-                            <a role="button" onClick={this.handleRatingClick}>rating</a>
+                            <a role="button" tabIndex="0" onClick={this.handleRatingClick}>rating</a>
                         </span>
                     </div>
                 </div>
