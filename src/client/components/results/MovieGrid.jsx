@@ -28,7 +28,19 @@ class MovieGrid extends React.Component {
             sortBy: props.sortByFlag,
         };
     }
-
+    componentDidMount() {
+        const elements = document.getElementsByClassName('movie');
+        const heights = [];
+        for (let i =0; i < heights.length; i++) {
+            elements[i].style.height;
+            console.log(elements[i].clientHeight, elements.length);
+        }
+        
+        heights.
+        // heights.each(item => {
+        //     console.log(item);
+        // });
+    }
     renderMovies() {
         const sorted = [...this.state.database];
 
@@ -44,7 +56,7 @@ class MovieGrid extends React.Component {
         }
 
         return sorted.map((movie) => {
-            return <Movie key={movie.id} movie={movie} />;
+            return <Movie key={movie.id} movie={movie} height={450} />;
         });
     }
 
