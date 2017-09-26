@@ -13,6 +13,7 @@
     "no-console": 0, /*i use console for deguging*/
     "react/jsx-closing-bracket-location": [2, {"location": "after-props"}],
     "react/jsx-indent": ["error", 4],
-    "arrow-body-style":0
+    "arrow-body-style":0,
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }] /*https://eslint.org/docs/rules/no-plusplus*/
   }
 }
