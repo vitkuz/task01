@@ -1,5 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { selectItem, setFilterBy, setSearchBy, makeSearch } from './actions/actions';
 
 // Page components
 import HeaderSearch from './components/sections/HeaderSearch';
@@ -53,10 +57,15 @@ class App extends React.Component {
     }
 
     updateSortBy(flag) {
+        console.log("!!!!");
+        this.props.selectItem({type:"ssddsa"});
         this.setState({ sortBy: flag });
+
     }
 
     updateSearchBy(flag) {
+        console.log("!!!!");
+        this.props.selectItem({type:"ssddsa"});
         this.setState({ searchBy: flag });
     }
 
@@ -112,4 +121,22 @@ class App extends React.Component {
     }
 }
 
-export default App;
+function mapStateToProps (state) {
+    return {
+        list: state.list,
+        sortBy: state.sortBy,
+        searchBy: state.searchBy,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+
+    return bindActionCreators({
+        selectItem: selectItem,
+        setSearchBy: setSearchBy,
+        setFilterBy: setFilterBy,
+        makeSearch: makeSearch,
+    }, dispatch);
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
