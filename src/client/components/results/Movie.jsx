@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Movie = (props) => {
-    const url = `/movie/${props.movie.id}`;
+    const url = `/movies/${props.movie.id}`;
 
     return (
         <div className="col-md-3 mb1">

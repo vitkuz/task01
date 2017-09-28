@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 // Page components
 import HeaderSearch from './components/sections/HeaderSearch';
@@ -77,46 +77,33 @@ class App extends React.Component {
         return (
             <Router>
                 <div className="App">
-
                     <Switch>
                         <Route
                           exact
-                          path="/"
+                          path="/movies"
                           component={withProps(HeaderSearch, {
                                 updateSearchBy: this.updateSearchBy,
                                 searchByFlag: this.state.searchBy,
                                 handleSearch: this.handleSearch,
                             })} />
-
                         <Route
-                          path="/movie/:id"
+                          exact
+                          path="/movies/:id"
                           component={withProps(HeaderMovie, {
                                 database: this.state.database,
                             })} />
-                    </Switch>
-
-                    <Switch>
+                        <Redirect exact from="/" to="/movies" />
                         <Route
-                          exact
-                          path="/"
-                          component={withProps(MovieGrid, {
-                                sortByFlag: this.state.sortBy,
-                                updateSortBy: this.updateSortBy,
-                                database: this.state.database,
-                            })} />
-
-                        <Route
-                          path="/movie/:id"
-                          component={withProps(MovieGrid, {
-                                sortByFlag: this.state.sortBy,
-                                updateSortBy: this.updateSortBy,
-                                database: this.state.database,
-                            })} />
-
-                        <Route
+                          path="*"
                           component={PageNotFound} />
                     </Switch>
-
+                    <Route
+                      path="/movies"
+                      component={withProps(MovieGrid, {
+                            sortByFlag: this.state.sortBy,
+                            updateSortBy: this.updateSortBy,
+                            database: this.state.database,
+                        })} />
                     <Footer />
                 </div>
             </Router>
