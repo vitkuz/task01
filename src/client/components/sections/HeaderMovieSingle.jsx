@@ -7,9 +7,11 @@ const printListOfNames = list => list.map(name => <span key={name} className="ac
 
 class HeaderMovieSinglePage extends React.Component {
     componentDidMount() {
+        console.log('Component HeaderMovieSinglePage did mount!');
         window.scrollTo(0, 0);
     }
     componentWillUpdate() {
+        console.log('Component HeaderMovieSinglePage will update!');
         window.scrollTo(0, 0);
     }
     render() {
