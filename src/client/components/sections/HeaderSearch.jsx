@@ -5,6 +5,7 @@ import Search from '../search/Search';
 
 
 const HeaderSearch = (props) => {
+    console.log('HeaderSearch.jsx', props);
     return (
         <header className="section header header-search header-cover-1">
             <div className="gradient-1">

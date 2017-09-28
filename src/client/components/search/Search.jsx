@@ -14,7 +14,7 @@ class Search extends React.Component {
     }
 
     handleInputChange(e) {
-        this.setState({query: e.target.value});
+        this.setState({ query: e.target.value });
     }
 
     handleFormSubmit(e) {
@@ -30,7 +30,7 @@ class Search extends React.Component {
                     <span className="input-group-addon" id="basic-addon2">fake api</span>
                 </div>
                 <div className="dflex dflex-justify mt1">
-                    <div>
+                    <div className="toggle-search-type">
                         <ToggleGroup updateSearchBy={this.props.updateSearchBy} searchByFlag={this.props.searchByFlag} />
                     </div>
                     <div>
@@ -42,5 +42,11 @@ class Search extends React.Component {
         );
     }
 }
+
+Search.propTypes = {
+    handleSearch: PropTypes.func.isRequired,
+    searchByFlag: PropTypes.string.isRequired,
+    updateSearchBy: PropTypes.func.isRequired,
+};
 
 export default Search;

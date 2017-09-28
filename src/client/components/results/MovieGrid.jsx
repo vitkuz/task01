@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import Movie from './Movie';
 import Filters from '../filtering/Filters';
 
-
 function sortBy(key, reverse) {
     const moveSmaller = reverse ? 1 : -1;
     const moveLarger = reverse ? -1 : 1;
 
-    return function (a, b) {
+    return function sort(a, b) {
         if (a[key] < b[key]) {
             return moveSmaller;
         }
@@ -26,11 +25,11 @@ class MovieGrid extends React.Component {
         this.state = {
             database: props.database,
             sortBy: props.sortByFlag,
+            maxHeight: '',
         };
     }
 
     renderMovies() {
-
         const sorted = [...this.state.database];
 
         switch (this.props.sortByFlag) {
@@ -45,12 +44,11 @@ class MovieGrid extends React.Component {
         }
 
         return sorted.map((movie) => {
-            return <Movie key={movie.title} movie={movie} />
+            return <Movie key={movie.id} movie={movie} />;
         });
     }
 
     render() {
-
         if (!this.state.database) {
             return (
                 <div className="movies-gid-content mt1">
@@ -76,7 +74,7 @@ class MovieGrid extends React.Component {
 }
 
 MovieGrid.propTypes = {
-    database: PropTypes.array.isRequired,
+    database: PropTypes.arrayOf(PropTypes.object).isRequired,
     sortByFlag: PropTypes.string.isRequired,
     updateSortBy: PropTypes.func.isRequired,
 };

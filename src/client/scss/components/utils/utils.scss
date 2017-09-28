@@ -9,8 +9,6 @@
 @import "buttons/buttons";
 @import "inputs/input";
 
-
-
 $margin-constant:20px;
 
 // Box sizing
@@ -168,4 +166,24 @@ $margin-constant:20px;
 
 .dflex-justify {
   justify-content: space-between;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+.pull-rigth {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.bold {
+  font-weight: bold;
+  font-size:16px;
 }

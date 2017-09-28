@@ -17,7 +17,7 @@ class Toggle extends React.Component {
 
     render() {
         return (
-            <a onClick={this.handleClick} className={this.props.classes}>
+            <a role="button" tabIndex="0" onClick={this.handleClick} className={this.props.classes}>
                 {this.state.text}
             </a>
         );
@@ -29,8 +29,9 @@ Toggle.defaultProps = {
 };
 
 Toggle.propTypes = {
-    button: PropTypes.object.isRequired,
+    button: PropTypes.shape({ title: PropTypes.string, value: PropTypes.string }).isRequired,
     classes: PropTypes.string,
+    updateSearchBy: PropTypes.func.isRequired,
 };
 
 export default Toggle;

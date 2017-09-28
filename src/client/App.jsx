@@ -1,61 +1,55 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-// Import components
-import MovieGrid from './components/results/MovieGrid';
-
+// Page components
 import HeaderSearch from './components/sections/HeaderSearch';
 import HeaderMovie from './components/sections/HeaderMovieSingle';
+import MovieGrid from './components/results/MovieGrid';
+
 import Footer from './components/sections/Footer';
 
+import PageNotFound from './pages/PageNotFound';
+import database from '../dummydata/data';
 
-// utils function to generate random colors
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-function fetchPosts() {
-    fetch('https://jsonplaceholder.typicode.com/posts')
+function fetchByTitle(value = 'Attack on titan') {
+    // value = value || 'Attack on titan';
+    fetch(`https://netflixroulette.net/api/api.php?title=${value}`)
         .then((response) => {
             return response.json();
         })
+        .then((result) => {
+            console.log(result);
+        });
 }
 
-function fetchComments() {
-    fetch('https://jsonplaceholder.typicode.com/comments')
+function fetchByDirector(value = 'Quentin Tarantino') {
+    // value = value || 'Quentin Tarantino';
+    fetch(`http://netflixroulette.net/api/api.php?director=${value}`)
         .then((response) => {
             return response.json();
         })
+        .then((result) => {
+            console.log(result);
+        });
 }
 
-const database = [
-    { title: 'title 1', year: '2011', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 9 },
-    { title: 'title 2', year: '2012', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '222', rating: 2 },
-    { title: 'title 3', year: '2013', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 1 },
-    { title: 'title 4', year: '2014', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '333', rating: 4 },
-    { title: 'title 5', year: '2015', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '222', rating: 1 },
-    { title: 'title 6', year: '2016', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 2 },
-    { title: 'title 7', year: '2017', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 7 },
-    { title: 'title 8', year: '2011', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 8 },
-    { title: 'title 9', year: '2011', img: `http://via.placeholder.com/350x500/${getRandomColor()}`, category: '123', rating: 9 },
-];
+function withProps(Component, props) {
+    return function (matchProps) {
+        return <Component {...props} {...matchProps} />;
+    };
+}
 
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
             sortBy: 'rating',
-            searchBy: 'comments',
+            searchBy: 'title',
             database,
         };
         this.updateSortBy = this.updateSortBy.bind(this);
         this.updateSearchBy = this.updateSearchBy.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
-
     }
 
     updateSortBy(flag) {
@@ -68,23 +62,52 @@ class App extends React.Component {
 
     handleSearch(value) {
         switch (this.state.searchBy) {
-            case 'posts':
-                fetchPosts(value);
+            case 'title':
+                fetchByTitle(value);
                 break;
-            case 'comments':
-                fetchComments(value);
+            case 'director':
+                fetchByDirector(value);
+                break;
+            default:
                 break;
         }
     }
 
     render() {
         return (
-            <div className="App">
-                <HeaderSearch updateSearchBy={this.updateSearchBy} searchByFlag={this.state.searchBy} handleSearch={this.handleSearch} />
-                <HeaderMovie />
-                <MovieGrid database={this.state.database} updateSortBy={this.updateSortBy} sortByFlag={this.state.sortBy} />
-                <Footer />
-            </div>
+            <Router>
+                <div className="App">
+                    <Switch>
+                        <Route
+                          exact
+                          path="/movies"
+                          component={withProps(HeaderSearch, {
+                                updateSearchBy: this.updateSearchBy,
+                                searchByFlag: this.state.searchBy,
+                                handleSearch: this.handleSearch,
+                            })} />
+                        <Route
+                          exact
+                          path="/movies/:id"
+                          component={withProps(HeaderMovie, {
+                                database: this.state.database,
+                            })} />
+                        <Redirect exact from="/" to="/movies" />
+                        <Route
+                          path="*"
+                          component={PageNotFound} />
+                    </Switch>
+                    <Route
+                      path="/movies"
+                      component={withProps(MovieGrid, {
+                            sortByFlag: this.state.sortBy,
+                            updateSortBy: this.updateSortBy,
+                            database: this.state.database,
+                        })} />
+                    <Footer />
+                </div>
+            </Router>
+
         );
     }
 }

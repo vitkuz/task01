@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ToggleGroup from '../utils/ToggleGroup';
-
 class Filters extends React.Component {
     constructor(props) {
         super(props);
@@ -28,10 +26,10 @@ class Filters extends React.Component {
                         <span>Sort by:</span>
 
                         <span>
-                            <a onClick={this.handleDateClick}>release date</a>
+                            <a role="button" tabIndex="0" onClick={this.handleDateClick}>release date</a>
                         </span> |&nbsp;
                         <span>
-                            <a onClick={this.handleRatingClick}>rating</a>
+                            <a role="button" tabIndex="0" onClick={this.handleRatingClick}>rating</a>
                         </span>
                     </div>
                 </div>
