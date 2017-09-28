@@ -19,34 +19,6 @@ function sortBy(key, reverse) {
     };
 }
 
-function setMaxHeight() {
-    const elements = document.getElementsByClassName('movie');
-    let maxHeight = 0;
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style.height = '';
-    }
-    for (let i = 0; i < elements.length; i++) {
-        if (elements[i].offsetHeight > maxHeight) {
-            maxHeight = elements[i].offsetHeight;
-        }
-    }
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style.height = `${maxHeight}px`;
-    }
-    return maxHeight;
-}
-
-
-let resizeTimeout;
-function resizeThrottler() {
-    if (!resizeTimeout) {
-        resizeTimeout = setTimeout(() => {
-            resizeTimeout = null;
-            setMaxHeight();
-        }, 66);
-    }
-}
-
 class MovieGrid extends React.Component {
     constructor(props) {
         super(props);
@@ -55,14 +27,6 @@ class MovieGrid extends React.Component {
             sortBy: props.sortByFlag,
             maxHeight: '',
         };
-    }
-    componentDidMount() {
-        console.log('Component did mount!');
-        window.onload = function () {
-            setMaxHeight();
-        };
-        window.addEventListener('resize', resizeThrottler, false);
-        setMaxHeight();
     }
 
     renderMovies() {
