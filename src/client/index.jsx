@@ -1,13 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+
+import App from './App';
 
 import './scss/index.scss';
-import movieFromNetflix from './reducers/index';
+import rootReducer from './reducers/index';
 
-let store = createStore(movieFromNetflix);
+const store = createStore(
+    rootReducer,
+    applyMiddleware(thunk),
+);
 
 render(
     <Provider store={store}>

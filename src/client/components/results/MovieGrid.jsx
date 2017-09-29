@@ -74,7 +74,7 @@ class MovieGrid extends React.Component {
 }
 
 MovieGrid.propTypes = {
-    database: PropTypes.arrayOf(PropTypes.object).isRequired,
+    database: PropTypes.arrayOf(PropTypes.object),
     sortByFlag: PropTypes.string.isRequired,
     updateSortBy: PropTypes.func.isRequired,
 };

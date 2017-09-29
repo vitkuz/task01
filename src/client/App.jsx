@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { selectItem, setFilterBy, setSearchBy, makeSearch } from './actions/actions';
+import { setFilterBy, setSearchBy, makeDirectorSearch, makeTitleSearch } from './actions/actions';
 
 // Page components
 import HeaderSearch from './components/sections/HeaderSearch';
@@ -14,28 +14,6 @@ import Footer from './components/sections/Footer';
 
 import PageNotFound from './pages/PageNotFound';
 import database from '../dummydata/data';
-
-function fetchByTitle(value = 'Attack on titan') {
-    // value = value || 'Attack on titan';
-    fetch(`https://netflixroulette.net/api/api.php?title=${value}`)
-        .then((response) => {
-            return response.json();
-        })
-        .then((result) => {
-            console.log(result);
-        });
-}
-
-function fetchByDirector(value = 'Quentin Tarantino') {
-    // value = value || 'Quentin Tarantino';
-    fetch(`http://netflixroulette.net/api/api.php?director=${value}`)
-        .then((response) => {
-            return response.json();
-        })
-        .then((result) => {
-            console.log(result);
-        });
-}
 
 function withProps(Component, props) {
     return function (matchProps) {
@@ -55,27 +33,24 @@ class App extends React.Component {
         this.updateSearchBy = this.updateSearchBy.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
     }
-
+    componentDidMount() {
+        this.props.makeDirectorSearch('Quentin Tarantino');
+    }
     updateSortBy(flag) {
-        console.log("!!!!");
-        this.props.selectItem({type:"ssddsa"});
-        this.setState({ sortBy: flag });
-
+        this.props.setFilterBy(flag);
     }
 
     updateSearchBy(flag) {
-        console.log("!!!!");
-        this.props.selectItem({type:"ssddsa"});
-        this.setState({ searchBy: flag });
+        this.props.setSearchBy(flag);
     }
 
     handleSearch(value) {
-        switch (this.state.searchBy) {
+        switch (this.props.searchBy) {
             case 'title':
-                fetchByTitle(value);
+                this.props.makeTitleSearch(value);
                 break;
             case 'director':
-                fetchByDirector(value);
+                this.props.makeDirectorSearch(value);
                 break;
             default:
                 break;
@@ -111,7 +86,7 @@ class App extends React.Component {
                       component={withProps(MovieGrid, {
                             sortByFlag: this.state.sortBy,
                             updateSortBy: this.updateSortBy,
-                            database: this.state.database,
+                            database: this.props.searchResults,
                         })} />
                     <Footer />
                 </div>
@@ -121,22 +96,21 @@ class App extends React.Component {
     }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
     return {
-        list: state.list,
+        searchResults: state.searchResults,
         sortBy: state.sortBy,
         searchBy: state.searchBy,
-    }
+    };
 }
 
 function mapDispatchToProps(dispatch) {
-
     return bindActionCreators({
-        selectItem: selectItem,
-        setSearchBy: setSearchBy,
-        setFilterBy: setFilterBy,
-        makeSearch: makeSearch,
+        makeDirectorSearch,
+        makeTitleSearch,
+        setSearchBy,
+        setFilterBy,
     }, dispatch);
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
