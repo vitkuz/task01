@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setFilterBy, setSearchBy, makeDirectorSearch, makeTitleSearch } from './actions/actions';
+import { setActiveFilter, setSearchBy, makeDirectorSearch, makeTitleSearch } from './actions/actions';
 
 // Page components
 import HeaderSearch from './components/sections/HeaderSearch';
@@ -13,7 +13,6 @@ import MovieGrid from './components/results/MovieGrid';
 import Footer from './components/sections/Footer';
 
 import PageNotFound from './pages/PageNotFound';
-import database from '../dummydata/data';
 
 function withProps(Component, props) {
     return function (matchProps) {
@@ -24,20 +23,17 @@ function withProps(Component, props) {
 class App extends React.Component {
     constructor() {
         super();
-        this.state = {
-            sortBy: 'rating',
-            searchBy: 'title',
-            database,
-        };
-        this.updateSortBy = this.updateSortBy.bind(this);
+        this.setActiveFilter = this.setActiveFilter.bind(this);
         this.updateSearchBy = this.updateSearchBy.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
     }
     componentDidMount() {
-        this.props.makeDirectorSearch('Quentin Tarantino');
+        setTimeout(() => {
+            this.props.makeDirectorSearch('Quentin Tarantino');
+        }, 3000);
     }
-    updateSortBy(flag) {
-        this.props.setFilterBy(flag);
+    setActiveFilter(flag) {
+        this.props.setActiveFilter(flag);
     }
 
     updateSearchBy(flag) {
@@ -67,14 +63,14 @@ class App extends React.Component {
                           path="/movies"
                           component={withProps(HeaderSearch, {
                                 updateSearchBy: this.updateSearchBy,
-                                searchByFlag: this.state.searchBy,
+                                searchByFlag: this.props.searchBy,
                                 handleSearch: this.handleSearch,
                             })} />
                         <Route
                           exact
                           path="/movies/:id"
                           component={withProps(HeaderMovie, {
-                                database: this.state.database,
+                                database: this.props.searchResults,
                             })} />
                         <Redirect exact from="/" to="/movies" />
                         <Route
@@ -84,9 +80,10 @@ class App extends React.Component {
                     <Route
                       path="/movies"
                       component={withProps(MovieGrid, {
-                            sortByFlag: this.state.sortBy,
-                            updateSortBy: this.updateSortBy,
+                            sortByFlag: this.props.sortBy,
+                            setActiveFilter: this.setActiveFilter,
                             database: this.props.searchResults,
+                            filters: this.props.filters,
                         })} />
                     <Footer />
                 </div>
@@ -99,8 +96,8 @@ class App extends React.Component {
 function mapStateToProps(state) {
     return {
         searchResults: state.searchResults,
-        sortBy: state.sortBy,
         searchBy: state.searchBy,
+        filters: state.filters,
     };
 }
 
@@ -109,7 +106,7 @@ function mapDispatchToProps(dispatch) {
         makeDirectorSearch,
         makeTitleSearch,
         setSearchBy,
-        setFilterBy,
+        setActiveFilter,
     }, dispatch);
 }
 

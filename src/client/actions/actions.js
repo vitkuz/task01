@@ -1,16 +1,18 @@
 function populateMovies(data) {
-    return {
-        type: 'POPULATE_MOVIES',
-        payload: data,
-    };
+    console.log(data);
+    if (data.errorcode === 404) {
+        return {
+            type: 'ERROR',
+            payload: data.message,
+        };
+    } else {
+        return {
+            type: 'POPULATE_MOVIES',
+            payload: data,
+        };
+    }
 }
 
-function showError(error) {
-    return {
-        type: 'ERROR',
-        payload: error,
-    };
-}
 
 export function selectItem(item) {
     console.log('selectItem', item);
@@ -43,7 +45,6 @@ export function makeDirectorSearch(value) {
 }
 
 export function setSearchBy(value) {
-    //console.log('setSearchBy', value);
     return {
         type: 'SET_SEARCH_BY',
         payload: value,
@@ -51,9 +52,15 @@ export function setSearchBy(value) {
 }
 
 export function setFilterBy(value) {
-    //console.log('setSearchBy', value);
     return {
         type: 'SET_FILTER_BY',
         payload: value,
+    };
+}
+
+export function setActiveFilter(filter) {
+    return {
+        type: 'SET_ACTIVE_FILTER',
+        payload: filter,
     };
 }

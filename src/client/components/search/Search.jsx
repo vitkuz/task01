@@ -12,7 +12,7 @@ class Search extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
-
+    
     handleInputChange(e) {
         this.setState({ query: e.target.value });
     }
@@ -28,7 +28,9 @@ class Search extends React.Component {
                 <div className="input-group">
                     <input type="text" onChange={this.handleInputChange} value={this.state.query} className="form-control" placeholder="Search..." />
                     <span className="input-group-addon" id="basic-addon2">fake api</span>
+                    <div className="help">Steven Spielberg, Martin Scorsese, Alfred Hitchcock, Stanley Kubrick</div>
                 </div>
+                <div></div>
                 <div className="dflex dflex-justify mt1">
                     <div className="toggle-search-type">
                         <ToggleGroup updateSearchBy={this.props.updateSearchBy} searchByFlag={this.props.searchByFlag} />

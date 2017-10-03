@@ -20,41 +20,37 @@ function sortBy(key, reverse) {
 }
 
 class MovieGrid extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            database: props.database,
-            sortBy: props.sortByFlag,
-            maxHeight: '',
-        };
-    }
 
     renderMovies() {
-        const sorted = [...this.state.database];
-
-        switch (this.props.sortByFlag) {
-            case 'year':
-                sorted.sort(sortBy('year'));
-                break;
-            case 'rating':
-                sorted.sort(sortBy('rating'));
-                break;
-            default:
-                break;
-        }
+        const sorted = [...this.props.database];
+        
+        const activeFilter = this.props.filters.find((filter) => {
+            return filter.active === true;
+        })
+        
+        console.log(this.props.filters, activeFilter);
+    
+        sorted.sort(sortBy(activeFilter.type, activeFilter.sortDir));
 
         return sorted.map((movie) => {
-            return <Movie key={movie.id} movie={movie} />;
+            return <Movie key={movie.unit} movie={movie} />;
         });
     }
 
     render() {
-        if (!this.state.database) {
+        if (!this.props.database) {
             return (
                 <div className="movies-gid-content mt1">
                     <div>Loading...</div>
                 </div>
-
+            );
+        }
+    
+        if (typeof this.props.database === 'string') {
+            return (
+                <div className="movies-gid-content mt1">
+                    <div>Noting found.</div>
+                </div>
             );
         }
 
@@ -62,7 +58,9 @@ class MovieGrid extends React.Component {
             <section className="section movies mt1">
                 <div className="section-content">
 
-                    <Filters updateSortBy={this.props.updateSortBy} />
+                    <Filters
+                          setActiveFilter={this.props.setActiveFilter}
+                          filters={this.props.filters} />
 
                     <div className="row movies-gid-content mt1">
                         { this.renderMovies() }
@@ -75,8 +73,6 @@ class MovieGrid extends React.Component {
 
 MovieGrid.propTypes = {
     database: PropTypes.arrayOf(PropTypes.object),
-    sortByFlag: PropTypes.string.isRequired,
-    updateSortBy: PropTypes.func.isRequired,
 };
 
 export default MovieGrid;

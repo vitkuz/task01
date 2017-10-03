@@ -17,3 +17,10 @@ html, body {
 img {
   max-width: 100%;
 }
+
+.true:after {
+  content:'↑';
+}
+.false:after {
+  content:'↓';
+}

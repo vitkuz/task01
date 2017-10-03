@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SortLink from './SortLink';
 
 class Filters extends React.Component {
     constructor(props) {
         super(props);
-        this.handleDateClick = this.handleDateClick.bind(this);
-        this.handleRatingClick = this.handleRatingClick.bind(this);
+        this.handleFilterClick = this.handleFilterClick.bind(this);
     }
-
-    handleDateClick() {
-        this.props.updateSortBy('year');
+    
+    handleFilterClick(filter) {
+        this.props.setActiveFilter(filter);
     }
-
-    handleRatingClick() {
-        this.props.updateSortBy('rating');
+    
+    renderFilters() {
+        return this.props.filters.map((filter, index) => {
+            return <SortLink key={filter.title} title={filter.title} type={filter.type} active={filter.active} sortDir={filter.sortDir} onClickHandler={this.handleFilterClick} />
+        });
     }
 
     render() {
@@ -24,13 +26,7 @@ class Filters extends React.Component {
                     <div>{} movies found</div>
                     <div>
                         <span>Sort by:</span>
-
-                        <span>
-                            <a role="button" tabIndex="0" onClick={this.handleDateClick}>release date</a>
-                        </span> |&nbsp;
-                        <span>
-                            <a role="button" tabIndex="0" onClick={this.handleRatingClick}>rating</a>
-                        </span>
+                        { this.renderFilters() }
                     </div>
                 </div>
             </section>
@@ -39,7 +35,6 @@ class Filters extends React.Component {
 }
 
 Filters.propTypes = {
-    updateSortBy: PropTypes.func.isRequired,
 };
 
 export default Filters;
