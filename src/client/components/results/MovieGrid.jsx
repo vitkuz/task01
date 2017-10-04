@@ -20,18 +20,12 @@ function sortBy(key, reverse) {
 }
 
 class MovieGrid extends React.Component {
-
     renderMovies() {
         const sorted = [...this.props.database];
-        
         const activeFilter = this.props.filters.find((filter) => {
             return filter.active === true;
-        })
-        
-        console.log(this.props.filters, activeFilter);
-    
+        });
         sorted.sort(sortBy(activeFilter.type, activeFilter.sortDir));
-
         return sorted.map((movie) => {
             return <Movie key={movie.unit} movie={movie} />;
         });
@@ -45,7 +39,6 @@ class MovieGrid extends React.Component {
                 </div>
             );
         }
-    
         if (typeof this.props.database === 'string') {
             return (
                 <div className="movies-gid-content mt1">
@@ -53,14 +46,13 @@ class MovieGrid extends React.Component {
                 </div>
             );
         }
-
         return (
             <section className="section movies mt1">
                 <div className="section-content">
 
                     <Filters
-                          setActiveFilter={this.props.setActiveFilter}
-                          filters={this.props.filters} />
+                      setActiveFilter={this.props.setActiveFilter}
+                      filters={this.props.filters} />
 
                     <div className="row movies-gid-content mt1">
                         { this.renderMovies() }
@@ -72,7 +64,9 @@ class MovieGrid extends React.Component {
 }
 
 MovieGrid.propTypes = {
-    database: PropTypes.arrayOf(PropTypes.object),
+  setActiveFilter: PropTypes.func.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.object).isRequired,
+  database: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default MovieGrid;

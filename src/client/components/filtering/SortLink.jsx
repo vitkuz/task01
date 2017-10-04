@@ -21,4 +21,8 @@ class SortLink extends React.Component {
     }
 }
 
+SortLink.propTypes = {
+    onClickHandler: PropTypes.func.isRequired,
+};
+
 export default SortLink;

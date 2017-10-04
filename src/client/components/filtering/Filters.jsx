@@ -7,14 +7,12 @@ class Filters extends React.Component {
         super(props);
         this.handleFilterClick = this.handleFilterClick.bind(this);
     }
-    
     handleFilterClick(filter) {
         this.props.setActiveFilter(filter);
     }
-    
     renderFilters() {
-        return this.props.filters.map((filter, index) => {
-            return <SortLink key={filter.title} title={filter.title} type={filter.type} active={filter.active} sortDir={filter.sortDir} onClickHandler={this.handleFilterClick} />
+        return this.props.filters.map((filter) => {
+            return <SortLink key={filter.title} title={filter.title} type={filter.type} active={filter.active} sortDir={filter.sortDir} onClickHandler={this.handleFilterClick} />;
         });
     }
 
@@ -35,6 +33,8 @@ class Filters extends React.Component {
 }
 
 Filters.propTypes = {
+    setActiveFilter: PropTypes.func.isRequired,
+    filters: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Filters;

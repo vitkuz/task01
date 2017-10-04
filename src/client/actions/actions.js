@@ -1,13 +1,15 @@
+import C from './constants';
+
 function populateMovies(data) {
     console.log(data);
     if (data.errorcode === 404) {
         return {
-            type: 'ERROR',
+            type: C.ERROR,
             payload: data.message,
         };
     } else {
         return {
-            type: 'POPULATE_MOVIES',
+            type: C.POPULATE_MOVIES,
             payload: data,
         };
     }
@@ -46,21 +48,14 @@ export function makeDirectorSearch(value) {
 
 export function setSearchBy(value) {
     return {
-        type: 'SET_SEARCH_BY',
-        payload: value,
-    };
-}
-
-export function setFilterBy(value) {
-    return {
-        type: 'SET_FILTER_BY',
+        type: C.SET_SEARCH_BY,
         payload: value,
     };
 }
 
 export function setActiveFilter(filter) {
     return {
-        type: 'SET_ACTIVE_FILTER',
+        type: C.SET_ACTIVE_FILTER,
         payload: filter,
     };
 }

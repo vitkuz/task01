@@ -29,11 +29,11 @@ const Movie = (props) => {
 };
 
 Movie.propTypes = {
-      movie: PropTypes.shape({ img: PropTypes.string,
-      id: PropTypes.number,
-      year: PropTypes.number,
-      title: PropTypes.string,
+      movie: PropTypes.shape({ unit: PropTypes.number,
+      release_year: PropTypes.number,
+      show_title: PropTypes.string,
       category: PropTypes.string,
+      poster: PropTypes.string,
       rating: PropTypes.string,
     }).isRequired,
 };

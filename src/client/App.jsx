@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -52,7 +53,6 @@ class App extends React.Component {
                 break;
         }
     }
-
     render() {
         return (
             <Router>
@@ -80,7 +80,6 @@ class App extends React.Component {
                     <Route
                       path="/movies"
                       component={withProps(MovieGrid, {
-                            sortByFlag: this.props.sortBy,
                             setActiveFilter: this.setActiveFilter,
                             database: this.props.searchResults,
                             filters: this.props.filters,
@@ -109,5 +108,15 @@ function mapDispatchToProps(dispatch) {
         setActiveFilter,
     }, dispatch);
 }
+
+App.propTypes = {
+    searchResults: PropTypes.arrayOf(PropTypes.object).isRequired,
+    searchBy: PropTypes.string.isRequired,
+    filters: PropTypes.arrayOf(PropTypes.object).isRequired,
+    setActiveFilter: PropTypes.func.isRequired,
+    setSearchBy: PropTypes.func.isRequired,
+    makeTitleSearch: PropTypes.func.isRequired,
+    makeDirectorSearch: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

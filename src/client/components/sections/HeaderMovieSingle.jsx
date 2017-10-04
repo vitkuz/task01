@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -9,14 +8,12 @@ const printListOfNames = list => list.map(name => <span key={name} className="ac
 class HeaderMovieSinglePage extends React.Component {
     componentDidMount() {
         console.log('Component HeaderMovieSinglePage did mount!');
-        // window.scrollTo(0, 0);
     }
     componentWillUpdate() {
         console.log('Component HeaderMovieSinglePage will update!');
         window.scrollTo(0, 0);
     }
     render() {
-    
         if (!this.props.database) {
             return (
                 <div>
@@ -24,14 +21,10 @@ class HeaderMovieSinglePage extends React.Component {
                 </div>
             );
         }
-        
         const movie = this.props.database.find((item) => {
             console.log(item.unit, this.props.match.params.id);
-            return item.unit == this.props.match.params.id;
+            return parseInt(item.unit, 10) === this.props.match.params.id;
         });
-        
-        console.log('SELECTED_MOVIE', movie);
-
         return (
             <div className="section header header-movie header-cover-1">
                 <div className="gradient-2">
