@@ -23,6 +23,10 @@ class SortLink extends React.Component {
 
 SortLink.propTypes = {
     onClickHandler: PropTypes.func.isRequired,
+    active: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    sortDir: PropTypes.string.isRequired,
 };
 
 export default SortLink;
