@@ -34,15 +34,19 @@ class MovieGrid extends React.Component {
     render() {
         if (!this.props.database) {
             return (
-                <div className="movies-gid-content mt1">
-                    <div>Loading...</div>
+                <div className="section movies-gid-content mt1">
+                    <div className="section-content">
+                        Loading...
+                    </div>
                 </div>
             );
         }
         if (typeof this.props.database === 'string') {
             return (
-                <div className="movies-gid-content mt1">
-                    <div>Noting found.</div>
+                <div className="section movies-gid-content mt1">
+                    <div className="section-content">
+                        Noting found.
+                    </div>
                 </div>
             );
         }

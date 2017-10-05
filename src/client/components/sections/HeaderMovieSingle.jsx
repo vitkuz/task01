@@ -8,6 +8,7 @@ const printListOfNames = list => list.map(name => <span key={name} className="ac
 class HeaderMovieSinglePage extends React.Component {
     componentDidMount() {
         console.log('Component HeaderMovieSinglePage did mount!');
+        window.scrollTo(0, 0);
     }
     componentWillUpdate() {
         console.log('Component HeaderMovieSinglePage will update!');
@@ -16,14 +17,15 @@ class HeaderMovieSinglePage extends React.Component {
     render() {
         if (!this.props.database) {
             return (
-                <div>
-                    Search is outdated. Please wait
+                <div className="section mt1">
+                    <div className="section-content">
+                        Search is outdated. Please wait
+                    </div>
                 </div>
             );
         }
         const movie = this.props.database.find((item) => {
-            console.log(item.unit, this.props.match.params.id);
-            return parseInt(item.unit, 10) === this.props.match.params.id;
+            return item.unit === parseInt(this.props.match.params.id, 10);
         });
         return (
             <div className="section header header-movie header-cover-1">
