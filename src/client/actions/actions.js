@@ -59,3 +59,11 @@ export function setActiveFilter(filter) {
         payload: filter,
     };
 }
+
+export function setSearchQuery(value) {
+    console.log('setSearchQuery', value);
+    return {
+        type: C.SET_SEARCH_QUERY,
+        payload: value,
+    };
+}

@@ -5,6 +5,7 @@ const constatnts = {
     SET_SEARCH_BY: 'SET_SEARCH_BY',
     SET_FILTER_BY: 'SET_FILTER_BY',
     SET_ACTIVE_FILTER: 'SET_ACTIVE_FILTER',
+    SET_SEARCH_QUERY: 'SET_SEARCH_QUERY',
 }
 
 export default constatnts;

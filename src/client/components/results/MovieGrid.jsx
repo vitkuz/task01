@@ -36,7 +36,7 @@ class MovieGrid extends React.Component {
             return (
                 <div className="section movies-gid-content mt1">
                     <div className="section-content">
-                        Loading...
+                        <div className="loader" />
                     </div>
                 </div>
             );

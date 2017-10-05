@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 
 import MoviesReducer from './reducer_movies';
-import SelectedMovie from './reducer_selected_movie';
+import SearchReducer from './reducer_search';
 import SearchBy from './search_by';
 import Filters from './filters';
 
 
 const rootReducer = combineReducers({
+    searchQuery: SearchReducer,
     searchResults: MoviesReducer,
-    selected: SelectedMovie,
     filters: Filters,
     searchBy: SearchBy,
 });

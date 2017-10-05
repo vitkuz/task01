@@ -7,22 +7,25 @@ import ToggleGroup from '../utils/ToggleGroup';
 class Search extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { query: '' };
-
+        this.state = {
+            query: this.props.searchQuery,
+        };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        this.quickSearch = this.quickSearch.bind(this);
+        this.quickDirectorSearch = this.quickDirectorSearch.bind(this);
     }
-    quickSearch(e) {
-        console.log(e.target.innerText);
+    quickDirectorSearch(e) {
         this.props.updateSearchBy('director');
+        this.props.setSearchQuery(e.target.innerText);
         this.props.handleSearch(e.target.innerText);
     }
     handleInputChange(e) {
-        this.setState({ query: e.target.value });
+        // this.props.setSearchQuery(e.target.value);
+        this.setState({ value: e.target.value });
     }
     handleFormSubmit(e) {
         e.preventDefault();
+        this.props.setSearchQuery(this.state.query);
         this.props.handleSearch(this.state.query);
     }
 
@@ -32,11 +35,12 @@ class Search extends React.Component {
                 <div className="input-group">
                     <input type="text" onChange={this.handleInputChange} value={this.state.query} className="form-control" placeholder="Search..." />
                     <span className="input-group-addon" id="basic-addon2">fake api</span>
-                    <div className="help">
-                        <span role="button" tabIndex="-1" onClick={this.quickSearch}>Steven Spielberg</span>,
-                        <span>Martin Scorsese</span>,
-                        <span>Alfred Hitchcock</span>,
-                        <span>Stanley Kubrick</span>
+                    <div className="help mt1">
+                        Example:
+                        <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">Steven Spielberg</span>
+                        <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">Martin Scorsese</span>
+                        <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">Alfred Hitchcock</span>
+                        <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">Stanley Kubrick</span>
                     </div>
                 </div>
                 <div className="dflex dflex-justify mt1">
@@ -55,7 +59,9 @@ class Search extends React.Component {
 
 Search.propTypes = {
     handleSearch: PropTypes.func.isRequired,
+    setSearchQuery: PropTypes.func.isRequired,
     searchByFlag: PropTypes.string.isRequired,
+    searchQuery: PropTypes.string.isRequired,
     updateSearchBy: PropTypes.func.isRequired,
 };
 
