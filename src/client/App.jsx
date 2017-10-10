@@ -16,28 +16,10 @@ import Footer from './components/sections/Footer';
 import PageNotFound from './pages/PageNotFound';
 
 class App extends React.Component {
-    constructor() {
-        super();
-
-        this.handleSearch = this.handleSearch.bind(this);
-    }
     componentDidMount() {
         setTimeout(() => {
             this.props.makeDirectorSearch('Quentin Tarantino');
         }, 2000);
-    }
-
-    handleSearch(value) {
-        switch (this.props.searchBy) {
-            case 'title':
-                this.props.makeTitleSearch(value);
-                break;
-            case 'director':
-                this.props.makeDirectorSearch(value);
-                break;
-            default:
-                break;
-        }
     }
     render() {
         return (
@@ -76,7 +58,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 App.propTypes = {
-    makeTitleSearch: PropTypes.func.isRequired,
     makeDirectorSearch: PropTypes.func.isRequired,
 };
 

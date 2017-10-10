@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setSearchBy } from '../../actions/actions';
 
 class SortLink extends React.Component {
     constructor(props) {
@@ -7,7 +10,7 @@ class SortLink extends React.Component {
         this.onClickHandler = this.onClickHandler.bind(this);
     }
     onClickHandler() {
-        this.props.onClickHandler({
+        this.props.setSearchBy({
             active: this.props.active,
             type: this.props.type,
             title: this.props.title,
@@ -21,12 +24,18 @@ class SortLink extends React.Component {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        setSearchBy,
+    }, dispatch);
+}
+
 SortLink.propTypes = {
-    onClickHandler: PropTypes.func.isRequired,
+    setSearchBy: PropTypes.func.isRequired,
     active: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     sortDir: PropTypes.string.isRequired,
 };
 
-export default SortLink;
+export default connect(null, mapDispatchToProps)(SortLink);

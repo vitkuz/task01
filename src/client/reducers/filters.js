@@ -1,4 +1,17 @@
-export default function (state = null, action) {
+const dafaultFilters = [{
+    active: true,
+    title: 'by year',
+    type: 'release_year',
+    sortDir: true,
+}, {
+    active: false,
+    title: 'by rating',
+    type: 'rating',
+    sortDir: true,
+},
+];
+
+export default function (state = dafaultFilters, action) {
     switch (action.type) {
         case 'SET_ACTIVE_FILTER':
             return state.map((filter) => {
@@ -11,17 +24,5 @@ export default function (state = null, action) {
                 return filter;
             });
     }
-    
-    return [{
-        active: true,
-        title: 'by year',
-        type: 'release_year',
-        sortDir: true,
-    }, {
-        active: false,
-        title: 'by rating',
-        type: 'rating',
-        sortDir: true,
-    },
-    ];
+    return state;
 }

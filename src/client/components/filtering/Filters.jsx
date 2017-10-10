@@ -18,7 +18,6 @@ class Filters extends React.Component {
 
     render() {
         return (
-
             <section className="section sorting mt1">
                 <div className="section-content dflex dflex-justify">
                     <div>{} movies found</div>

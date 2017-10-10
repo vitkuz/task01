@@ -15,15 +15,6 @@ function populateMovies(data) {
     }
 }
 
-
-export function selectItem(item) {
-    console.log('selectItem', item);
-    return {
-        type: 'ITEM_SELECTED',
-        payload: item,
-    };
-}
-
 export function makeTitleSearch(value) {
     return function (dispatch) {
         return fetch(`https://netflixroulette.net/api/api.php?title=${value}`)
@@ -46,10 +37,10 @@ export function makeDirectorSearch(value) {
     };
 }
 
-export function setSearchBy(value) {
+export function setSearchBy(filter) {
     return {
         type: C.SET_SEARCH_BY,
-        payload: value,
+        payload: filter,
     };
 }
 

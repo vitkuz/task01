@@ -47,10 +47,9 @@ class Search extends React.Component {
                     <span className="input-group-addon" id="basic-addon2">fake api</span>
                     <div className="help mt1">
                         Quick search:&nbsp;
-                        <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">Steven Spielberg</span>
-                        <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">Martin Scorsese</span>
-                        <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">Alfred Hitchcock</span>
-                        <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">Stanley Kubrick</span>
+                        {
+                            this.props.directors.map(linkText => <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">{linkText}</span>)
+                        }
                     </div>
                 </div>
                 <div className="dflex dflex-justify mt1">
@@ -71,6 +70,7 @@ function mapStateToProps(state) {
     return {
         searchBy: state.searchBy,
         searchQuery: state.searchQuery,
+        directors: state.directors,
     };
 }
 
@@ -90,6 +90,7 @@ Search.propTypes = {
     searchQuery: PropTypes.string.isRequired,
     setSearchBy: PropTypes.func.isRequired,
     setSearchQuery: PropTypes.func.isRequired,
+    directors: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
