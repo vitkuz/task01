@@ -5,19 +5,22 @@ import { connect } from 'react-redux';
 import Toggle from './ToggleButton';
 
 class ToggleGroup extends React.Component {
-    getToggleClassName(button) {
-        if (button.active === this.props.searchBy.ative) {
+    constructor(props) {
+        super(props);
+        this.getToggleClassName = this.getToggleClassName.bind(this);
+    }
+    getClasses(btn) {
+        if (btn.active) {
             return 'btn active';
         }
         return 'btn';
     }
-
     renderButtons() {
         return this.props.searchBy.map(button => (
             <Toggle
               key={button.type}
               button={button}
-              classes={this.getToggleClassName(button)} />
+              classes={this.getClasses(button)} />
         ));
     }
 

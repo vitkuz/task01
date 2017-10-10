@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setSearchBy } from '../../actions/actions';
+import { setActiveFilter } from '../../actions/actions';
 
 class SortLink extends React.Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class SortLink extends React.Component {
         this.onClickHandler = this.onClickHandler.bind(this);
     }
     onClickHandler() {
-        this.props.setSearchBy({
+        this.props.setActiveFilter({
             active: this.props.active,
             type: this.props.type,
             title: this.props.title,
@@ -26,12 +26,12 @@ class SortLink extends React.Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        setSearchBy,
+        setActiveFilter,
     }, dispatch);
 }
 
 SortLink.propTypes = {
-    setSearchBy: PropTypes.func.isRequired,
+    setActiveFilter: PropTypes.func.isRequired,
     active: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
