@@ -10,13 +10,13 @@ class Toggle extends React.Component {
         super(props);
         this.state = {
             text: props.button.title,
-            value: props.button.value,
+            type: props.button.type,
         };
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick() {
-        this.props.setSearchBy(this.state.value);
+    handleClick(e) {
+        this.props.setSearchBy({type: this.state.type});
     }
 
     render() {
