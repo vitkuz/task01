@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { setSearchBy } from '../../actions/actions';
 
 class Toggle extends React.Component {
     constructor(props) {
@@ -12,7 +16,7 @@ class Toggle extends React.Component {
     }
 
     handleClick() {
-        this.props.updateSearchBy(this.state.value);
+        this.props.setSearchBy(this.state.value);
     }
 
     render() {
@@ -24,6 +28,12 @@ class Toggle extends React.Component {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        setSearchBy,
+    }, dispatch);
+}
+
 Toggle.defaultProps = {
     classes: 'btn',
 };
@@ -31,7 +41,7 @@ Toggle.defaultProps = {
 Toggle.propTypes = {
     button: PropTypes.shape({ title: PropTypes.string, value: PropTypes.string }).isRequired,
     classes: PropTypes.string,
-    updateSearchBy: PropTypes.func.isRequired,
+    setSearchBy: PropTypes.func.isRequired,
 };
 
-export default Toggle;
+export default connect(null, mapDispatchToProps)(Toggle);

@@ -9,10 +9,14 @@ import App from './App';
 import './scss/index.scss';
 import rootReducer from './reducers/index';
 
+
+/* eslint-disable no-underscore-dangle */
 const store = createStore(
     rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(thunk),
 );
+/* eslint-enable */
 
 render(
     <Provider store={store}>

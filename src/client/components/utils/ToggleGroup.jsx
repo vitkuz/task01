@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Toggle from './ToggleButton';
 
@@ -11,11 +12,11 @@ class ToggleGroup extends React.Component {
                 { title: 'title', value: 'title' },
                 { title: 'director', value: 'director' },
             ],
-            selected: this.props.searchByFlag,
+            selected: this.props.searchBy,
         };
     }
     getToggleClassName(button) {
-        if (button.value === this.props.searchByFlag) {
+        if (button.value === this.props.searchBy) {
             return 'btn active';
         }
         return 'btn';
@@ -26,8 +27,7 @@ class ToggleGroup extends React.Component {
             <Toggle
               key={button.value}
               button={button}
-              classes={this.getToggleClassName(button)}
-              updateSearchBy={this.props.updateSearchBy} />
+              classes={this.getToggleClassName(button)} />
         ));
     }
 
@@ -40,13 +40,19 @@ class ToggleGroup extends React.Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        searchBy: state.searchBy,
+    };
+}
+
+
 ToggleGroup.defaultProps = {
     selected: 'comments',
 };
 
 ToggleGroup.propTypes = {
-    searchByFlag: PropTypes.string.isRequired,
-    updateSearchBy: PropTypes.func.isRequired,
+    searchBy: PropTypes.string.isRequired,
 };
 
-export default ToggleGroup;
+export default connect(mapStateToProps)(ToggleGroup);

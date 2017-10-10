@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { setSearchQuery, setSearchBy, makeTitleSearch, makeDirectorSearch } from '../../actions/actions';
 
 import ToggleGroup from '../utils/ToggleGroup';
-
 
 class Search extends React.Component {
     constructor(props) {
@@ -15,28 +18,35 @@ class Search extends React.Component {
         this.quickDirectorSearch = this.quickDirectorSearch.bind(this);
     }
     quickDirectorSearch(e) {
-        this.props.updateSearchBy('director');
+        e.preventDefault();
+        this.props.setSearchBy('director');
         this.props.setSearchQuery(e.target.innerText);
-        this.props.handleSearch(e.target.innerText);
     }
     handleInputChange(e) {
-        // this.props.setSearchQuery(e.target.value);
-        this.setState({ value: e.target.value });
+        this.props.setSearchQuery(e.target.value);
     }
     handleFormSubmit(e) {
         e.preventDefault();
-        this.props.setSearchQuery(this.state.query);
-        this.props.handleSearch(this.state.query);
-    }
 
+        switch (this.props.searchBy) {
+            case 'title':
+                this.props.makeTitleSearch(this.props.searchQuery);
+                break;
+            case 'director':
+                this.props.makeDirectorSearch(this.props.searchQuery);
+                break;
+            default:
+                break;
+        }
+    }
     render() {
         return (
             <form action="" onSubmit={this.handleFormSubmit}>
                 <div className="input-group">
-                    <input type="text" onChange={this.handleInputChange} value={this.state.query} className="form-control" placeholder="Search..." />
+                    <input type="text" onChange={this.handleInputChange} value={this.props.searchQuery} className="form-control" placeholder="Search..." />
                     <span className="input-group-addon" id="basic-addon2">fake api</span>
                     <div className="help mt1">
-                        Example:
+                        Quick search:&nbsp;
                         <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">Steven Spielberg</span>
                         <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">Martin Scorsese</span>
                         <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">Alfred Hitchcock</span>
@@ -45,7 +55,7 @@ class Search extends React.Component {
                 </div>
                 <div className="dflex dflex-justify mt1">
                     <div className="toggle-search-type">
-                        <ToggleGroup updateSearchBy={this.props.updateSearchBy} searchByFlag={this.props.searchByFlag} />
+                        <ToggleGroup />
                     </div>
                     <div>
                         <button className="btn btn-default">Submit</button>
@@ -57,12 +67,30 @@ class Search extends React.Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        searchBy: state.searchBy,
+        searchQuery: state.searchQuery,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        makeDirectorSearch,
+        makeTitleSearch,
+        setSearchBy,
+        setSearchQuery,
+    }, dispatch);
+}
+
 Search.propTypes = {
-    handleSearch: PropTypes.func.isRequired,
-    setSearchQuery: PropTypes.func.isRequired,
-    searchByFlag: PropTypes.string.isRequired,
+    makeTitleSearch: PropTypes.func.isRequired,
+    makeDirectorSearch: PropTypes.func.isRequired,
+    searchBy: PropTypes.string.isRequired,
     searchQuery: PropTypes.string.isRequired,
-    updateSearchBy: PropTypes.func.isRequired,
+    setSearchBy: PropTypes.func.isRequired,
+    setSearchQuery: PropTypes.func.isRequired,
 };
 
-export default Search;
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
+

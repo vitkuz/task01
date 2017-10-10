@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const printListOfNames = list => list.map(name => <span key={name} className="actor">{name}</span>);
 
@@ -68,10 +69,16 @@ class HeaderMovieSinglePage extends React.Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        database: state.searchResults,
+    };
+}
+
 HeaderMovieSinglePage.propTypes = {
     database: PropTypes.arrayOf(PropTypes.object).isRequired,
     match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
 };
 
-export default HeaderMovieSinglePage;
+export default connect(mapStateToProps)(HeaderMovieSinglePage);
 
