@@ -3,8 +3,8 @@ import { combineReducers } from 'redux';
 import MoviesReducer from './reducer_movies';
 import SearchReducer from './reducer_search';
 import Directors from './reducer_directors';
-import SearchBy from './search_by';
-import Filters from './filters';
+import SearchBy from './reducer_searchBy';
+import Filters from './reducer_filters';
 
 
 const rootReducer = combineReducers({

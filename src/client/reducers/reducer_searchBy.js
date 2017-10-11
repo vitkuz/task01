@@ -1,11 +1,11 @@
 import C from '../actions/constants';
 
-const by = [
-    { title: 'title', type: 'title', active: true },
-    { title: 'director', type: 'director', active: false },
+const searchBy = [
+    { title: 'Title', type: 'title', active: true },
+    { title: 'Director', type: 'director', active: false },
 ];
 
-export default function (state = by, action) {
+export default function (state = searchBy, action) {
     switch (action.type) {
         case C.SET_SEARCH_BY:
             return state.map((filter) => {
@@ -16,6 +16,7 @@ export default function (state = by, action) {
                 }
                 return filter;
             });
+        default:
+            return state;
     }
-    return state;
 }

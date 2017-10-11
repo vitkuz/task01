@@ -23,6 +23,7 @@ export default function (state = dafaultFilters, action) {
                 }
                 return filter;
             });
+        default:
+            return state;
     }
-    return state;
 }

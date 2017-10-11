@@ -19,7 +19,7 @@ class Search extends React.Component {
     }
     quickDirectorSearch(e) {
         e.preventDefault();
-        this.props.setSearchBy('director');
+        this.props.setSearchBy({ type: 'director' });
         this.props.setSearchQuery(e.target.innerText);
     }
     handleInputChange(e) {
@@ -27,8 +27,10 @@ class Search extends React.Component {
     }
     handleFormSubmit(e) {
         e.preventDefault();
-
-        switch (this.props.searchBy) {
+        const ativeFilter = this.props.searchBy.find((filter) => {
+            return filter.active === true;
+        });
+        switch (ativeFilter.type) {
             case 'title':
                 this.props.makeTitleSearch(this.props.searchQuery);
                 break;

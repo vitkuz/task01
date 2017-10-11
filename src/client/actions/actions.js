@@ -52,7 +52,6 @@ export function setActiveFilter(filter) {
 }
 
 export function setSearchQuery(value) {
-    console.log('setSearchQuery', value);
     return {
         type: C.SET_SEARCH_QUERY,
         payload: value,

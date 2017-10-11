@@ -15,8 +15,8 @@ class Toggle extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(e) {
-        this.props.setSearchBy({type: this.state.type});
+    handleClick() {
+        this.props.setSearchBy({ type: this.state.type });
     }
 
     render() {
@@ -39,7 +39,7 @@ Toggle.defaultProps = {
 };
 
 Toggle.propTypes = {
-    button: PropTypes.shape({ title: PropTypes.string, value: PropTypes.string }).isRequired,
+    button: PropTypes.shape({ title: PropTypes.string, type: PropTypes.string }).isRequired,
     classes: PropTypes.string,
     setSearchBy: PropTypes.func.isRequired,
 };

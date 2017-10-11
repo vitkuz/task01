@@ -4,22 +4,20 @@ import { connect } from 'react-redux';
 
 import Toggle from './ToggleButton';
 
-class ToggleGroup extends React.Component {
-    render() {
-        return (
-            <div>
-                {
-                    this.props.searchBy.map(button => (
-                        <Toggle
-                          key={button.type}
-                          button={button}
-                          classes={button.active ? 'btn active' : 'btn'} />
-                    ))
-                }
-            </div>
-        );
-    }
-}
+const ToggleGroup = (props) => {
+    return (
+        <div>
+            {
+                props.searchBy.map(button => (
+                    <Toggle
+                      key={button.type}
+                      button={button}
+                      classes={button.active ? 'btn active' : 'btn'} />
+                ))
+            }
+        </div>
+    );
+};
 
 function mapStateToProps(state) {
     return {
