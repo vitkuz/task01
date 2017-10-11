@@ -50,7 +50,7 @@ class Search extends React.Component {
                     <div className="help mt1">
                         Quick search:&nbsp;
                         {
-                            this.props.directors.map(linkText => <span role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">{linkText}</span>)
+                            this.props.directors.map(linkText => <span key={linkText} role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">{linkText}</span>)
                         }
                     </div>
                 </div>
@@ -88,11 +88,11 @@ function mapDispatchToProps(dispatch) {
 Search.propTypes = {
     makeTitleSearch: PropTypes.func.isRequired,
     makeDirectorSearch: PropTypes.func.isRequired,
-    searchBy: PropTypes.string.isRequired,
+    searchBy: PropTypes.arrayOf(PropTypes.object).isRequired,
     searchQuery: PropTypes.string.isRequired,
     setSearchBy: PropTypes.func.isRequired,
     setSearchQuery: PropTypes.func.isRequired,
-    directors: PropTypes.arrayOf(PropTypes.object).isRequired,
+    directors: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

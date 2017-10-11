@@ -30,7 +30,7 @@ const Movie = (props) => {
 
 Movie.propTypes = {
       movie: PropTypes.shape({ unit: PropTypes.number,
-      release_year: PropTypes.number,
+      release_year: PropTypes.string,
       show_title: PropTypes.string,
       category: PropTypes.string,
       poster: PropTypes.string,

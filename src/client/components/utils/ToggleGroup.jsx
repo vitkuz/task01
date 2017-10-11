@@ -26,7 +26,7 @@ function mapStateToProps(state) {
 }
 
 ToggleGroup.propTypes = {
-    searchBy: PropTypes.string.isRequired,
+    searchBy: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps)(ToggleGroup);

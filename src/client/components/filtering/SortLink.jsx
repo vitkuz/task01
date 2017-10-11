@@ -32,10 +32,10 @@ function mapDispatchToProps(dispatch) {
 
 SortLink.propTypes = {
     setActiveFilter: PropTypes.func.isRequired,
-    active: PropTypes.string.isRequired,
+    active: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    sortDir: PropTypes.string.isRequired,
+    sortDir: PropTypes.bool.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(SortLink);
