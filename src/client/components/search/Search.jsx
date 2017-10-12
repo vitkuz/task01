@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { setSearchQuery, setSearchBy, makeTitleSearch, makeDirectorSearch } from '../../actions/actions';
-
 import ToggleGroup from '../utils/ToggleGroup';
+
+const DIRECTORS = ['Steven Spielberg', 'Martin Scorsese', 'Alfred Hitchcock', 'Stanley Kubrick'];
 
 class Search extends React.Component {
     constructor(props) {
@@ -50,7 +51,7 @@ class Search extends React.Component {
                     <div className="help mt1">
                         Quick search:&nbsp;
                         {
-                            this.props.directors.map(linkText => <span key={linkText} role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">{linkText}</span>)
+                            DIRECTORS.map(linkText => <span key={linkText} role="button" tabIndex="-1" onClick={this.quickDirectorSearch} className="quick-link">{linkText}</span>)
                         }
                     </div>
                 </div>
@@ -92,7 +93,6 @@ Search.propTypes = {
     searchQuery: PropTypes.string.isRequired,
     setSearchBy: PropTypes.func.isRequired,
     setSearchQuery: PropTypes.func.isRequired,
-    directors: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

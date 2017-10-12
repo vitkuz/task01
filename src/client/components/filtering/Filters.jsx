@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import SortLink from './SortLink';
+
+import { setActiveFilter } from '../../actions/actions';
 
 class Filters extends React.Component {
     constructor(props) {
@@ -31,9 +37,22 @@ class Filters extends React.Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        filters: state.filters,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        setActiveFilter,
+    }, dispatch);
+}
+
+
 Filters.propTypes = {
     setActiveFilter: PropTypes.func.isRequired,
     filters: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default Filters;
+export default connect(mapStateToProps, mapDispatchToProps)(Filters);

@@ -71,7 +71,7 @@ class HeaderMovieSinglePage extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        database: state.searchResults,
+        database: state.searchResults.byId,
     };
 }
 
