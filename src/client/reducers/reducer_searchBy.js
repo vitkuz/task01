@@ -1,7 +1,7 @@
-import C from '../actions/constants';
+import C from '../constants';
 
 const searchBy = [
-    { title: 'Title', type: 'title', active: true },
+    { title: 'Popular', type: 'popular', active: true },
     { title: 'Director', type: 'director', active: false },
 ];
 

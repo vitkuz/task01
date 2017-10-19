@@ -29,7 +29,7 @@ class MovieGrid extends React.Component {
         });
         sorted.sort(sortBy(activeFilter.type, activeFilter.sortDir));
         return sorted.map((movie) => {
-            return <Movie key={movie.unit} movie={movie} />;
+            return <Movie key={movie.id} movie={movie} />;
         });
     }
 

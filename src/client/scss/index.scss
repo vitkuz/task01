@@ -52,3 +52,18 @@ img {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.field-movie-images {
+  overflow: auto;
+
+  .field-movie-images-content {
+    width: auto;
+  }
+
+  div {
+    display: inline-block;
+    width: 300px;
+    margin-right:1px;
+    white-space: nowrap;
+  }
+}

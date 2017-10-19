@@ -1,4 +1,4 @@
-import C from '../actions/constants';
+import C from '../constants';
 
 const initialState = {
     byId: [],
@@ -7,7 +7,7 @@ const initialState = {
 
 function findIndex(movie, state) {
     return state.findIndex((item) => {
-        return movie.unit === item.unit;
+        return movie.id === item.id;
     });
 }
 
@@ -16,14 +16,12 @@ export default function (state = initialState, action) {
         case C.POPULATE_MOVIES:
             if (Array.isArray(action.payload)) {
                 const filtered = action.payload.filter((item) => {
-                    console.log(findIndex(item, state.byId) < 0);
                     return findIndex(item, state.byId) < 0;
                 });
                 const merged = [...state.byId, ...filtered];
                 const allIds = merged.map((item) => {
-                    return item.unit;
+                    return item.id;
                 });
-                console.log({ byId: merged, allIds });
                 return { byId: merged, allIds };
             } return [action.payload];
         case C.ERROR:

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setSearchQuery, setSearchBy, makeTitleSearch, makeDirectorSearch } from '../../actions/actions';
+import { setSearchQuery, setSearchBy, makeSearch } from '../../actions/actions';
 import ToggleGroup from '../utils/ToggleGroup';
 
 const DIRECTORS = ['Steven Spielberg', 'Martin Scorsese', 'Alfred Hitchcock', 'Stanley Kubrick'];
@@ -31,16 +31,7 @@ class Search extends React.Component {
         const ativeFilter = this.props.searchBy.find((filter) => {
             return filter.active === true;
         });
-        switch (ativeFilter.type) {
-            case 'title':
-                this.props.makeTitleSearch(this.props.searchQuery);
-                break;
-            case 'director':
-                this.props.makeDirectorSearch(this.props.searchQuery);
-                break;
-            default:
-                break;
-        }
+        this.props.makeSearch(ativeFilter.type, this.props.searchQuery);
     }
     render() {
         return (
@@ -79,16 +70,14 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        makeDirectorSearch,
-        makeTitleSearch,
+        makeSearch,
         setSearchBy,
         setSearchQuery,
     }, dispatch);
 }
 
 Search.propTypes = {
-    makeTitleSearch: PropTypes.func.isRequired,
-    makeDirectorSearch: PropTypes.func.isRequired,
+    makeSearch: PropTypes.func.isRequired,
     searchBy: PropTypes.arrayOf(PropTypes.object).isRequired,
     searchQuery: PropTypes.string.isRequired,
     setSearchBy: PropTypes.func.isRequired,

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { makeDirectorSearch, makeTitleSearch } from './actions/actions';
+import { makeSearch, getMoviesFromLocalStorage } from './actions/actions';
 
 // Page components
 import HeaderSearch from './components/sections/HeaderSearch';
@@ -18,8 +18,9 @@ import PageNotFound from './pages/PageNotFound';
 class App extends React.Component {
     componentDidMount() {
         setTimeout(() => {
-            this.props.makeDirectorSearch('Quentin Tarantino');
+            this.props.makeSearch('popular');
         }, 2000);
+        this.props.getMoviesFromLocalStorage();
     }
     render() {
         return (
@@ -52,13 +53,14 @@ class App extends React.Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        makeDirectorSearch,
-        makeTitleSearch,
+        makeSearch,
+        getMoviesFromLocalStorage,
     }, dispatch);
 }
 
 App.propTypes = {
-    makeDirectorSearch: PropTypes.func.isRequired,
+    makeSearch: PropTypes.func.isRequired,
+    getMoviesFromLocalStorage: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(App);

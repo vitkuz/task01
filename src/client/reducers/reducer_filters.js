@@ -1,12 +1,12 @@
 const dafaultFilters = [{
     active: true,
     title: 'by year',
-    type: 'release_year',
+    type: 'release_date',
     sortDir: true,
 }, {
     active: false,
     title: 'by rating',
-    type: 'rating',
+    type: 'vote_average',
     sortDir: true,
 },
 ];
