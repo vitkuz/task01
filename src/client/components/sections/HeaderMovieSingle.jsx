@@ -24,26 +24,23 @@ class HeaderMovieSinglePage extends React.Component {
         console.log('Component HeaderMovieSinglePage will update!');
         window.scrollTo(0, 0);
     }
-    getMovie(id) {
-        const movie1 = this.props.cache.find((item) => {
-            return item.id === id;
+    getMovie() {
+        const movie = this.props.cache.find((item) => {
+            return item.id === parseInt(this.props.match.params.id, 10);
         });
         if (!movie) {
-            this.props.getMovieDetails(id);
+            this.props.getMovieDetails(parseInt(this.props.match.params.id, 10));
         }
-        const movie2 = this.props.cache.find((item) => {
-            return item.id === id;
-        });
+        return movie;
     }
     render() {
         const movieID = parseInt(this.props.match.params.id, 10);
         const movie = this.getMovie(movieID);
-        
         if (!movie) {
             return (
                 <div className="section mt1">
                     <div className="section-content">
-                        Search is outdated. Do it again
+                        Loading...
                     </div>
                 </div>
             );
@@ -110,11 +107,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 HeaderMovieSinglePage.defaultProps = {
-    cache: [],
+    cache: { movies: [] },
 };
 
 HeaderMovieSinglePage.propTypes = {
-    database: PropTypes.arrayOf(PropTypes.object).isRequired,
+    // database: PropTypes.arrayOf(PropTypes.object).isRequired,
     cache: PropTypes.arrayOf(PropTypes.object),
     match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
     getMovieDetails: PropTypes.func.isRequired,
