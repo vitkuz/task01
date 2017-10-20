@@ -13,7 +13,7 @@ export default function (state = initialCache, action) {
             return { movies: newMovies1 };
         case C.GET_MOVIES_FROM_LOCALSTORAGE:
             const tretrievedObject = localStorage.getItem('movies');
-            const newMovies2 = JSON.parse(tretrievedObject);
+            let newMovies2 = JSON.parse(tretrievedObject);
             console.log(newMovies2);
             if (!newMovies2) {
                 newMovies2 = [];

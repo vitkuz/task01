@@ -18,6 +18,9 @@ class Search extends React.Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.quickDirectorSearch = this.quickDirectorSearch.bind(this);
     }
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
     quickDirectorSearch(e) {
         e.preventDefault();
         this.props.setSearchBy({ type: 'director' });

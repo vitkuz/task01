@@ -11,17 +11,20 @@ const printListOfGenres = list => list.map(genre => <span key={genre.id} classNa
 
 const printListOfCountries = list => list.map(country => <span key={country.name} className="actor">{country.name}</span>);
 
-const printListOfPosters = list => list.map(poster => <div key={poster.file_path}><img className="poster" src={`https://image.tmdb.org/t/p/w500/${poster.file_path}`} alt="" /></div>);
+const printListOfPosters = list => (list.map((poster) => {
+    if (poster.file_path) {
+        return <div key={poster.file_path}><img className="poster" src={`https://image.tmdb.org/t/p/w500/${poster.file_path}`} alt="" /></div>;
+    }
+    return null;
+}));
 
 const printListOfVideos = list => list.map(video => <iframe key={video.key} width="560" height="315" src={`https://www.youtube.com/embed/${video.key}?rel=0&amp;controls=0&amp;showinfo=0`} frameBorder="0" allowFullScreen title={video.name} />);
 
 class HeaderMovieSinglePage extends React.Component {
     componentDidMount() {
-        console.log('Component HeaderMovieSinglePage did mount!');
         window.scrollTo(0, 0);
     }
     componentWillUpdate() {
-        console.log('Component HeaderMovieSinglePage will update!');
         window.scrollTo(0, 0);
     }
     getMovie() {
@@ -40,12 +43,11 @@ class HeaderMovieSinglePage extends React.Component {
             return (
                 <div className="section mt1">
                     <div className="section-content">
-                        Loading...
+                        <div className="loader" />
                     </div>
                 </div>
             );
         }
-        console.log(movie);
         const posterURL = movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : null;
         const posters = movie.images || movie.images.posters ? movie.images.posters : null;
         const videos = movie.videos || movie.videos.results ? movie.videos.results : null;
