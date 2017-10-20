@@ -28,10 +28,10 @@ class Search extends React.Component {
     }
     handleFormSubmit(e) {
         e.preventDefault();
-        const ativeFilter = this.props.searchBy.find((filter) => {
-            return filter.active === true;
-        });
-        this.props.makeSearch(ativeFilter.type, this.props.searchQuery);
+        // const ativeFilter = this.props.searchBy.find((filter) => {
+        //     return filter.active === true;
+        // });
+        this.props.makeSearch('search', this.props.searchQuery);
     }
     render() {
         return (
@@ -78,7 +78,7 @@ function mapDispatchToProps(dispatch) {
 
 Search.propTypes = {
     makeSearch: PropTypes.func.isRequired,
-    searchBy: PropTypes.arrayOf(PropTypes.object).isRequired,
+    // searchBy: PropTypes.arrayOf(PropTypes.object).isRequired,
     searchQuery: PropTypes.string.isRequired,
     setSearchBy: PropTypes.func.isRequired,
     setSearchQuery: PropTypes.func.isRequired,

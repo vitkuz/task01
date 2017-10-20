@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Slider from 'react-image-slider';
 
 import { getMovieDetails } from '../../actions/actions';
 
@@ -10,9 +11,9 @@ const printListOfGenres = list => list.map(genre => <span key={genre.id} classNa
 
 const printListOfCountries = list => list.map(country => <span key={country.name} className="actor">{country.name}</span>);
 
-const printListOfPosters = list => list.map((poster, i) => <div key={i}><img className="poster" src={`https://image.tmdb.org/t/p/w500/${poster.file_path}`} alt="" /></div>);
+const printListOfPosters = list => list.map(poster => <div key={poster.file_path}><img className="poster" src={`https://image.tmdb.org/t/p/w500/${poster.file_path}`} alt="" /></div>);
 
-// const printListOfVideos = list => list.map(poster => <div key={poster.file_path}><img className="poster" src={`https://image.tmdb.org/t/p/w500/${poster.file_path}`} alt="" /></div>);
+const printListOfVideos = list => list.map(video => <iframe key={video.key} width="560" height="315" src={`https://www.youtube.com/embed/${video.key}?rel=0&amp;controls=0&amp;showinfo=0`} frameBorder="0" allowFullScreen title={video.name} />);
 
 class HeaderMovieSinglePage extends React.Component {
     componentDidMount() {
@@ -29,7 +30,7 @@ class HeaderMovieSinglePage extends React.Component {
         let movie = this.props.cache.find((item) => {
             return item.id === movieID;
         });
-        // Step 2: if empty search in search results
+        // Step 2: if cache is empty search in current search results
         if (this.props.database && !movie) {
             movie = this.props.database.find((item) => {
                 return item.id === movieID;
@@ -37,24 +38,26 @@ class HeaderMovieSinglePage extends React.Component {
             console.log(movie);
             this.props.getMovieDetails(movieID);
         }
-        // Step 3: if empty show dummyText
+        // Step 3: if search results is empty show dummyText
         if (!movie) {
             return (
                 <div className="section mt1">
                     <div className="section-content">
-                        Search is outdated. Please wait
+                        Search is outdated. Do it again
                     </div>
                 </div>
             );
         }
-        const posterURL = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+        const posterURL = movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : null;
+        const posters = movie.images && movie.images.posters ? movie.images.posters : null;
+        const videos = movie.videos && movie.videos.results ? movie.videos.results : null;
         return (
             <div>
                 <div className="section header header-movie header-cover-1">
                     <div className="gradient-2">
                         <div className="section-content">
                             <div className="row">
-                                <Link to="/" className="btn pull-rigth">Make search</Link>
+                                <Link to="/" className="btn pull-rigth search-submit-button">Make search</Link>
                             </div>
                             <div className="row">
                                 <div className="col-md-4">
@@ -81,10 +84,11 @@ class HeaderMovieSinglePage extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="field-movie-images">
-                    <div className="field-movie-images-content">
-                        { movie.images ? printListOfPosters(movie.images.posters) : null }
-                    </div>
+                <Slider images={movie.images.posters} isInfinite delay={5000}>
+                    { posters ? printListOfPosters(posters) : null }
+                </Slider>
+                <div style={{ textAlign: 'center' }}>
+                    { videos ? printListOfVideos(videos) : null }
                 </div>
             </div>
         );

@@ -8,6 +8,8 @@
 @import "components/movie/movie";
 @import "components/footer/footer";
 
+@import "../../../node_modules/react-image-slider/lib/image-slider.css";
+
 html, body {
   margin: 0;
   padding: 0;
@@ -66,4 +68,11 @@ img {
     margin-right:1px;
     white-space: nowrap;
   }
+}
+
+.search-submit-button {
+  position: fixed;
+  z-index: 111;
+  top: 30px;
+  right: 30px;
 }

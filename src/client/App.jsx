@@ -17,9 +17,7 @@ import PageNotFound from './pages/PageNotFound';
 
 class App extends React.Component {
     componentDidMount() {
-        setTimeout(() => {
-            this.props.makeSearch('popular');
-        }, 2000);
+        this.props.makeSearch('popular');
         this.props.getMoviesFromLocalStorage();
     }
     render() {

@@ -18,7 +18,7 @@ export default function (state = initialState, action) {
                 const filtered = action.payload.filter((item) => {
                     return findIndex(item, state.byId) < 0;
                 });
-                const merged = [...state.byId, ...filtered];
+                const merged = [...filtered, ...state.byId];
                 const allIds = merged.map((item) => {
                     return item.id;
                 });
