@@ -2,11 +2,6 @@ import C from '../constants';
 
 const API_KEY = 'd13d1d5aeffc289cf0b7508199063c50';
 
-// const LANG = 'ru';
-// https://api.themoviedb.org/3/movie/550?api_key=d13d1d5aeffc289cf0b7508199063c50
-// https://image.tmdb.org/t/p/w500/ - images vase
-// https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&query=whiplash&language=de-DE&region=DE
-
 function putMovieToCache(movie) {
     return {
         type: C.PUT_MOVIE_TO_CACHE,
@@ -33,17 +28,10 @@ export function getMovieDetails(id) {
 
 function populateMovies(data) {
     console.log(data);
-    if (data.errorcode === 404) {
-        return {
-            type: C.ERROR,
-            payload: data.message,
-        };
-    } else {
-        return {
-            type: C.POPULATE_MOVIES,
-            payload: data.results,
-        };
-    }
+    return {
+        type: C.POPULATE_MOVIES,
+        payload: data.results,
+    };
 }
 
 export function makeSearch(type = 'popular', queryValue) {
@@ -54,7 +42,7 @@ export function makeSearch(type = 'popular', queryValue) {
                 // return fetch(`https://api.themoviedb.org/3/movie/latest?api_key=${API_KEY}&query=${value}`)
                 // https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&query=whiplash&language=de-DE&region=DE
                 // https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&language=de-DE&region=DE&release_date.gte=2016-11-16&release_date.lte=2016-12-02&with_release_type=2|3
-                return fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&append_to_response=videos,images`)
+                return fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`)
                     .then(resp => resp.json()) // Transform the data into json
                     .then(data => dispatch(populateMovies(data)))
                     .catch((error) => {

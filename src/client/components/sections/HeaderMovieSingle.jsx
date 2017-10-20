@@ -24,21 +24,21 @@ class HeaderMovieSinglePage extends React.Component {
         console.log('Component HeaderMovieSinglePage will update!');
         window.scrollTo(0, 0);
     }
+    getMovie(id) {
+        const movie1 = this.props.cache.find((item) => {
+            return item.id === id;
+        });
+        if (!movie) {
+            this.props.getMovieDetails(id);
+        }
+        const movie2 = this.props.cache.find((item) => {
+            return item.id === id;
+        });
+    }
     render() {
         const movieID = parseInt(this.props.match.params.id, 10);
-        // Step 1: search in cache
-        let movie = this.props.cache.find((item) => {
-            return item.id === movieID;
-        });
-        // Step 2: if cache is empty search in current search results
-        if (this.props.database && !movie) {
-            movie = this.props.database.find((item) => {
-                return item.id === movieID;
-            });
-            console.log(movie);
-            this.props.getMovieDetails(movieID);
-        }
-        // Step 3: if search results is empty show dummyText
+        const movie = this.getMovie(movieID);
+        
         if (!movie) {
             return (
                 <div className="section mt1">
@@ -48,9 +48,10 @@ class HeaderMovieSinglePage extends React.Component {
                 </div>
             );
         }
+        console.log(movie);
         const posterURL = movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : null;
-        const posters = movie.images && movie.images.posters ? movie.images.posters : null;
-        const videos = movie.videos && movie.videos.results ? movie.videos.results : null;
+        const posters = movie.images || movie.images.posters ? movie.images.posters : null;
+        const videos = movie.videos || movie.videos.results ? movie.videos.results : null;
         return (
             <div>
                 <div className="section header header-movie header-cover-1">
@@ -108,10 +109,13 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
+HeaderMovieSinglePage.defaultProps = {
+    cache: [],
+};
 
 HeaderMovieSinglePage.propTypes = {
     database: PropTypes.arrayOf(PropTypes.object).isRequired,
-    cache: PropTypes.arrayOf(PropTypes.object).isRequired,
+    cache: PropTypes.arrayOf(PropTypes.object),
     match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
     getMovieDetails: PropTypes.func.isRequired,
 };
