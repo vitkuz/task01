@@ -10,12 +10,16 @@ const dafaultFilters = {
 export default function (state = dafaultFilters, action) {
     switch (action.type) {
         case 'SET_ACTIVE_FILTER':
-            const filterToChange = state.filters.find((filter) => {
-                return action.payload.active === filter.type;
+            return Object.assign({}, state, {
+                active: action.payload.active,
+                reverse: action.payload.reverse,
             });
-            filterToChange.reverse = !filterToChange.reverse;
-            console.log({ filters: state.filters, active: action.payload.active, reverse: filterToChange.reverse });
-            return { filters: state.filters, active: action.payload.active, reverse: filterToChange.reverse };
+            // const filterToChange = state.filters.find((filter) => {
+            //     return action.payload.active === filter.type;
+            // });
+            // filterToChange.reverse = !filterToChange.reverse;
+            // console.log({ filters: state.filters, active: action.payload.active, reverse: filterToChange.reverse });
+            // return { filters: state.filters, active: action.payload.active, reverse: filterToChange.reverse };
         default:
             return state;
     }

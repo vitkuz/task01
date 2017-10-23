@@ -2,7 +2,7 @@ import C from '../constants';
 
 const API_KEY = 'd13d1d5aeffc289cf0b7508199063c50';
 
-const RANDOM_SEARCH_KEYWORDS = ['Happy', 'Crazy', 'Family', 'Space', 'Ghost', 'War'];
+const RANDOM_SEARCH_KEYWORDS = ['Happy', 'Crazy', 'Family', 'Space', 'Ghost', 'War', 'Sex', 'Vampire', 'Wife', 'Iron', 'Blood'];
 
 function putMovieToCache(movie) {
     return {
@@ -25,6 +25,20 @@ export function getMovieDetails(id) {
             .catch((error) => {
                 dispatch(showError(error));
             });
+    };
+}
+
+export function addNotification(notification) {
+    return {
+        type: C.ADD_NOTIFICATION,
+        payload: notification,
+    };
+}
+
+export function removeNotification(id) {
+    return {
+        type: C.REMOVE_NOTIFICATION,
+        payload: id,
     };
 }
 

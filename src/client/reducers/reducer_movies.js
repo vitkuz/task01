@@ -1,7 +1,7 @@
 import C from '../constants';
 
 const initialState = {
-    byId: [],
+    byId: {},
     allIds: [],
 };
 

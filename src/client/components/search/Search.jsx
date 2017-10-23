@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setSearchQuery, makeSearch } from '../../actions/actions';
+import { setSearchQuery, makeSearch, randomSearch } from '../../actions/actions';
 
 const DIRECTORS = ['Steven Spielberg', 'Martin Scorsese', 'Alfred Hitchcock', 'Stanley Kubrick'];
 
@@ -15,6 +15,7 @@ class Search extends React.Component {
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleRandomClick = this.handleRandomClick.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.quickDirectorSearch = this.quickDirectorSearch.bind(this);
     }
@@ -36,6 +37,10 @@ class Search extends React.Component {
         e.preventDefault();
         this.props.makeSearch('popular');
     }
+    handleRandomClick(e) {
+        e.preventDefault();
+        this.props.randomSearch();
+    }
     render() {
         return (
             <form action="" onSubmit={this.handleFormSubmit}>
@@ -53,6 +58,9 @@ class Search extends React.Component {
                     <div className="toggle-search-type">
                         <a role="button" tabIndex="0" onClick={this.handleClick} className="btn">
                             Load popular
+                        </a>
+                        <a role="button" tabIndex="0" onClick={this.handleRandomClick} className="btn">
+                            Random search
                         </a>
                     </div>
                     <div>
@@ -76,12 +84,14 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         makeSearch,
+        randomSearch,
         setSearchQuery,
     }, dispatch);
 }
 
 Search.propTypes = {
     makeSearch: PropTypes.func.isRequired,
+    randomSearch: PropTypes.func.isRequired,
     searchQuery: PropTypes.string.isRequired,
     setSearchQuery: PropTypes.func.isRequired,
 };
