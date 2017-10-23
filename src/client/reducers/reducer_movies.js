@@ -23,9 +23,7 @@ export default function (state = initialState, action) {
                     return item.id;
                 });
                 return { byId: merged, allIds };
-            } return [action.payload];
-        case C.ERROR:
-            return action.payload;
+            } return [action.payload, ...state.byId];
         default:
             return state;
     }

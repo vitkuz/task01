@@ -54,7 +54,7 @@ export function makeSearch(type = 'popular', queryValue) {
                 // return fetch(`https://api.themoviedb.org/3/movie/latest?api_key=${API_KEY}&query=${value}`)
                 // https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&query=whiplash&language=de-DE&region=DE
                 // https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&language=de-DE&region=DE&release_date.gte=2016-11-16&release_date.lte=2016-12-02&with_release_type=2|3
-                return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${queryValue}&append_to_response=videos,images`)
+                return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${queryValue}`)
                     .then(resp => resp.json()) // Transform the data into json
                     .then(data => dispatch(populateMovies(data)))
                     .catch((error) => {

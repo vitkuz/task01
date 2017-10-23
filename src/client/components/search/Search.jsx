@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setSearchQuery, setSearchBy, makeSearch } from '../../actions/actions';
-import ToggleGroup from '../utils/ToggleGroup';
+import { setSearchQuery, makeSearch } from '../../actions/actions';
 
 const DIRECTORS = ['Steven Spielberg', 'Martin Scorsese', 'Alfred Hitchcock', 'Stanley Kubrick'];
 
@@ -15,6 +14,7 @@ class Search extends React.Component {
             query: this.props.searchQuery,
         };
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.quickDirectorSearch = this.quickDirectorSearch.bind(this);
     }
@@ -23,7 +23,6 @@ class Search extends React.Component {
     }
     quickDirectorSearch(e) {
         e.preventDefault();
-        this.props.setSearchBy({ type: 'director' });
         this.props.setSearchQuery(e.target.innerText);
     }
     handleInputChange(e) {
@@ -31,10 +30,11 @@ class Search extends React.Component {
     }
     handleFormSubmit(e) {
         e.preventDefault();
-        // const ativeFilter = this.props.searchBy.find((filter) => {
-        //     return filter.active === true;
-        // });
         this.props.makeSearch('search', this.props.searchQuery);
+    }
+    handleClick(e) {
+        e.preventDefault();
+        this.props.makeSearch('popular');
     }
     render() {
         return (
@@ -51,7 +51,9 @@ class Search extends React.Component {
                 </div>
                 <div className="dflex dflex-justify mt1">
                     <div className="toggle-search-type">
-                        <ToggleGroup />
+                        <a role="button" tabIndex="0" onClick={this.handleClick} className="btn">
+                            Load popular
+                        </a>
                     </div>
                     <div>
                         <button className="btn btn-default">Submit</button>
@@ -74,16 +76,14 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         makeSearch,
-        setSearchBy,
+        // setSearchBy,
         setSearchQuery,
     }, dispatch);
 }
 
 Search.propTypes = {
     makeSearch: PropTypes.func.isRequired,
-    // searchBy: PropTypes.arrayOf(PropTypes.object).isRequired,
     searchQuery: PropTypes.string.isRequired,
-    setSearchBy: PropTypes.func.isRequired,
     setSearchQuery: PropTypes.func.isRequired,
 };
 
