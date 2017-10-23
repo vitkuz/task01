@@ -76,7 +76,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         makeSearch,
-        // setSearchBy,
         setSearchQuery,
     }, dispatch);
 }

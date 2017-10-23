@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { makeSearch, getMoviesFromLocalStorage } from './actions/actions';
+import { getMoviesFromLocalStorage, randomSearch } from './actions/actions';
 
 // Page components
 import HeaderSearch from './components/sections/HeaderSearch';
@@ -17,7 +17,7 @@ import PageNotFound from './pages/PageNotFound';
 
 class App extends React.Component {
     componentDidMount() {
-        this.props.makeSearch('popular');
+        this.props.randomSearch();
         this.props.getMoviesFromLocalStorage();
     }
     render() {
@@ -51,13 +51,13 @@ class App extends React.Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        makeSearch,
+        randomSearch,
         getMoviesFromLocalStorage,
     }, dispatch);
 }
 
 App.propTypes = {
-    makeSearch: PropTypes.func.isRequired,
+    randomSearch: PropTypes.func.isRequired,
     getMoviesFromLocalStorage: PropTypes.func.isRequired,
 };
 

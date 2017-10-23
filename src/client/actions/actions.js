@@ -2,6 +2,8 @@ import C from '../constants';
 
 const API_KEY = 'd13d1d5aeffc289cf0b7508199063c50';
 
+const RANDOM_SEARCH_KEYWORDS = ['Happy', 'Crazy', 'Family', 'Space', 'Ghost', 'War'];
+
 function putMovieToCache(movie) {
     return {
         type: C.PUT_MOVIE_TO_CACHE,
@@ -34,8 +36,22 @@ function populateMovies(data) {
     };
 }
 
+export function randomSearch() {
+    const term = RANDOM_SEARCH_KEYWORDS[Math.round(Math.random()*RANDOM_SEARCH_KEYWORDS.length)];
+    return function (dispatch) {
+        // return fetch(`https://api.themoviedb.org/3/movie/latest?api_key=${API_KEY}&query=${value}`)
+        // https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&query=whiplash&language=de-DE&region=DE
+        // https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&language=de-DE&region=DE&release_date.gte=2016-11-16&release_date.lte=2016-12-02&with_release_type=2|3
+        return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${term}`)
+            .then(resp => resp.json()) // Transform the data into json
+            .then(data => dispatch(populateMovies(data)))
+            .catch((error) => {
+                dispatch(showError(error));
+            });
+    };
+}
+
 export function makeSearch(type = 'popular', queryValue) {
-    console.log(type);
     switch (type) {
         case 'popular':
             return function (dispatch) {
