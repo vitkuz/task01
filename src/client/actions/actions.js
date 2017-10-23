@@ -37,7 +37,7 @@ function populateMovies(data) {
 }
 
 export function randomSearch() {
-    const term = RANDOM_SEARCH_KEYWORDS[Math.round(Math.random()*RANDOM_SEARCH_KEYWORDS.length)];
+    const term = RANDOM_SEARCH_KEYWORDS[Math.round(Math.random() * RANDOM_SEARCH_KEYWORDS.length)];
     return function (dispatch) {
         // return fetch(`https://api.themoviedb.org/3/movie/latest?api_key=${API_KEY}&query=${value}`)
         // https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&query=whiplash&language=de-DE&region=DE
