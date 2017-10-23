@@ -20,12 +20,7 @@ img {
   max-width: 100%;
 }
 
-.true:after {
-  content:'↑';
-}
-.false:after {
-  content:'↓';
-}
+
 
 .quick-link {
   cursor: pointer;
@@ -75,4 +70,16 @@ img {
   z-index: 111;
   top: 30px;
   right: 30px;
+}
+
+.sort-active {
+  color:red;
+
+  &.true:after {
+    content:'↑';
+  }
+  &.false:after {
+    content:'↓';
+  }
+
 }

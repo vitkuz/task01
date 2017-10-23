@@ -11,17 +11,24 @@ class SortLink extends React.Component {
     }
     onClickHandler() {
         this.props.setActiveFilter({
-            active: this.props.active,
-            type: this.props.type,
-            title: this.props.title,
-            sortDir: !this.props.sortDir,
+            active: this.props.type,
         });
+    }
+    getClasses() {
+        const classes = `${this.props.type === this.props.filters.active ? 'sort-active' : ''} ${this.props.filters.reverse}`;
+        return classes;
     }
     render() {
         return (
-            <a role="button" tabIndex="0" className={`sort-link ${this.props.active} ${this.props.sortDir}`} onClick={this.onClickHandler}>{this.props.title}</a>
+            <a role="button" tabIndex="0" className={`sort-link ${this.getClasses()}`} onClick={this.onClickHandler}>{this.props.title}</a>
         );
     }
+}
+
+function mapStateToProps(state) {
+    return {
+        filters: state.filters,
+    };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -32,10 +39,11 @@ function mapDispatchToProps(dispatch) {
 
 SortLink.propTypes = {
     setActiveFilter: PropTypes.func.isRequired,
-    active: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    sortDir: PropTypes.bool.isRequired,
+    filters: PropTypes.shape({ filters: PropTypes.arrayOf(PropTypes.object),
+        active: PropTypes.string,
+        reverse: PropTypes.bool }).isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(SortLink);
+export default connect(mapStateToProps, mapDispatchToProps)(SortLink);

@@ -24,7 +24,7 @@ const Movie = (props) => {
     return (
         <div className="col-md-3 mb1">
             <div className="movie">
-                <div className="movie-description-rating">Rating: {props.movie.vote_average}</div>
+                <div className="movie-description-rating">{props.movie.vote_average}</div>
                 <div className="movie-picture">
                     <Link to={url}>
                         <img src={posterURL} alt="Movie Poster" />

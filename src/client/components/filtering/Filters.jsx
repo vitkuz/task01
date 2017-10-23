@@ -9,16 +9,9 @@ import SortLink from './SortLink';
 import { setActiveFilter } from '../../actions/actions';
 
 class Filters extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleFilterClick = this.handleFilterClick.bind(this);
-    }
-    handleFilterClick(filter) {
-        this.props.setActiveFilter(filter);
-    }
     renderFilters() {
-        return this.props.filters.map((filter) => {
-            return <SortLink key={filter.title} title={filter.title} type={filter.type} active={filter.active} sortDir={filter.sortDir} onClickHandler={this.handleFilterClick} />;
+        return this.props.filters.filters.map((filter) => {
+            return <SortLink key={filter.title} title={filter.title} type={filter.type} reverse={filter.reverse} />;
         });
     }
 
@@ -51,8 +44,7 @@ function mapDispatchToProps(dispatch) {
 
 
 Filters.propTypes = {
-    setActiveFilter: PropTypes.func.isRequired,
-    filters: PropTypes.arrayOf(PropTypes.object).isRequired,
+    filters: PropTypes.shape({ filters: PropTypes.arrayOf(PropTypes.object), active: PropTypes.string.isRequired, reverse: PropTypes.bool.isRequired }).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filters);

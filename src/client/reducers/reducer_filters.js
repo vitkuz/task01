@@ -1,28 +1,21 @@
-const dafaultFilters = [{
-    active: true,
-    title: 'by year',
-    type: 'release_date',
-    sortDir: true,
-}, {
-    active: false,
-    title: 'by rating',
-    type: 'vote_average',
-    sortDir: true,
-},
-];
+const dafaultFilters = {
+    filters: [
+        { type: 'release_date', title: 'By date' },
+        { type: 'vote_average', title: 'By rating' },
+    ],
+    active: 'release_date',
+    reverse: true,
+};
 
 export default function (state = dafaultFilters, action) {
     switch (action.type) {
         case 'SET_ACTIVE_FILTER':
-            return state.map((filter) => {
-                if (action.payload.type !== filter.type) {
-                    filter.active = false;
-                } else {
-                    filter.active = true;
-                    filter.sortDir = action.payload.sortDir;
-                }
-                return filter;
+            const filterToChange = state.filters.find((filter) => {
+                return action.payload.active === filter.type;
             });
+            filterToChange.reverse = !filterToChange.reverse;
+            console.log({ filters: state.filters, active: action.payload.active, reverse: filterToChange.reverse });
+            return { filters: state.filters, active: action.payload.active, reverse: filterToChange.reverse };
         default:
             return state;
     }
