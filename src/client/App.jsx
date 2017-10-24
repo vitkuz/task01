@@ -27,7 +27,7 @@ class App extends React.Component {
                     this.props.addNotification({ type: 'warning', message: '400000000 movies found!' });
                 }, 1000);
             }, 1000);
-        }, 1000);
+        }, 10000000000000000000000000000000000000);
         this.props.getMoviesFromLocalStorage();
     }
     render() {

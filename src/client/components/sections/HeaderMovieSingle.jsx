@@ -27,12 +27,13 @@ class HeaderMovieSinglePage extends React.Component {
     componentWillUpdate() {
         window.scrollTo(0, 0);
     }
-    getMovie() {
+    getMovie(id) {
         const movie = this.props.cache.find((item) => {
-            return item.id === parseInt(this.props.match.params.id, 10);
+            return item.id === id;
         });
         if (!movie) {
-            this.props.getMovieDetails(parseInt(this.props.match.params.id, 10));
+            this.props.getMovieDetails(id);
+            return null;
         }
         return movie;
     }
@@ -95,10 +96,12 @@ class HeaderMovieSinglePage extends React.Component {
     }
 }
 
+// selector
+const getMovies = state => state.allIds.map(id => state.byId[id]);
+
 function mapStateToProps(state) {
     return {
-        database: state.searchResults.byId,
-        cache: state.cache.movies,
+        cache: getMovies(state.cache),
     };
 }
 
@@ -108,13 +111,8 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-HeaderMovieSinglePage.defaultProps = {
-    cache: { movies: [] },
-};
-
 HeaderMovieSinglePage.propTypes = {
-    // database: PropTypes.arrayOf(PropTypes.object).isRequired,
-    cache: PropTypes.arrayOf(PropTypes.object),
+    cache: PropTypes.arrayOf(PropTypes.object).isRequired,
     match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
     getMovieDetails: PropTypes.func.isRequired,
 };

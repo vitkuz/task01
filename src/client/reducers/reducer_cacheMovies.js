@@ -1,24 +1,23 @@
 import C from '../constants';
 
 const initialCache = {
-    movies: [],
+    byId: {},
+    allIds: [],
 };
 
 export default function (state = initialCache, action) {
     switch (action.type) {
         case C.PUT_MOVIE_TO_CACHE:
-            console.log(action.payload);
-            const newMovies1 = [...state.movies, action.payload];
-            localStorage.setItem('movies', JSON.stringify(newMovies1));
-            return { movies: newMovies1 };
-        case C.GET_MOVIES_FROM_LOCALSTORAGE:
-            const tretrievedObject = localStorage.getItem('movies');
-            let newMovies2 = JSON.parse(tretrievedObject);
-            console.log(newMovies2);
-            if (!newMovies2) {
-                newMovies2 = [];
-            }
-            return { movies: newMovies2 };
+            console.log('PUT_MOVIE_TO_CACHE', action.payload);
+            const byId = Object.assign({}, state.byId, action.payload.entities.movies);
+            const allIds = [...state.allIds, ...action.payload.result];
+            console.log('meraged object', { byId, allIds });
+            return { byId, allIds };
+        case C.POPULATE_CACHE:
+            console.log('POPULATE_CACHE', action.payload);
+            const byId2 = Object.assign({}, state.byId, action.payload.entities.movies);
+            const allIds2 = [...state.allIds, ...action.payload.result];
+            return { byId: byId2, allIds: allIds2 };
         default:
             return state;
     }

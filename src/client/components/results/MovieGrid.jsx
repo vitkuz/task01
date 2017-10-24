@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Movie from './Movie';
 import Filters from '../filtering/Filters';
 
-
 function sortBy(key, reverse) {
     const moveSmaller = reverse ? 1 : -1;
     const moveLarger = reverse ? -1 : 1;
@@ -23,7 +22,7 @@ function sortBy(key, reverse) {
 
 class MovieGrid extends React.Component {
     renderMovies() {
-        const sorted = [...this.props.database];
+        const sorted = [...this.props.items];
         sorted.sort(sortBy(this.props.filters.active, this.props.filters.reverse));
         return sorted.map((movie) => {
             return <Movie key={movie.id} movie={movie} />;
@@ -31,7 +30,7 @@ class MovieGrid extends React.Component {
     }
 
     render() {
-        if (!this.props.database) {
+        if (!this.props.items) {
             return (
                 <div className="section movies-gid-content mt1">
                     <div className="section-content">
@@ -40,7 +39,7 @@ class MovieGrid extends React.Component {
                 </div>
             );
         }
-        if (typeof this.props.database === 'string') {
+        if (typeof this.props.items === 'string') {
             return (
                 <div className="section movies-gid-content mt1">
                     <div className="section-content">
@@ -52,9 +51,7 @@ class MovieGrid extends React.Component {
         return (
             <section className="section movies mt1">
                 <div className="section-content">
-
                     <Filters />
-
                     <div className="row movies-gid-content mt1">
                         { this.renderMovies() }
                     </div>
@@ -64,16 +61,20 @@ class MovieGrid extends React.Component {
     }
 }
 
+// selector
+const getMovies = state => state.allIds.map(id => state.byId[id]);
+
 function mapStateToProps(state) {
     return {
         filters: state.filters,
-        database: state.searchResults.byId,
+        items: getMovies(state.searchResults),
     };
 }
 
+
 MovieGrid.propTypes = {
     filters: PropTypes.shape({ filters: PropTypes.arrayOf(PropTypes.object), active: PropTypes.string.isRequired, reverse: PropTypes.bool.isRequired }).isRequired,
-    database: PropTypes.arrayOf(PropTypes.object).isRequired,
+    items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, null)(MovieGrid);

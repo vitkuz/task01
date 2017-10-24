@@ -8,37 +8,27 @@ import { removeNotification } from '../../actions/actions';
 class Notification extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {getClass:'animated bounceIn'};
-        this.fadingDone = this.fadingDone.bind(this)
+        this.state = { getClass: 'animated bounceIn' };
+        this.fadingDone = this.fadingDone.bind(this);
     }
-    
-    fadingDone () {
-       console.log('!!!!');
+   componentDidMount() {
+       setTimeout(() => {
+           const elm = this.notification;
+           elm.addEventListener('animationend', this.fadingDone);
+           this.setState({ getClass: 'animated fadeOut' });
+       }, 5000);
+   }
+    componentWillUnmount() {
+        const elm = this.notification;
+        elm.removeEventListener('animationend', this.fadingDone);
+    }
+    fadingDone() {
+        console.log('!!!!');
         this.props.removeNotification(this.props.id);
     }
-    
-   componentDidMount() {
-  
-       setTimeout(() => {
-           const elm = this.refs.message;
-           elm.addEventListener('animationend', this.fadingDone);
-           this.setState({getClass: 'animated fadeOut'});
-           // this.props.removeNotification(this.props.id);
-       }, 5000);
-       // setTimeout(() => {
-       //
-       //     this.props.removeNotification(this.props.id);
-       // }, 10000);
-   }
-    
-    componentWillUnmount () {
-        const elm = this.refs.message
-        elm.removeEventListener('animationend', this.fadingDone)
-    }
-   
     render() {
         return (
-            <div className={this.state.getClass} ref="message">
+            <div className={this.state.getClass} ref={(ref) => { this.notification = ref; }}>
                 {this.props.message}
             </div>
         );
