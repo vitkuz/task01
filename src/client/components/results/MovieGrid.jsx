@@ -67,7 +67,7 @@ const getMovies = state => state.allIds.map(id => state.byId[id]);
 function mapStateToProps(state) {
     return {
         filters: state.filters,
-        items: getMovies(state.searchResults),
+        items: getMovies(state.moviesPreviews),
     };
 }
 

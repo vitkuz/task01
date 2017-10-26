@@ -1,17 +1,17 @@
 import { combineReducers } from 'redux';
 
-import MoviesReducer from './reducer_movies';
+import MoviesPreview from './reducer_moviesPreview';
 import SearchReducer from './reducer_search';
 import Filters from './reducer_filters';
-import Cache from './reducer_cacheMovies';
+import MoviesFull from './reducer_moviesFull';
 import Notification from './reducer_notifications';
 
 const rootReducer = combineReducers({
     searchQuery: SearchReducer,
-    searchResults: MoviesReducer,
+    moviesPreviews: MoviesPreview,
     filters: Filters,
     notifications: Notification,
-    cache: Cache,
+    moviesFull: MoviesFull,
 });
 
 export default rootReducer;

@@ -101,7 +101,7 @@ const getMovies = state => state.allIds.map(id => state.byId[id]);
 
 function mapStateToProps(state) {
     return {
-        cache: getMovies(state.cache),
+        cache: getMovies(state.moviesFull),
     };
 }
 

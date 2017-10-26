@@ -47,7 +47,7 @@ export function getMoviesFromLocalStorage() {
         if (tretrievedObject) {
             dispatch(populateCache(tretrievedObject));
         } else {
-            //dispatch(showError(error));
+            // dispatch(showError(error));
             console.log(error);
         }
     };
