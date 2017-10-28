@@ -1,3 +1,4 @@
+@import "utils/animate";
 @import "components/utils/utils";
 
 @import "components/utils/buttons/buttons";
@@ -8,6 +9,8 @@
 @import "components/movie/movie";
 @import "components/footer/footer";
 
+@import "../../../node_modules/react-image-slider/lib/image-slider.css";
+
 html, body {
   margin: 0;
   padding: 0;
@@ -16,4 +19,68 @@ html, body {
 
 img {
   max-width: 100%;
+}
+
+
+
+.quick-link {
+  cursor: pointer;
+  margin-right:5px;
+  &:after {
+    content:',';
+  }
+  &:last-child {
+    margin-right: 0;
+    &:after {
+      content:'';
+    }
+  }
+}
+
+.loader {
+  border-top: 16px solid blue;
+  border-bottom: 16px solid blue;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.field-movie-images {
+  overflow: auto;
+
+  .field-movie-images-content {
+    width: auto;
+  }
+
+  div {
+    display: inline-block;
+    width: 300px;
+    margin-right:1px;
+    white-space: nowrap;
+  }
+}
+
+.search-submit-button {
+  position: fixed;
+  z-index: 111;
+  top: 30px;
+  right: 30px;
+}
+
+.sort-active {
+  color:red;
+
+  &.true:after {
+    content:'↑';
+  }
+  &.false:after {
+    content:'↓';
+  }
+
 }

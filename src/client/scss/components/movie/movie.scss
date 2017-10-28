@@ -31,10 +31,22 @@
 }
 
 .movie {
-
   background: #000;
   min-height:520px;
-  
+
+  .movie-description-rating {
+    top: 10px;
+    left: 25px;
+    border-radius: 50%;
+    text-align: center;
+    width:50px;
+    height:50px;
+    line-height:50px;
+    position: absolute;
+    background: red;
+    color: #fff;
+  }
+
   .movie-picture {
     background: #000;
   }

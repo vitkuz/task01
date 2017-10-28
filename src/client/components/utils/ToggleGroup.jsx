@@ -1,52 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Toggle from './ToggleButton';
 
-class ToggleGroup extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            buttons: [
-                { title: 'title', value: 'title' },
-                { title: 'director', value: 'director' },
-            ],
-            selected: this.props.searchByFlag,
-        };
-    }
-    getToggleClassName(button) {
-        if (button.value === this.props.searchByFlag) {
-            return 'btn active';
-        }
-        return 'btn';
-    }
+const ToggleGroup = (props) => {
+    return (
+        <div>
+            {
+                props.searchBy.map(button => (
+                    <Toggle
+                      key={button.type}
+                      button={button}
+                      classes={button.active ? 'btn active' : 'btn'} />
+                ))
+            }
+        </div>
+    );
+};
 
-    renderButtons() {
-        return this.state.buttons.map(button => (
-            <Toggle
-              key={button.value}
-              button={button}
-              classes={this.getToggleClassName(button)}
-              updateSearchBy={this.props.updateSearchBy} />
-        ));
-    }
-
-    render() {
-        return (
-            <div>
-                { this.renderButtons() }
-            </div>
-        );
-    }
+function mapStateToProps(state) {
+    return {
+        searchBy: state.searchBy,
+    };
 }
 
-ToggleGroup.defaultProps = {
-    selected: 'comments',
-};
-
 ToggleGroup.propTypes = {
-    searchByFlag: PropTypes.string.isRequired,
-    updateSearchBy: PropTypes.func.isRequired,
+    searchBy: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default ToggleGroup;
+export default connect(mapStateToProps)(ToggleGroup);

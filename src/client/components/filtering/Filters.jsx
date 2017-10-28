@@ -1,36 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import SortLink from './SortLink';
+
+import { setActiveFilter } from '../../actions/actions';
+
 class Filters extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleDateClick = this.handleDateClick.bind(this);
-        this.handleRatingClick = this.handleRatingClick.bind(this);
-    }
-
-    handleDateClick() {
-        this.props.updateSortBy('year');
-    }
-
-    handleRatingClick() {
-        this.props.updateSortBy('rating');
+    renderFilters() {
+        return this.props.filters.filters.map((filter) => {
+            return <SortLink key={filter.title} title={filter.title} type={filter.type} reverse={filter.reverse} />;
+        });
     }
 
     render() {
         return (
-
             <section className="section sorting mt1">
                 <div className="section-content dflex dflex-justify">
                     <div>{} movies found</div>
                     <div>
                         <span>Sort by:</span>
-
-                        <span>
-                            <a role="button" tabIndex="0" onClick={this.handleDateClick}>release date</a>
-                        </span> |&nbsp;
-                        <span>
-                            <a role="button" tabIndex="0" onClick={this.handleRatingClick}>rating</a>
-                        </span>
+                        { this.renderFilters() }
                     </div>
                 </div>
             </section>
@@ -38,8 +30,21 @@ class Filters extends React.Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        filters: state.filters,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        setActiveFilter,
+    }, dispatch);
+}
+
+
 Filters.propTypes = {
-    updateSortBy: PropTypes.func.isRequired,
+    filters: PropTypes.shape({ filters: PropTypes.arrayOf(PropTypes.object), active: PropTypes.string.isRequired, reverse: PropTypes.bool.isRequired }).isRequired,
 };
 
-export default Filters;
+export default connect(mapStateToProps, mapDispatchToProps)(Filters);

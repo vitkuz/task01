@@ -1,78 +1,35 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { getMoviesFromLocalStorage, randomSearch, addNotification } from './actions/actions';
 
 // Page components
 import HeaderSearch from './components/sections/HeaderSearch';
 import HeaderMovie from './components/sections/HeaderMovieSingle';
 import MovieGrid from './components/results/MovieGrid';
+import Notifications from './components/results/NotificationContainer';
 
 import Footer from './components/sections/Footer';
 
 import PageNotFound from './pages/PageNotFound';
-import database from '../dummydata/data';
-
-function fetchByTitle(value = 'Attack on titan') {
-    // value = value || 'Attack on titan';
-    fetch(`https://netflixroulette.net/api/api.php?title=${value}`)
-        .then((response) => {
-            return response.json();
-        })
-        .then((result) => {
-            console.log(result);
-        });
-}
-
-function fetchByDirector(value = 'Quentin Tarantino') {
-    // value = value || 'Quentin Tarantino';
-    fetch(`http://netflixroulette.net/api/api.php?director=${value}`)
-        .then((response) => {
-            return response.json();
-        })
-        .then((result) => {
-            console.log(result);
-        });
-}
-
-function withProps(Component, props) {
-    return function (matchProps) {
-        return <Component {...props} {...matchProps} />;
-    };
-}
 
 class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            sortBy: 'rating',
-            searchBy: 'title',
-            database,
-        };
-        this.updateSortBy = this.updateSortBy.bind(this);
-        this.updateSearchBy = this.updateSearchBy.bind(this);
-        this.handleSearch = this.handleSearch.bind(this);
+    componentDidMount() {
+        this.props.randomSearch();
+        setTimeout(() => {
+            this.props.addNotification({ type: 'warning', message: '100000000 movies found!' });
+            setTimeout(() => {
+                this.props.addNotification({ type: 'warning', message: '200000000 movies found!' });
+                setTimeout(() => {
+                    this.props.addNotification({ type: 'warning', message: '400000000 movies found!' });
+                }, 1000);
+            }, 1000);
+        }, 10000000000000000000000000000000000000);
+        this.props.getMoviesFromLocalStorage();
     }
-
-    updateSortBy(flag) {
-        this.setState({ sortBy: flag });
-    }
-
-    updateSearchBy(flag) {
-        this.setState({ searchBy: flag });
-    }
-
-    handleSearch(value) {
-        switch (this.state.searchBy) {
-            case 'title':
-                fetchByTitle(value);
-                break;
-            case 'director':
-                fetchByDirector(value);
-                break;
-            default:
-                break;
-        }
-    }
-
     render() {
         return (
             <Router>
@@ -81,29 +38,20 @@ class App extends React.Component {
                         <Route
                           exact
                           path="/movies"
-                          component={withProps(HeaderSearch, {
-                                updateSearchBy: this.updateSearchBy,
-                                searchByFlag: this.state.searchBy,
-                                handleSearch: this.handleSearch,
-                            })} />
+                          component={HeaderSearch} />
                         <Route
                           exact
                           path="/movies/:id"
-                          component={withProps(HeaderMovie, {
-                                database: this.state.database,
-                            })} />
+                          component={HeaderMovie} />
                         <Redirect exact from="/" to="/movies" />
                         <Route
                           path="*"
                           component={PageNotFound} />
                     </Switch>
+                    <Notifications />
                     <Route
                       path="/movies"
-                      component={withProps(MovieGrid, {
-                            sortByFlag: this.state.sortBy,
-                            updateSortBy: this.updateSortBy,
-                            database: this.state.database,
-                        })} />
+                      component={MovieGrid} />
                     <Footer />
                 </div>
             </Router>
@@ -112,4 +60,18 @@ class App extends React.Component {
     }
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        randomSearch,
+        addNotification,
+        getMoviesFromLocalStorage,
+    }, dispatch);
+}
+
+App.propTypes = {
+    randomSearch: PropTypes.func.isRequired,
+    addNotification: PropTypes.func.isRequired,
+    getMoviesFromLocalStorage: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(App);
