@@ -9,7 +9,8 @@
     "clean": "rimraf ./build",
     "server": "babel-node ./src/server/index.js",
     "dev": "webpack-dev-server --hot --inline --config ./webpack.config.dev.js",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -36,6 +37,9 @@
     "babel-preset-react": "^6.24.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.5",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-15": "^1.0.3",
+    "enzyme-adapter-react-16": "^1.0.2",
     "eslint": "^4.6.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-loader": "^1.9.0",

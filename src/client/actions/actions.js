@@ -9,7 +9,9 @@ const API_KEY = 'd13d1d5aeffc289cf0b7508199063c50';
 const RANDOM_SEARCH_KEYWORDS = ['Happy', 'Crazy', 'Family', 'Space', 'Ghost', 'War', 'Sex', 'Vampire', 'Wife', 'Iron', 'Blood'];
 
 function populateMovies(data) {
+    console.log(data);
     const normalizedData = normalize(data.results, movies);
+    console.log(normalizedData);
     return {
         type: C.POPULATE_MOVIES,
         payload: normalizedData,
