@@ -1,4 +1,5 @@
 import React from 'react';
+import Item from './item';
 
 
 class Test extends React.Component {
@@ -36,7 +37,7 @@ class Test extends React.Component {
                     {
                         this.state.dummy.map((item) => {
                             return (
-                                <div key={item.id}>1</div>
+                                <Item key={item.id} />
                             );
                         })
                     }
