@@ -1,5 +1,5 @@
 import React from 'react';
-import Item from './item';
+import Item from './Item';
 
 
 class Test extends React.Component {
@@ -13,11 +13,11 @@ class Test extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
     handleClick() {
-        const {dummy} = this.state;
+        const { dummy } = this.state;
         const ids = this.state.dummy.map(item => item.id);
         const maxId = ids.length > 0 ? Math.max(...ids) : 0;
-        dummy.push({id: maxId + 1});
-        this.setState({dummy});
+        dummy.push({ id: maxId + 1 });
+        this.setState({ dummy });
     }
     handleInputChange(e) {
         this.setState({ value: e.target.value });
