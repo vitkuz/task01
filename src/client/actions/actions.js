@@ -8,10 +8,15 @@ const API_KEY = 'd13d1d5aeffc289cf0b7508199063c50';
 
 const RANDOM_SEARCH_KEYWORDS = ['Happy', 'Crazy', 'Family', 'Space', 'Ghost', 'War', 'Sex', 'Vampire', 'Wife', 'Iron', 'Blood'];
 
-function populateMovies(data) {
-    console.log(data);
+export function customFn(data) {
+    return {
+        type: C.POPULATE_MOVIES,
+        payload: data,
+    };
+}
+
+export function populateMovies(data) {
     const normalizedData = normalize(data.results, movies);
-    console.log(normalizedData);
     return {
         type: C.POPULATE_MOVIES,
         payload: normalizedData,
@@ -34,7 +39,7 @@ function updateLocalStorage() {
     localStorage.setItem('movies', JSON.stringify(localStorageObjects));
 }
 
-function putMovieToCache(movie) {
+export function putMovieToCache(movie) {
     const normalizedData = normalize([movie], movies);
     console.log('putMovieToCache', normalizedData);
     return {
@@ -87,7 +92,8 @@ export function randomSearch() {
             .then(resp => resp.json()) // Transform the data into json
             .then(data => dispatch(populateMovies(data)))
             .catch((error) => {
-                dispatch(showError(error));
+                console.log(error);
+                //dispatch(showError(error));
             });
     };
 }
@@ -100,7 +106,8 @@ export function makeSearch(type = 'popular', queryValue) {
                     .then(resp => resp.json()) // Transform the data into json
                     .then(data => dispatch(populateMovies(data)))
                     .catch((error) => {
-                        dispatch(showError(error));
+                        console.log(error);
+                        // dispatch(showError(error));
                     });
             };
         case 'search':
@@ -109,7 +116,8 @@ export function makeSearch(type = 'popular', queryValue) {
                     .then(resp => resp.json()) // Transform the data into json
                     .then(data => dispatch(populateMovies(data)))
                     .catch((error) => {
-                        dispatch(showError(error));
+                        console.log(error);
+                        // dispatch(showError(error));
                     });
             };
     }
@@ -118,13 +126,6 @@ export function makeSearch(type = 'popular', queryValue) {
 export function setSearchBy(filter) {
     return {
         type: C.SET_SEARCH_BY,
-        payload: filter,
-    };
-}
-
-export function setActiveFilter(filter) {
-    return {
-        type: C.SET_ACTIVE_FILTER,
         payload: filter,
     };
 }
