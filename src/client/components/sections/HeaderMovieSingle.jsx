@@ -21,16 +21,17 @@ const printListOfCountries = list => list.map(country => <span key={country.name
 const printListOfVideos = list => list.map(video => <iframe key={video.key} width="560" height="315" src={`https://www.youtube.com/embed/${video.key}?rel=0&amp;controls=0&amp;showinfo=0`} frameBorder="0" allowFullScreen title={video.name} />);
 
 class HeaderMovieSinglePage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { id: props.match.params.id };
-    }
     componentDidMount() {
         window.scrollTo(0, 0);
         console.log('HeaderMovieSinglePage componentDidMount');
     }
+    shouldComponentUpdate(nextProps) {
+        if (parseInt(nextProps.match.params.id, 10) !== parseInt(this.props.match.params.id, 10)) {
+            window.scrollTo(0, 0);
+        }
+        return true;
+    }
     componentWillUpdate() {
-        window.scrollTo(0, 0);
         console.log('HeaderMovieSinglePage componentWillUpdate');
     }
     getMovie(id) {
