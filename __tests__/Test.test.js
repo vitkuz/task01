@@ -1,12 +1,15 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Test from '../src/client/components/results/Test';
+
+import { Test } from '../src/client/components/results/Test';
 
 configure({ adapter: new Adapter() });
 
 describe('Test', () => {
-    const test = shallow(<Test />);
+    const mockFn = jest.fn();
+    const props = { qwerty: '123456', testFn: mockFn};
+    const test = shallow(<Test {...props} />);
     it('Renders correctly', () => {
         expect(test).toMatchSnapshot();
     });
@@ -27,7 +30,7 @@ describe('Test', () => {
             expect(test.find('.item-list').children().length).toEqual(1);
         });
     });
-    describe('When changing input update `sate` ', () => {
+    describe('When changing input update `state`', () => {
         const stringToTest = 'Qwerty';
         beforeEach(() => {
             test.find('.input1').simulate('change', { target: { value: stringToTest } });
@@ -36,12 +39,12 @@ describe('Test', () => {
             expect(test.state().value).toEqual(stringToTest);
         });
     });
+    describe('Call fn', () => {
+        beforeEach(() => {
+            test.find('.btn-fn').simulate('click');
+        });
+        it('Dispatch fn() from props', () => {
+            expect(mockFn).toHaveBeenCalledWith(parseInt('1', 10));
+        });
+    });
 });
-
-// it('should dispatch action', (done) => {
-//     const getState = {}; // initial state of the store
-//     const action = { type: 'SET_SEARCH_QUERY' };
-//     const expectedActions = [action];
-//     const store = mockStore(getState, expectedActions, done);
-//     store.dispatch(action);
-// })
