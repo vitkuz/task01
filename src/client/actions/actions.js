@@ -54,8 +54,7 @@ export function getMoviesFromLocalStorage() {
         if (tretrievedObject) {
             dispatch(populateCache(tretrievedObject));
         } else {
-            // dispatch(showError(error));
-            console.log(error);
+            console.log('TODO: Write error');
         }
     };
 }
@@ -126,6 +125,13 @@ export function makeSearch(type = 'popular', queryValue) {
 export function setSearchBy(filter) {
     return {
         type: C.SET_SEARCH_BY,
+        payload: filter,
+    };
+}
+
+export function setActiveFilter(filter) {
+    return {
+        type: C.SET_ACTIVE_FILTER,
         payload: filter,
     };
 }

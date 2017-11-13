@@ -44,7 +44,10 @@ function mapDispatchToProps(dispatch) {
 
 
 Filters.propTypes = {
-    filters: PropTypes.shape({ filters: PropTypes.arrayOf(PropTypes.object), active: PropTypes.string.isRequired, reverse: PropTypes.bool.isRequired }).isRequired,
+    filters: PropTypes.shape({
+        filters: PropTypes.arrayOf(PropTypes.object),
+        active: PropTypes.string.isRequired,
+        reverse: PropTypes.bool.isRequired }).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filters);

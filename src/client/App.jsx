@@ -18,17 +18,17 @@ import PageNotFound from './pages/PageNotFound';
 
 class App extends React.Component {
     componentDidMount() {
-        this.props.randomSearch();
-        setTimeout(() => {
-            this.props.addNotification({ type: 'warning', message: '100000000 movies found!' });
-            setTimeout(() => {
-                this.props.addNotification({ type: 'warning', message: '200000000 movies found!' });
-                setTimeout(() => {
-                    this.props.addNotification({ type: 'warning', message: '400000000 movies found!' });
-                }, 1000);
-            }, 1000);
-        }, 10000000000000000000000000000000000000);
-        this.props.getMoviesFromLocalStorage();
+        // this.props.randomSearch();
+        // setTimeout(() => {
+        //     this.props.addNotification({ type: 'warning', message: '100000000 movies found!' });
+        //     setTimeout(() => {
+        //         this.props.addNotification({ type: 'warning', message: '200000000 movies found!' });
+        //         setTimeout(() => {
+        //             this.props.addNotification({ type: 'warning', message: '400000000 movies found!' });
+        //         }, 1000);
+        //     }, 1000);
+        // }, 10000000000000000000000000000000000000);
+        // this.props.getMoviesFromLocalStorage();
     }
     render() {
         return (
