@@ -23,16 +23,12 @@ const printListOfVideos = list => list.map(video => <iframe key={video.key} widt
 class HeaderMovieSinglePage extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0);
-        console.log('HeaderMovieSinglePage componentDidMount');
     }
     shouldComponentUpdate(nextProps) {
         if (parseInt(nextProps.match.params.id, 10) !== parseInt(this.props.match.params.id, 10)) {
             window.scrollTo(0, 0);
         }
         return true;
-    }
-    componentWillUpdate() {
-        console.log('HeaderMovieSinglePage componentWillUpdate');
     }
     getMovie(id) {
         const movie = this.props.cache.find((item) => {
