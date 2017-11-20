@@ -2,8 +2,6 @@ import React from 'react';
 
 import Search from '../search/Search';
 
-import { randomSearch } from '../../actions/actions';
-
 const HeaderSearch = () => {
     return (
         <header className="section header header-search header-cover-1">
@@ -18,12 +16,5 @@ const HeaderSearch = () => {
     );
 };
 
-function loadData(store) {
-    return store.dispatch(randomSearch());
-}
-
-export default {
-    loadData,
-    component: HeaderSearch,
-};
+export default HeaderSearch;
 
