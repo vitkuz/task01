@@ -28,7 +28,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: '[name].[hash].js',
+        filename: 'bundle.js',
         publicPath: '/',
     },
     devtool: 'inline-source-map',
@@ -46,7 +46,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules)/,
                 use: [
                     'babel-loader',

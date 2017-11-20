@@ -1,4 +1,5 @@
 import { normalize, schema } from 'normalizr';
+import fetch from 'isomorphic-fetch';
 import C from '../constants';
 
 const movie = new schema.Entity('movies');
@@ -89,7 +90,9 @@ export function randomSearch() {
     return function (dispatch) {
         return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${term}`)
             .then(resp => resp.json()) // Transform the data into json
-            .then(data => dispatch(populateMovies(data)))
+            .then(data => {
+                dispatch(populateMovies(data));
+            })
             .catch((error) => {
                 console.log(error);
                 //dispatch(showError(error));

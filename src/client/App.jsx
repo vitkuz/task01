@@ -14,8 +14,9 @@ import Routes from './Routes';
 
 class App extends React.Component {
     componentDidMount() {
+        console.log('Component did mount!');
         this.props.randomSearch();
-        this.props.getMoviesFromLocalStorage();
+        // this.props.getMoviesFromLocalStorage();
     }
     render() {
         return (
@@ -33,10 +34,6 @@ function mapDispatchToProps(dispatch) {
         randomSearch,
         getMoviesFromLocalStorage,
     }, dispatch);
-}
-
-export function loadData(store) {
-    store.dispatch(randomSearch());
 }
 
 App.propTypes = {

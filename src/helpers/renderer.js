@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
+import serialize from 'serialize-javascript';
 
 import Routes from '../client/Routes';
 
@@ -16,14 +17,18 @@ export default (req, store) => {
 
     return `
         <html>
+            <head>
+                <title>SandboxProject</title>
+                <link type="text/css" href="/styles.css" rel="stylesheet" />
+            </head>
             <body>
                 <div id="root">${content}</div>
                 <script>
-                    window.INITIAL_STATE = '{}';                
+                    window.INITIAL_STATE = ${serialize(store.getState())}
+                    // window.INITIAL_STATE = {}
                 </script>
-                <script src="/manifest.9fd8442e9b12224fa754.js"></script>
-                <script src="/vendor.9fd8442e9b12224fa754.js"></script>
-                <script src="./bundle.9fd8442e9b12224fa754.js"></script>
+                <script type="text/javascript" src="/vendor.js"></script>
+                <script type="text/javascript" src="/app.js"></script>
             </body>
         </html>
     `;

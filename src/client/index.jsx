@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 
 import App from './App';
 
-// import './scss/index.scss';
+import './scss/index.scss';
 import rootReducer from './reducers/index';
 
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 import Search from '../search/Search';
 
+import { randomSearch } from '../../actions/actions';
 
 const HeaderSearch = () => {
     return (
@@ -17,10 +18,12 @@ const HeaderSearch = () => {
     );
 };
 
-export function loadData(store) {
-    store.dispatch(randomSearch());
+function loadData(store) {
+    return store.dispatch(randomSearch());
 }
 
-
-export default HeaderSearch;
+export default {
+    loadData,
+    component: HeaderSearch,
+};
 
