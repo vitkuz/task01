@@ -1,21 +1,26 @@
-const express = require('express');
-const fs = require('fs');
-
-const config = require('dotenv').config();
+import 'babel-polyfill';
+import express from 'express';
+import { matchRoutes } from 'react-router-config';
+import Routes from '../client/Routes';
+import renderer from '../helpers/renderer';
+import createStore from '../helpers/createStore';
 
 const app = express();
 
-const port = process.env.PORT || config.parsed.PORT || 4000;
-process.env.NODE_ENV = config.parsed.NODE_ENV || 'development';
+const port = process.env.PORT || 4000;
 
 app.use(express.static('build'));
 
 app.get('*', (req, res) => {
-    fs.readFile('./build/index.html', 'utf8', (err, file) => {
-        if (err) {
-            return console.log(err);
-        }
-        return res.send(file);
+    const store = createStore();
+
+    //
+    const promises = matchRoutes(Routes, req.path).map(({ route }) => {
+       return route.loadData ? route.loadData(store) : null;
+    });
+
+    Promise.all(promises).then(() => {
+        res.send(renderer(req, store));
     });
 });
 

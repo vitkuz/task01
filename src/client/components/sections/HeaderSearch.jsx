@@ -17,5 +17,10 @@ const HeaderSearch = () => {
     );
 };
 
+export function loadData(store) {
+    store.dispatch(randomSearch());
+}
+
+
 export default HeaderSearch;
 
