@@ -51,13 +51,7 @@ module.exports = {
         new ExtractTextPlugin('css/styles.css'),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest'] }),
-        new webpack.optimize.UglifyJsPlugin({
-            compressor: {
-                warnings: false,
-            },
-        }),
         new HtmlWebpackPlugin({
-            template: 'src/templates/index.html',
             favicon: 'src/images/favicon.ico',
         }),
         new WebpackCleanupPlugin({
