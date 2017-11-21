@@ -32,8 +32,11 @@ function populateCache(data) {
     };
 }
 
-export function putMovieToCache(object) {
-    const normalizedData = normalize([object], movies);
+export function putMovieToCache(movie) {
+    const normalizedData = normalize([movie], movies);
+    console.log('=======================================');
+    console.log(normalizedData);
+    console.log('=======================================');
     return {
         type: C.PUT_MOVIE_TO_CACHE,
         payload: normalizedData,
@@ -60,20 +63,6 @@ export function getMovieDetails(id) {
             .catch((error) => {
                 console.log(error);
             });
-    };
-}
-
-export function addNotification(notification) {
-    return {
-        type: C.ADD_NOTIFICATION,
-        payload: notification,
-    };
-}
-
-export function removeNotification(id) {
-    return {
-        type: C.REMOVE_NOTIFICATION,
-        payload: id,
     };
 }
 
