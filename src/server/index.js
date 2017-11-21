@@ -20,13 +20,14 @@ function getDataRenderPage(req, res, id = undefined) {
     });
 }
 
+// dsfsfd
+
 app.use(express.static('build'));
 
 app.get('/', (req, res) => {
     console.log('req', req.params);
     getDataRenderPage(req, res);
 });
-
 
 app.get('/movies/:id', (req, res) => {
     console.log('req', req.params);

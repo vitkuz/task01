@@ -11,6 +11,7 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
+    "start:all": "concurrently \"npm run build:client\" \"npm run build:server\" \"npm run server\"",
     "work": "npm run clean && npm run build:client && npm run build:server && npm run server ",
     "start": "npm run clean && webpack  --config ./webpack.config.dev.js && babel-node ./src/server/index.js",
     "build": "npm run clean && webpack --config ./webpack.config.prod.js",
@@ -18,6 +19,7 @@
     "build:client": "webpack --config ./webpack.config.prod.js --watch",
     "clean": "rimraf ./build",
     "server": "nodemon ./server/index.js --watch ./server",
+    "server:dev": "",
     "dev": "webpack-dev-server --hot --inline --config ./webpack.config.dev.js",
     "lint": "eslint ./src",
     "test": "jest"
@@ -51,6 +53,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.5.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.5",
     "enzyme-adapter-react-16": "^1.0.4",
