@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -20,14 +20,14 @@ const store = createStore(
 );
 /* eslint-enable */
 
-ReactDOM.hydrate(
+hydrate(
     <Provider store={store}>
         <App />
     </Provider>,
     document.getElementById('root'),
 );
 
-// // Hot Module Replacement API
-// if (module.hot) {
-//     module.hot.accept('./App', hydrate);
-// }
+// Hot Module Replacement API
+if (module.hot) {
+    module.hot.accept('./App', hydrate);
+}

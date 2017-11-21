@@ -32,17 +32,8 @@ function populateCache(data) {
     };
 }
 
-function updateLocalStorage() {
-    const localStorageObjects = JSON.parse(localStorage.getItem('movies'));
-    if (localStorageObjects) {
-        localStorageObjects.push(movie);
-    }
-    localStorage.setItem('movies', JSON.stringify(localStorageObjects));
-}
-
-export function putMovieToCache(movie) {
-    const normalizedData = normalize([movie], movies);
-    // console.log('putMovieToCache', normalizedData);
+export function putMovieToCache(object) {
+    const normalizedData = normalize([object], movies);
     return {
         type: C.PUT_MOVIE_TO_CACHE,
         payload: normalizedData,
@@ -61,6 +52,7 @@ export function getMoviesFromLocalStorage() {
 }
 
 export function getMovieDetails(id) {
+    console.log('getMovieDetails');
     return function (dispatch) {
         return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos,images`)
             .then(resp => resp.json()) // Transform the data into json
@@ -86,16 +78,17 @@ export function removeNotification(id) {
 }
 
 export function randomSearch() {
+    console.log('randomSearch');
     const term = RANDOM_SEARCH_KEYWORDS[Math.round(Math.random() * RANDOM_SEARCH_KEYWORDS.length)];
     return function (dispatch) {
         return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${term}`)
             .then(resp => resp.json()) // Transform the data into json
-            .then(data => {
+            .then((data) => {
                 dispatch(populateMovies(data));
             })
             .catch((error) => {
                 console.log(error);
-                //dispatch(showError(error));
+                // dispatch(showError(error));
             });
     };
 }
@@ -109,7 +102,6 @@ export function makeSearch(type = 'popular', queryValue) {
                     .then(data => dispatch(populateMovies(data)))
                     .catch((error) => {
                         console.log(error);
-                        // dispatch(showError(error));
                     });
             };
         case 'search':
@@ -122,6 +114,9 @@ export function makeSearch(type = 'popular', queryValue) {
                         // dispatch(showError(error));
                     });
             };
+        default: {
+            return null;
+        }
     }
 }
 

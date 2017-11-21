@@ -20,7 +20,7 @@ function sortBy(key, reverse) {
     };
 }
 
-export class MovieGrid extends React.Component {
+class MovieGrid extends React.Component {
     renderMovies() {
         const sorted = [...this.props.items];
         sorted.sort(sortBy(this.props.filters.active, this.props.filters.reverse));

@@ -38,7 +38,6 @@ function mapDispatchToProps(dispatch) {
 
 App.propTypes = {
     randomSearch: PropTypes.func.isRequired,
-    getMoviesFromLocalStorage: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(App);

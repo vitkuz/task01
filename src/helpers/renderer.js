@@ -19,7 +19,7 @@ export default (req, store) => {
         <html>
             <head>
                 <title>SandboxProject</title>
-                <link type="text/css" href="/styles.css" rel="stylesheet" />
+                <link type="text/css" href="/css/styles.css" rel="stylesheet" />
             </head>
             <body>
                 <div id="root">${content}</div>
