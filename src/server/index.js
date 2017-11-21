@@ -9,23 +9,30 @@ const app = express();
 
 const port = process.env.PORT || 4000;
 
-app.use(express.static('build'));
-
-app.get('*', (req, res) => {
+function getDataRenderPage(req, res, id = undefined) {
     const store = createStore();
-  
     const promises = matchRoutes(Routes, req.path).map(({ route }) => {
-        console.log(route);
-       return route.loadData ? route.loadData(store) : null;
+        return route.loadData ? route.loadData(store, id) : null;
     });
-    
     Promise.all(promises).then(() => {
+        console.log('state on server changed', store.getState());
         res.send(renderer(req, store));
     });
+}
+
+app.use(express.static('build'));
+
+app.get('/', (req, res) => {
+    console.log('req', req.params);
+    getDataRenderPage(req, res);
 });
 
 
+app.get('/movies/:id', (req, res) => {
+    console.log('req', req.params);
+    getDataRenderPage(req, res, req.params.id);
+});
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}!`);
+    console.log(`App listening on port ${port}!`);
 });

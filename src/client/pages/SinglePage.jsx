@@ -1,20 +1,22 @@
 import React from 'react';
 
-import HeaderSearch from '../components/sections/HeaderSearch';
+import HeaderMovieSingle from '../components/sections/HeaderMovieSingle';
+import MovieGrid from '../components/results/MovieGrid';
 
-import { randomSearch } from '../actions/actions';
+import { randomSearch, getMovieDetails } from '../actions/actions';
 
-const SinglePage = () => {
+const SinglePage = (props) => {
     return (
         <div>
-            Single Movie Page
-            <HeaderSearch />
+            <HeaderMovieSingle {...props} />
+            <MovieGrid />
         </div>
     );
 };
 
-function loadData(store) {
-    return store.dispatch(randomSearch());
+function loadData(store, id) {
+    const promises = [store.dispatch(randomSearch()), store.dispatch(getMovieDetails(id))];
+    return Promise.all(promises);
 }
 
 export default {

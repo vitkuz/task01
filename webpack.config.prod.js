@@ -1,7 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 const VENDOR_LIBS = ['react', 'react-dom', 'redux-form', 'react-redux', 'redux'];
@@ -52,9 +52,10 @@ module.exports = {
             name: 'vendor',
             filename: 'vendor.js',
         }),
-        // new HtmlWebpackPlugin({
-        //     favicon: 'src/images/favicon.ico',
-        // }),
+        new CopyWebpackPlugin([
+            { from: 'src/images' },
+            { from: 'src/fonts' },
+        ]),
         new WebpackCleanupPlugin({
             preview: true,
         }),

@@ -42,7 +42,7 @@ function updateLocalStorage() {
 
 export function putMovieToCache(movie) {
     const normalizedData = normalize([movie], movies);
-    console.log('putMovieToCache', normalizedData);
+    // console.log('putMovieToCache', normalizedData);
     return {
         type: C.PUT_MOVIE_TO_CACHE,
         payload: normalizedData,
@@ -51,9 +51,9 @@ export function putMovieToCache(movie) {
 
 export function getMoviesFromLocalStorage() {
     return function (dispatch) {
-        const tretrievedObject = JSON.parse(localStorage.getItem('movies'));
-        if (tretrievedObject) {
-            dispatch(populateCache(tretrievedObject));
+        const retrievedObject = JSON.parse(localStorage.getItem('movies'));
+        if (retrievedObject) {
+            dispatch(populateCache(retrievedObject));
         } else {
             console.log('TODO: Write error');
         }

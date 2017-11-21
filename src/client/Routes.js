@@ -8,7 +8,13 @@ import SinglePage from './pages/SinglePage';
 export default [
     {
         ...HomePage,
+        path: '/',
+        exact: true,
+    },
+    {
+        ...HomePage,
         path: '/movies',
+        exact: true,
     },
     {
         ...SinglePage,
