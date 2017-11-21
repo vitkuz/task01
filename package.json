@@ -11,7 +11,7 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "start:all": "concurrently \"npm run build:client\" \"npm run build:server\" \"npm run server\"",
+    "start:all": "concurrently \"npm run clean\" \"npm run build:client\" \"npm run build:server\" \"npm run server\"",
     "work": "npm run clean && npm run build:client && npm run build:server && npm run server ",
     "start": "npm run clean && webpack  --config ./webpack.config.dev.js && babel-node ./src/server/index.js",
     "build": "npm run clean && webpack --config ./webpack.config.prod.js",
@@ -28,7 +28,6 @@
   "license": "ISC",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "dotenv": "^4.0.0",
     "enzyme": "^3.1.0",
     "express": "^4.16.2",
     "isomorphic-fetch": "^2.2.1",
@@ -36,7 +35,6 @@
     "prop-types": "^15.5.10",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-image-slider": "^0.1.0",
     "react-redux": "^5.0.6",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.2.2",
