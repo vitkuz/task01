@@ -8,7 +8,7 @@ const API_KEY = 'd13d1d5aeffc289cf0b7508199063c50';
 
 const RANDOM_SEARCH_KEYWORDS = ['Happy', 'Crazy', 'Family', 'Space', 'Ghost', 'War', 'Sex', 'Vampire', 'Wife', 'Iron', 'Blood'];
 
-function populateMovies(data) {
+export function populateMovies(data) {
     const normalizedData = normalize(data.results, movies);
     return {
         type: C.POPULATE_MOVIES,
@@ -16,7 +16,7 @@ function populateMovies(data) {
     };
 }
 
-function populateCache(data) {
+export function populateCache(data) {
     const normalizedData = normalize(data, movies);
     return {
         type: C.POPULATE_CACHE,
@@ -32,7 +32,7 @@ function updateLocalStorage() {
     localStorage.setItem('movies', JSON.stringify(localStorageObjects));
 }
 
-function putMovieToCache(movie) {
+export function putMovieToCache(movie) {
     const normalizedData = normalize([movie], movies);
     console.log('putMovieToCache', normalizedData);
     return {

@@ -15,9 +15,8 @@ describe('MovieGrid.jsx', () => {
         active: 'release_date',
         reverse: true,
     };
-
+    const test = shallow(<MovieGrid />);
     it('Renders correctly', () => {
-        const test = shallow(<MovieGrid />);
         expect(test).toMatchSnapshot();
     });
     it('Find .message-not-found if 0 items are passed', () => {

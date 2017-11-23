@@ -1,5 +1,12 @@
 {
   "name": "task1_webpack2",
+  "jest": {
+    "verbose": true,
+    "setupFiles": [
+      "./src/tempPolyfills.js",
+      "./src/setupTests.js"
+    ]
+  },
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
@@ -9,7 +16,8 @@
     "clean": "rimraf ./build",
     "server": "babel-node ./src/server/index.js",
     "dev": "webpack-dev-server --hot --inline --config ./webpack.config.dev.js",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
