@@ -16,7 +16,7 @@ export function populateMovies(data) {
     };
 }
 
-export function populateCache(data) {
+function populateCache(data) {
     const normalizedData = normalize(data, movies);
     return {
         type: C.POPULATE_CACHE,
@@ -24,17 +24,11 @@ export function populateCache(data) {
     };
 }
 
-function updateLocalStorage() {
-    const localStorageObjects = JSON.parse(localStorage.getItem('movies'));
-    if (localStorageObjects) {
-        localStorageObjects.push(movie);
-    }
-    localStorage.setItem('movies', JSON.stringify(localStorageObjects));
-}
-
 export function putMovieToCache(movie) {
     const normalizedData = normalize([movie], movies);
-    console.log('putMovieToCache', normalizedData);
+    console.log('=======================================');
+    console.log(normalizedData);
+    console.log('=======================================');
     return {
         type: C.PUT_MOVIE_TO_CACHE,
         payload: normalizedData,
@@ -43,17 +37,17 @@ export function putMovieToCache(movie) {
 
 export function getMoviesFromLocalStorage() {
     return function (dispatch) {
-        const tretrievedObject = JSON.parse(localStorage.getItem('movies'));
-        if (tretrievedObject) {
-            dispatch(populateCache(tretrievedObject));
+        const retrievedObject = JSON.parse(localStorage.getItem('movies'));
+        if (retrievedObject) {
+            dispatch(populateCache(retrievedObject));
         } else {
-            // dispatch(showError(error));
-            console.log(error);
+            console.log('TODO: Write error');
         }
     };
 }
 
 export function getMovieDetails(id) {
+    console.log('getMovieDetails');
     return function (dispatch) {
         return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos,images`)
             .then(resp => resp.json()) // Transform the data into json
@@ -64,28 +58,17 @@ export function getMovieDetails(id) {
     };
 }
 
-export function addNotification(notification) {
-    return {
-        type: C.ADD_NOTIFICATION,
-        payload: notification,
-    };
-}
-
-export function removeNotification(id) {
-    return {
-        type: C.REMOVE_NOTIFICATION,
-        payload: id,
-    };
-}
-
 export function randomSearch() {
     const term = RANDOM_SEARCH_KEYWORDS[Math.round(Math.random() * RANDOM_SEARCH_KEYWORDS.length)];
     return function (dispatch) {
         return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${term}`)
             .then(resp => resp.json()) // Transform the data into json
-            .then(data => dispatch(populateMovies(data)))
+            .then((data) => {
+                dispatch(populateMovies(data));
+            })
             .catch((error) => {
-                dispatch(showError(error));
+                console.log(error);
+                // dispatch(showError(error));
             });
     };
 }
@@ -98,7 +81,7 @@ export function makeSearch(type = 'popular', queryValue) {
                     .then(resp => resp.json()) // Transform the data into json
                     .then(data => dispatch(populateMovies(data)))
                     .catch((error) => {
-                        dispatch(showError(error));
+                        console.log(error);
                     });
             };
         case 'search':
@@ -107,9 +90,13 @@ export function makeSearch(type = 'popular', queryValue) {
                     .then(resp => resp.json()) // Transform the data into json
                     .then(data => dispatch(populateMovies(data)))
                     .catch((error) => {
-                        dispatch(showError(error));
+                        console.log(error);
+                        // dispatch(showError(error));
                     });
             };
+        default: {
+            return null;
+        }
     }
 }
 
