@@ -32,8 +32,8 @@ function populateCache(data) {
     };
 }
 
-export function putMovieToCache(movie) {
-    const normalizedData = normalize([movie], movies);
+export function putMovieToCache(object) {
+    const normalizedData = normalize([object], movies);
     console.log('=======================================');
     console.log(normalizedData);
     console.log('=======================================');
