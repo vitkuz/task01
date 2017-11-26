@@ -3,8 +3,8 @@
   "jest": {
     "verbose": true,
     "setupFiles": [
-      "./src/tempPolyfills.js",
-      "./src/setupTests.js"
+      "./src/tempPolyfills.js", //add a src/tempPolyfills.js file to create the global request animation frame function that React now depends on
+      "./src/setupTests.js" // to configure the enzmye adapter for our tests. The disableLifecyleMethods portion is needed to allow us to modify props through different tests
     ]
   },
   "version": "1.0.0",
