@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { renderRoutes } from 'react-router-config';
 
-import { getMoviesFromLocalStorage, randomSearch } from './actions/actions';
+import { randomSearch } from './actions/actions';
 
 // Page components
 
@@ -16,7 +16,6 @@ class App extends React.Component {
     componentDidMount() {
         console.log('Component did mount!');
         this.props.randomSearch();
-        // this.props.getMoviesFromLocalStorage();
     }
     render() {
         return (

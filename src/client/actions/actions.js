@@ -43,17 +43,6 @@ export function putMovieToCache(object) {
     };
 }
 
-export function getMoviesFromLocalStorage() {
-    return function (dispatch) {
-        const retrievedObject = JSON.parse(localStorage.getItem('movies'));
-        if (retrievedObject) {
-            dispatch(populateCache(retrievedObject));
-        } else {
-            console.log('TODO: Write error');
-        }
-    };
-}
-
 export function getMovieDetails(id) {
     console.log('getMovieDetails');
     return function (dispatch) {
