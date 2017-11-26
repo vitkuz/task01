@@ -1,12 +1,8 @@
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { normalize, schema } from 'normalizr';
 
 import * as A from '../src/client/actions/actions';
 import C from '../src/client/constants';
-
-const movie = new schema.Entity('movies');
-const movies = [movie];
 
 Enzyme.configure({ adapter: new Adapter() });
 
