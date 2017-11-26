@@ -34,6 +34,11 @@ app.get('/movies/:id', (req, res) => {
     getDataRenderPage(req, res, req.params.id);
 });
 
+app.get('*', (req, res) => {
+    console.log('req', req.params);
+    getDataRenderPage(req, res);
+});
+
 app.listen(port, () => {
     console.log(`App listening on port ${port}!`);
 });

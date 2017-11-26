@@ -2,6 +2,7 @@
 
 import HomePage from './pages/HomePage';
 import SinglePage from './pages/SinglePage';
+import PageNotFound from './pages/NotFoundPage';
 
 // import PageNotFound from './pages/PageNotFound';
 
@@ -19,5 +20,9 @@ export default [
     {
         ...SinglePage,
         path: '/movies/:id',
+    },
+    {
+        ...PageNotFound,
+        path: '*',
     },
 ];

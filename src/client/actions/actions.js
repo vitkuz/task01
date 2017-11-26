@@ -24,14 +24,6 @@ export function populateMovies(data) {
     };
 }
 
-function populateCache(data) {
-    const normalizedData = normalize(data, movies);
-    return {
-        type: C.POPULATE_CACHE,
-        payload: normalizedData,
-    };
-}
-
 export function putMovieToCache(object) {
     const normalizedData = normalize([object], movies);
     console.log('=======================================');
