@@ -6,9 +6,6 @@ import { bindActionCreators } from 'redux';
 import { renderRoutes } from 'react-router-config';
 
 import { randomSearch } from './actions/actions';
-
-// Page components
-
 import Routes from './Routes';
 
 

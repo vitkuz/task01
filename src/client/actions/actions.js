@@ -26,9 +26,6 @@ export function populateMovies(data) {
 
 export function putMovieToCache(object) {
     const normalizedData = normalize([object], movies);
-    console.log('=======================================');
-    console.log(normalizedData);
-    console.log('=======================================');
     return {
         type: C.PUT_MOVIE_TO_CACHE,
         payload: normalizedData,
@@ -58,7 +55,6 @@ export function randomSearch() {
             })
             .catch((error) => {
                 console.log(error);
-                // dispatch(showError(error));
             });
     };
 }
@@ -81,7 +77,6 @@ export function makeSearch(type = 'popular', queryValue) {
                     .then(data => dispatch(populateMovies(data)))
                     .catch((error) => {
                         console.log(error);
-                        // dispatch(showError(error));
                     });
             };
         default: {

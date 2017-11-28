@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 
 import { setActiveFilter } from '../../actions/actions';
 
@@ -10,11 +10,11 @@ class SortLink extends React.Component {
         super(props);
         this.onClickHandler = this.onClickHandler.bind(this);
     }
-    onClickHandler() {
-        this.props.setActiveFilter({
-            active: this.props.type,
-        });
-    }
+    // onClickHandler() {
+    //     this.props.setActiveFilter({
+    //         active: this.props.type,
+    //     });
+    // }
     getClasses() {
         const classes = `${this.props.type === this.props.filters.active ? 'sort-active' : ''} ${this.props.filters.reverse}`;
         return classes;
@@ -32,11 +32,25 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        setActiveFilter,
-    }, dispatch);
-}
+// const mapDispatchToProps = {
+//     setActiveFilter,
+// };
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onClickHandler: () => {
+            dispatch(setActiveFilter({
+                active: ownProps.type,
+            }));
+        },
+    };
+};
+
+// function mapDispatchToProps(dispatch) {
+//     return bindActionCreators({
+//         setActiveFilter,
+//     }, dispatch);
+// }
 
 SortLink.propTypes = {
     setActiveFilter: PropTypes.func.isRequired,
