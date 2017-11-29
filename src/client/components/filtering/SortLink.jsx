@@ -10,47 +10,29 @@ class SortLink extends React.Component {
         super(props);
         this.onClickHandler = this.onClickHandler.bind(this);
     }
-    // onClickHandler() {
-    //     this.props.setActiveFilter({
-    //         active: this.props.type,
-    //     });
-    // }
+    onClickHandler() {
+        this.props.setActiveFilter({
+            active: this.props.type,
+        });
+    }
     getClasses() {
         const classes = `${this.props.type === this.props.filters.active ? 'sort-active' : ''} ${this.props.filters.reverse}`;
         return classes;
     }
     render() {
         return (
-            <a role="button" tabIndex="0" className={`sort-link ${this.getClasses()}`} onClick={this.onClickHandler}>{this.props.title}</a>
+            <a
+              role="button"
+              tabIndex="0"
+              className={`sort-link ${this.getClasses()}`}
+              onClick={this.onClickHandler}>{this.props.title}</a>
         );
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        filters: state.filters,
-    };
-}
-
-// const mapDispatchToProps = {
-//     setActiveFilter,
-// };
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onClickHandler: () => {
-            dispatch(setActiveFilter({
-                active: ownProps.type,
-            }));
-        },
-    };
-};
-
-// function mapDispatchToProps(dispatch) {
-//     return bindActionCreators({
-//         setActiveFilter,
-//     }, dispatch);
-// }
+const mapStateToProps = state => ({
+  filters: state.filters,
+});
 
 SortLink.propTypes = {
     setActiveFilter: PropTypes.func.isRequired,
@@ -61,4 +43,4 @@ SortLink.propTypes = {
         reverse: PropTypes.bool }).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortLink);
+export default connect(mapStateToProps, { setActiveFilter })(SortLink);
