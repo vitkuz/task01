@@ -3,20 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Slider from 'react-image-slider';
 
 import { getMovieDetails } from '../../actions/actions';
 
 const printListOfGenres = list => list.map(genre => <span key={genre.id} className="actor">{genre.name}</span>);
 
 const printListOfCountries = list => list.map(country => <span key={country.name} className="actor">{country.name}</span>);
-
-const printListOfPosters = list => (list.map((poster) => {
-    if (poster.file_path) {
-        return <div key={poster.file_path}><img className="poster" src={`https://image.tmdb.org/t/p/w500/${poster.file_path}`} alt="" /></div>;
-    }
-    return null;
-}));
 
 const printListOfVideos = list => list.map(video => <iframe key={video.key} width="560" height="315" src={`https://www.youtube.com/embed/${video.key}?rel=0&amp;controls=0&amp;showinfo=0`} frameBorder="0" allowFullScreen title={video.name} />);
 
@@ -50,7 +42,6 @@ class HeaderMovieSinglePage extends React.Component {
             );
         }
         const posterURL = movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : null;
-        const posters = movie.images || movie.images.posters ? movie.images.posters : null;
         const videos = movie.videos || movie.videos.results ? movie.videos.results : null;
         return (
             <div>
@@ -85,9 +76,6 @@ class HeaderMovieSinglePage extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Slider images={movie.images.posters} isInfinite delay={5000}>
-                    { posters ? printListOfPosters(posters) : null }
-                </Slider>
                 <div style={{ textAlign: 'center' }}>
                     { videos ? printListOfVideos(videos) : null }
                 </div>

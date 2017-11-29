@@ -7,6 +7,7 @@
     "jest": true
   },
   "rules": {
+    "import/no-named-as-default": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "jsx-a11y/href-no-hash": 0, /*do not understand wtf is that, */
     "max-len":0,

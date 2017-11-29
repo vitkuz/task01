@@ -24,11 +24,14 @@ function populateCache(data) {
     };
 }
 
-export function putMovieToCache(movie) {
-    const normalizedData = normalize([movie], movies);
-    console.log('=======================================');
-    console.log(normalizedData);
-    console.log('=======================================');
+export function putMovieToCache(object) {
+    const normalizedData = normalize([object], movies);
+
+    console.log({
+        type: C.PUT_MOVIE_TO_CACHE,
+        payload: normalizedData,
+    });
+
     return {
         type: C.PUT_MOVIE_TO_CACHE,
         payload: normalizedData,
@@ -51,7 +54,10 @@ export function getMovieDetails(id) {
     return function (dispatch) {
         return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos,images`)
             .then(resp => resp.json()) // Transform the data into json
-            .then(data => dispatch(putMovieToCache(data)))
+            .then((data) => {
+                console.log(data);
+                return dispatch(putMovieToCache(data))
+            })
             .catch((error) => {
                 console.log(error);
             });
