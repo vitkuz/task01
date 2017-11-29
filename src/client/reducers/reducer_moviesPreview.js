@@ -7,10 +7,11 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case C.POPULATE_MOVIES:
+        case C.POPULATE_MOVIES: {
             const byId = action.payload.entities.movies;
             const allIds = [...action.payload.result];
             return { byId, allIds };
+        }
         default:
             return state;
     }

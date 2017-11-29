@@ -1,7 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 const VENDOR_LIBS = ['react', 'react-dom', 'redux-form', 'react-redux', 'redux'];
@@ -9,14 +9,12 @@ const VENDOR_LIBS = ['react', 'react-dom', 'redux-form', 'react-redux', 'redux']
 module.exports = {
     // context: __dirname + './src',
     entry: {
-        bundle: [
-            './src/client/index.jsx',
-        ],
+        bundle: ['./src/client/index.jsx'],
         vendor: VENDOR_LIBS,
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: '[name].[hash].js',
+        filename: 'app.js',
         publicPath: '/',
     },
     devtool: 'inline-source-map',
@@ -26,10 +24,11 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules)/,
                 use: [
                     'babel-loader',
+                    'eslint-loader',
                 ],
             },
             {
@@ -50,16 +49,14 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('css/styles.css'),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest'] }),
-        new webpack.optimize.UglifyJsPlugin({
-            compressor: {
-                warnings: false,
-            },
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.js',
         }),
-        new HtmlWebpackPlugin({
-            template: 'src/templates/index.html',
-            favicon: 'src/images/favicon.ico',
-        }),
+        new CopyWebpackPlugin([
+            { from: 'src/images' },
+            { from: 'src/fonts' },
+        ]),
         new WebpackCleanupPlugin({
             preview: true,
         }),
@@ -67,6 +64,11 @@ module.exports = {
             'process.env': {
                 NODE_ENV: JSON.stringify('production'),
                 WEBPACK: true,
+            },
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
             },
         }),
     ],

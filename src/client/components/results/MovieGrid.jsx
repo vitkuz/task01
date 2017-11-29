@@ -39,11 +39,13 @@ class MovieGrid extends React.Component {
                 </div>
             );
         }
-        if (typeof this.props.items === 'string') {
+        if (typeof this.props.items === 'string' || this.props.items.length === 0) {
             return (
                 <div className="section movies-gid-content mt1">
                     <div className="section-content">
-                        Noting found.
+                        <div className="message-not-found">
+                            Nothing found.
+                        </div>
                     </div>
                 </div>
             );
@@ -73,7 +75,10 @@ function mapStateToProps(state) {
 
 
 MovieGrid.propTypes = {
-    filters: PropTypes.shape({ filters: PropTypes.arrayOf(PropTypes.object), active: PropTypes.string.isRequired, reverse: PropTypes.bool.isRequired }).isRequired,
+    filters: PropTypes.shape({
+        filters: PropTypes.arrayOf(PropTypes.object),
+        active: PropTypes.string.isRequired,
+        reverse: PropTypes.bool.isRequired }).isRequired,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

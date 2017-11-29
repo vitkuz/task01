@@ -2,7 +2,6 @@ import React from 'react';
 
 import Search from '../search/Search';
 
-
 const HeaderSearch = () => {
     return (
         <header className="section header header-search header-cover-1">

@@ -4,4 +4,6 @@ const PageNotFound = () => (
     <p>PageNotFound</p>
 );
 
-export default PageNotFound;
+export default {
+    component: PageNotFound,
+};

@@ -1,24 +1,44 @@
-const express = require('express');
-const fs = require('fs');
-
-const config = require('dotenv').config();
+import 'babel-polyfill';
+import express from 'express';
+import { matchRoutes } from 'react-router-config';
+import Routes from '../client/Routes';
+import renderer from '../helpers/renderer';
+import createStore from '../helpers/createStore';
 
 const app = express();
 
-const port = process.env.PORT || config.parsed.PORT || 4000;
-process.env.NODE_ENV = config.parsed.NODE_ENV || 'development';
+const port = process.env.PORT || 4000;
+
+function getDataRenderPage(req, res, id = undefined) {
+    const store = createStore();
+    const promises = matchRoutes(Routes, req.path).map(({ route }) => {
+        return route.loadData ? route.loadData(store, id) : null;
+    });
+    Promise.all(promises).then(() => {
+        console.log('state on server changed', store.getState());
+        res.send(renderer(req, store));
+    });
+}
+
+// dsfsfd
 
 app.use(express.static('build'));
 
+app.get('/', (req, res) => {
+    console.log('req', req.params);
+    getDataRenderPage(req, res);
+});
+
+app.get('/movies/:id', (req, res) => {
+    console.log('req', req.params);
+    getDataRenderPage(req, res, req.params.id);
+});
+
 app.get('*', (req, res) => {
-    fs.readFile('./build/index.html', 'utf8', (err, file) => {
-        if (err) {
-            return console.log(err);
-        }
-        return res.send(file);
-    });
+    console.log('req', req.params);
+    getDataRenderPage(req, res);
 });
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}!`);
+    console.log(`App listening on port ${port}!`);
 });

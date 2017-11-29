@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
+
 import { setActiveFilter } from '../../actions/actions';
 
 class SortLink extends React.Component {
@@ -20,22 +21,18 @@ class SortLink extends React.Component {
     }
     render() {
         return (
-            <a role="button" tabIndex="0" className={`sort-link ${this.getClasses()}`} onClick={this.onClickHandler}>{this.props.title}</a>
+            <a
+              role="button"
+              tabIndex="0"
+              className={`sort-link ${this.getClasses()}`}
+              onClick={this.onClickHandler}>{this.props.title}</a>
         );
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        filters: state.filters,
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        setActiveFilter,
-    }, dispatch);
-}
+const mapStateToProps = state => ({
+  filters: state.filters,
+});
 
 SortLink.propTypes = {
     setActiveFilter: PropTypes.func.isRequired,
@@ -46,4 +43,4 @@ SortLink.propTypes = {
         reverse: PropTypes.bool }).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortLink);
+export default connect(mapStateToProps, { setActiveFilter })(SortLink);
